@@ -12,6 +12,7 @@
 |------|------|------|
 | Nolan | Head of HR | Team/NOLAN.md |
 | Felix | Senior Researcher | Team/FELIX.md |
+| Harlow | Heavy Vehicle Body Engineer | Team/HARLOW.md |
 
 ---
 
@@ -180,4 +181,4 @@ Rules: Save immediately when triggered. Never write about in-progress session ta
 
 ---
 
-*Last roster update: 19 May 2026 — MEO | Team name: The Works*
+*Last roster update: 19 May 2026 — MEO | Team name: The Works | Harlow onboarded*

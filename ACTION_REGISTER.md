@@ -19,6 +19,7 @@
 
 | # | Action | Owner | Due | Status |
 |---|--------|-------|-----|--------|
+| 2 | Monitor build progress — flag if further engineering specialisations required | MEO | Ongoing | Open |
 
 ---
 

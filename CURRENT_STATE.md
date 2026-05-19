@@ -7,17 +7,17 @@
 
 | Dimension | Status | Notes |
 |-----------|--------|-------|
-| Project | Executive Dashboard | Workspace initialised |
-| Team size | 2 | Nolan (HR), Felix (Research) |
-| Active tasks | 0 | Awaiting first owner task |
-| Open actions | 0 | Register initialised |
+| Project | Executive Dashboard — Engineering & Manufacturing, Transport | Active |
+| Team size | 3 | Nolan (HR), Felix (Research), Harlow (Heavy Vehicle Body Engineer) |
+| Active tasks | 0 | First task delivered |
+| Open actions | 1 | Owner to define broader project goals |
 | Data feeds | Pending configuration | portfolio_pro.py present |
 
 ---
 
 ## Active Alerts
 
-- None at session open. Workspace freshly initialised.
+- None.
 
 ---
 
@@ -41,4 +41,4 @@
 
 | Date | Key Actions |
 |------|-------------|
-| 19 May 2026 | Workspace initialised. CLAUDE.md, CURRENT_STATE.md, ACTION_REGISTER.md, ACTION_REGISTER_ARCHIVE.md created. Nolan and Felix onboarded. Memory system created. |
+| 19 May 2026 | Workspace initialised. Nolan and Felix onboarded. Team named The Works. Harlow (Heavy Vehicle Body Engineer) hired and onboarded via full pipeline. First assessment delivered: subframe requirement for Volvo FM rigid tanker, Class 3 fuels. |
