@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bottom Load Fuel Skid — Safety Assessment &amp; Business Case</title>
+<style>
+  :root {
+    --red:    #c0392b;
+    --amber:  #d68910;
+    --green:  #1a7a3f;
+    --navy:   #1b2a4a;
+    --mid:    #2e4172;
+    --light:  #eaf0fb;
+    --border: #c5cfe8;
+    --text:   #1a1a2e;
+    --muted:  #5a6278;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 11pt;
+    color: var(--text);
+    background: #fff;
+    line-height: 1.6;
+  }
+
+  /* ── Cover page ── */
+  .cover {
+    background: linear-gradient(160deg, var(--navy) 0%, var(--mid) 100%);
+    color: #fff;
+    padding: 80px 60px 60px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    page-break-after: always;
+  }
+  .cover-logo { font-size: 10pt; opacity: .7; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 60px; }
+  .cover-tag {
+    display: inline-block;
+    background: var(--red);
+    color: #fff;
+    font-size: 8.5pt;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+  .cover h1 { font-size: 30pt; font-weight: 800; line-height: 1.15; margin-bottom: 16px; }
+  .cover h2 { font-size: 15pt; font-weight: 400; opacity: .85; margin-bottom: 40px; }
+  .cover-meta { font-size: 9.5pt; opacity: .7; line-height: 2; }
+  .cover-footer { font-size: 8.5pt; opacity: .5; border-top: 1px solid rgba(255,255,255,.2); padding-top: 16px; }
+
+  /* ── Body layout ── */
+  .body-wrap { max-width: 900px; margin: 0 auto; padding: 48px 60px; }
+
+  /* ── Headings ── */
+  h1.section-title {
+    font-size: 18pt;
+    font-weight: 800;
+    color: var(--navy);
+    border-bottom: 3px solid var(--navy);
+    padding-bottom: 8px;
+    margin: 48px 0 20px;
+  }
+  h2.sub-title {
+    font-size: 13pt;
+    font-weight: 700;
+    color: var(--mid);
+    margin: 32px 0 12px;
+  }
+  h3.minor-title {
+    font-size: 11pt;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 20px 0 8px;
+  }
+
+  /* ── Paragraphs / lists ── */
+  p { margin-bottom: 10px; }
+  ul, ol { margin: 8px 0 12px 24px; }
+  li { margin-bottom: 5px; }
+
+  /* ── Executive summary box ── */
+  .exec-box {
+    background: var(--light);
+    border-left: 5px solid var(--navy);
+    border-radius: 4px;
+    padding: 20px 24px;
+    margin: 24px 0;
+  }
+  .exec-box p { margin-bottom: 6px; }
+
+  /* ── Risk matrix ── */
+  .risk-table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 10pt; }
+  .risk-table th {
+    background: var(--navy);
+    color: #fff;
+    padding: 9px 12px;
+    text-align: left;
+    font-weight: 600;
+  }
+  .risk-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .risk-table tr:nth-child(even) td { background: var(--light); }
+  .badge {
+    display: inline-block;
+    font-size: 8.5pt;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 12px;
+    white-space: nowrap;
+  }
+  .badge-high    { background: #fde8e8; color: var(--red); }
+  .badge-medium  { background: #fef3cd; color: var(--amber); }
+  .badge-low     { background: #d4edda; color: var(--green); }
+  .badge-extreme { background: var(--red); color: #fff; }
+
+  /* ── Comparison two-column ── */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .compare-card {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .compare-card-head {
+    padding: 12px 16px;
+    font-weight: 700;
+    font-size: 10pt;
+    letter-spacing: .5px;
+  }
+  .compare-card-head.bad  { background: #fde8e8; color: var(--red); }
+  .compare-card-head.good { background: #d4edda; color: var(--green); }
+  .compare-card-body { padding: 14px 16px; font-size: 10pt; }
+  .compare-card-body li { margin-bottom: 7px; }
+
+  /* ── Highlight callout ── */
+  .callout {
+    border: 1px solid;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 18px 0;
+    font-size: 10pt;
+  }
+  .callout.danger { border-color: var(--red);   background: #fde8e8; color: #7b1c1c; }
+  .callout.warn   { border-color: var(--amber);  background: #fef3cd; color: #6b4800; }
+  .callout.info   { border-color: var(--mid);    background: var(--light); color: var(--navy); }
+  .callout.ok     { border-color: var(--green);  background: #d4edda; color: #0d4f28; }
+  .callout strong { display: block; margin-bottom: 4px; font-size: 9pt; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* ── Regulation reference ── */
+  .reg-ref { background: var(--light); border: 1px solid var(--border); border-radius: 4px; padding: 12px 16px; margin: 12px 0; font-size: 9.5pt; }
+  .reg-ref b { color: var(--mid); }
+
+  /* ── Recommendation steps ── */
+  .steps { counter-reset: step; margin: 16px 0; }
+  .step  { display: flex; gap: 16px; margin-bottom: 16px; align-items: flex-start; }
+  .step-num {
+    counter-increment: step;
+    content: counter(step);
+    min-width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: #fff;
+    font-weight: 800;
+    font-size: 13pt;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-body { flex: 1; padding-top: 4px; }
+  .step-body b { color: var(--navy); }
+
+  /* ── Footer / page numbers ── */
+  .page-footer {
+    border-top: 1px solid var(--border);
+    margin-top: 60px;
+    padding-top: 12px;
+    font-size: 8.5pt;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* ── Print ── */
+  @media print {
+    .cover { min-height: auto; padding: 60px 50px 50px; }
+    .body-wrap { padding: 36px 50px; }
+    h1.section-title { page-break-before: always; }
+    h1.section-title:first-child { page-break-before: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     COVER PAGE
+══════════════════════════════════════════════ -->
+<div class="cover">
+  <div>
+    <div class="cover-logo">[Your Company Name] &nbsp;|&nbsp; Fuel Infrastructure Solutions</div>
+    <div class="cover-tag">Safety Assessment &amp; Business Case</div>
+    <h1>Bottom Load Fuel Skid<br>Upgrade Program</h1>
+    <h2>Road Tanker Loading — Transition from Top Fill to<br>Bottom Fill Loading Systems</h2>
+    <div class="cover-meta">
+      Prepared for: &nbsp;<strong>[Customer Name]</strong><br>
+      Prepared by: &nbsp;<strong>[Your Company Name]</strong><br>
+      Date: &nbsp;<strong>May 2026</strong><br>
+      Document Ref: &nbsp;<strong>BLS-2026-001 Rev A</strong><br>
+      Classification: &nbsp;<strong>Commercial in Confidence</strong>
+    </div>
+  </div>
+  <div class="cover-footer">
+    This document is prepared for the exclusive use of [Customer Name]. Contents are based on site information
+    provided and applicable Australian Standards and dangerous goods legislation current at date of issue.
+    Specific engineering and regulatory advice should be obtained prior to installation.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     BODY
+══════════════════════════════════════════════ -->
+<div class="body-wrap">
+
+<!-- ── 1. Executive Summary ── -->
+<h1 class="section-title">1. Executive Summary</h1>
+
+<div class="exec-box">
+  <p>[Customer Name] currently operates a top-fill road tanker loading facility with 2–4 loading bays handling
+  diesel and unleaded petrol at a medium-volume regional depot (10–30 fills per day). This assessment identifies
+  four critical, unmitigated or inadequately mitigated hazard categories present in the current configuration
+  and demonstrates that the installation of a modern <strong>API Bottom Load Skid</strong> system will
+  substantially eliminate each hazard class.</p>
+  <p>The recommendation is to proceed with a full bottom-load conversion, incorporating: API bottom-fill couplers,
+  overfill prevention valves (OPV), a vapour recovery system (VRS), and an electronic grounding verification
+  system. This will bring the facility into full compliance with applicable Australian Standards and dangerous
+  goods legislation, materially reduce risk of fire, explosion, environmental contamination, and serious injury,
+  and reduce long-term operating costs.</p>
+</div>
+
+<div class="callout danger">
+  <strong>Key Finding</strong>
+  Under the current top-fill configuration, all four primary hazard categories — overfill, vapour release,
+  electrostatic ignition, and working at height — are simultaneously present during every tanker fill.
+  The likelihood of a serious incident is rated <em>High</em> on the Australian Standard risk matrix.
+  This represents an unacceptable residual risk under the Work Health and Safety Act 2011 (Cth) and
+  applicable state dangerous goods legislation.
+</div>
+
+
+<!-- ── 2. Regulatory Framework ── -->
+<h1 class="section-title">2. Regulatory &amp; Standards Framework</h1>
+
+<p>The following legislation and standards govern the storage, handling, and loading of Class 3 flammable
+liquids (diesel and unleaded petrol) at road tanker loading facilities in Australia. Compliance is mandatory,
+not optional, and enforcement authority rests with both the relevant state Work Health and Safety regulator
+and the Dangerous Goods regulator.</p>
+
+<div class="reg-ref">
+  <b>Work Health and Safety Act 2011 (Cth) / Mirror Acts</b><br>
+  Section 19 — Primary duty of care. A person conducting a business or undertaking (PCBU) must ensure, so far
+  as is reasonably practicable, the health and safety of workers and others. This is an absolute obligation to
+  eliminate risks where possible, or where not possible, to minimise them to the lowest practicable level.
+  Known, controllable hazards that are not mitigated expose the PCBU to prosecution.
+</div>
+
+<div class="reg-ref">
+  <b>AS 1940:2017 — The Storage and Handling of Flammable and Combustible Liquids</b><br>
+  The principal Australian Standard for liquid fuel handling. Mandates requirements for overfill prevention,
+  vapour control, earthing/bonding of transfer equipment, and tanker loading procedures. Top-fill systems
+  must comply with specific controls; bottom-fill systems are recognised as the preferred method meeting
+  these requirements inherently.
+</div>
+
+<div class="reg-ref">
+  <b>Dangerous Goods legislation — State/Territory (e.g. Dangerous Goods (Road and Rail Transport) Act; Dangerous
+  Goods Safety Management Act Qld; Dangerous Substances Act Vic)</b><br>
+  All states require manifested tanker loading to comply with relevant codes. Loading sites must be designed
+  to prevent uncontrolled release of dangerous goods and must provide safe working conditions for transport
+  operators.
+</div>
+
+<div class="reg-ref">
+  <b>Australian Dangerous Goods Code (ADG Code), 9th Edition</b><br>
+  Governs the road transport of dangerous goods. Tankers used for Class 3 liquids operating in bottom-fill
+  configuration must be loaded at a compliant bottom-fill station. This is increasingly a legal and insurance
+  requirement for transport operators.
+</div>
+
+<div class="reg-ref">
+  <b>AS/NZS 60079 Series — Explosive Atmospheres</b><br>
+  Defines hazardous area zones around loading points. Zone 1 (area where explosive atmospheres are likely to
+  occur) exists around open top-fill hatches. Equipment selection, earthing, and vapour control in these zones
+  must comply with this series.
+</div>
+
+<div class="reg-ref">
+  <b>Safe Work Australia — Code of Practice: Managing Risks of Hazardous Chemicals in the Workplace</b><br>
+  Requires a hierarchy of controls to manage chemical hazards. Elimination or substitution (i.e. replacing
+  the hazardous top-fill method with an inherently safer bottom-fill method) is the highest-ranked control
+  and must be implemented where reasonably practicable.
+</div>
+
+
+<!-- ── 3. Current System Assessment ── -->
+<h1 class="section-title">3. Current System — Risk Assessment</h1>
+
+<p>The following section details each identified hazard in the current top-fill loading configuration.
+Risk ratings are based on the <strong>AS/NZS ISO 31000</strong> risk management framework using a
+5×5 likelihood/consequence matrix.</p>
+
+<h2 class="sub-title">3.1 Hazard 1: Overfill of Road Tanker</h2>
+
+<h3 class="minor-title">How it occurs</h3>
+<p>In a top-fill loading configuration, product is gravity-fed or pumped into an open top hatch on the
+tanker. Flow control relies entirely on the operator manually monitoring the fill and closing a valve or
+activating a pump stop. There is no automatic overfill shut-off connected to the tanker's own level sensors.</p>
+
+<h3 class="minor-title">Consequences</h3>
+<ul>
+  <li><strong>Spill to ground and stormwater:</strong> Uncontrolled release of diesel or petrol directly onto
+  the hardstand and into stormwater drainage, risking soil and groundwater contamination and triggering EPA
+  notification obligations.</li>
+  <li><strong>Fire and explosion:</strong> Petrol vapour from a spill at ambient temperature can rapidly form
+  an explosive atmosphere across a wide area. A single ignition source — a running vehicle engine, a static
+  spark, a cigarette — can detonate the mixture.</li>
+  <li><strong>Product loss:</strong> Even partial overfills represent direct financial loss plus remediation
+  and clean-up costs.</li>
+  <li><strong>Regulatory breach:</strong> An uncontrolled release of Class 3 flammable liquids to stormwater
+  is a notifiable environmental incident in all Australian states.</li>
+</ul>
+
+<div class="callout danger">
+  <strong>Specific Risk — Petrol (ULP)</strong>
+  Unleaded petrol has a flash point of −43°C, meaning it produces ignitable vapours at all ambient temperatures
+  encountered in Australian conditions. An overfill of even 20–30 litres can produce an explosive vapour cloud
+  extending many metres from the spill point in calm conditions.
+</div>
+
+<h3 class="minor-title">Current controls</h3>
+<ul>
+  <li>Operator visual monitoring — highly fallible; distraction, fatigue, and obscured sight lines are common.</li>
+  <li>Tanker-mounted ullage sight glasses — may not be visible from the fill platform.</li>
+  <li>No automatic or electronic overfill prevention integrated into the loading system.</li>
+</ul>
+
+<h3 class="minor-title">Risk rating — current state</h3>
+<table class="risk-table">
+  <tr><th>Parameter</th><th>Rating</th><th>Basis</th></tr>
+  <tr><td>Likelihood</td><td><span class="badge badge-high">Likely (4)</span></td><td>Operator-dependent control; human error occurs regularly across the industry</td></tr>
+  <tr><td>Consequence</td><td><span class="badge badge-extreme">Major (4)</span></td><td>Fire/explosion potential; environmental prosecution; serious injury or fatality</td></tr>
+  <tr><td><strong>Residual Risk</strong></td><td><span class="badge badge-extreme">EXTREME (16)</span></td><td>Immediate action required</td></tr>
+</table>
+
+
+<h2 class="sub-title">3.2 Hazard 2: Uncontrolled Vapour Release</h2>
+
+<h3 class="minor-title">How it occurs</h3>
+<p>Top-fill loading requires the tanker hatch to be open throughout the fill process. As product enters the
+compartment, the vapour space above the liquid is displaced and vented directly to atmosphere through the
+open hatch. At a 2–4 bay facility loading 10–30 tankers per day, this is a continuous, high-volume vapour
+source during operating hours.</p>
+
+<h3 class="minor-title">Consequences</h3>
+<ul>
+  <li><strong>Fire and explosion risk:</strong> Petrol vapours discharged from an open hatch create an
+  uncontrolled hazardous zone (Zone 1 per AS/NZS 60079) immediately above and around the fill point.
+  Ignition sources anywhere in this zone can cause ignition.</li>
+  <li><strong>Health hazard to operators:</strong> Prolonged exposure to benzene (present in ULP) and other
+  volatile hydrocarbons is a known carcinogen risk. Australian WHS regulations require atmospheric monitoring
+  and control of occupational exposure limits (OELs).</li>
+  <li><strong>Environmental — VOC emissions:</strong> Australian National Pollutant Inventory (NPI) requires
+  reporting of volatile organic compound (VOC) emissions above threshold quantities. Uncontrolled vapour
+  venting from top-fill operations at a medium-volume site is likely to exceed NPI reporting thresholds.</li>
+  <li><strong>Product loss:</strong> Vented vapours represent direct, unrecovered product loss.</li>
+</ul>
+
+<div class="callout warn">
+  <strong>Industry Data</strong>
+  Studies by the US EPA and European Environment Agency have found that top-fill loading of petroleum products
+  emits approximately 1.0–1.4 kg of VOCs per cubic metre of product transferred. At medium-volume
+  throughput, this represents hundreds of kilograms of hydrocarbon vapour released per year.
+</div>
+
+<h3 class="minor-title">Risk rating — current state</h3>
+<table class="risk-table">
+  <tr><th>Parameter</th><th>Rating</th><th>Basis</th></tr>
+  <tr><td>Likelihood</td><td><span class="badge badge-extreme">Almost Certain (5)</span></td><td>Vapour release is inherent and unavoidable with every top-fill operation</td></tr>
+  <tr><td>Consequence</td><td><span class="badge badge-high">Major (4)</span></td><td>Ignition risk; worker health impact; regulatory non-compliance</td></tr>
+  <tr><td><strong>Residual Risk</strong></td><td><span class="badge badge-extreme">EXTREME (20)</span></td><td>Immediate action required</td></tr>
+</table>
+
+
+<h2 class="sub-title">3.3 Hazard 3: Electrostatic Discharge / Spark Ignition (Grounding)</h2>
+
+<h3 class="minor-title">How it occurs</h3>
+<p>Road tankers accumulate significant electrostatic charge during travel and during product movement through
+pipework. When an ungrounded tanker is approached with a fill hose or when the fill stream contacts the
+product in the compartment, electrostatic discharge (ESD) can occur. In a Zone 1 or Zone 2 hazardous
+atmosphere — which top-fill loading creates by definition — a single ESD event can be sufficient to ignite
+the vapour-air mixture.</p>
+
+<p>This is not a theoretical risk. Multiple tanker fires and explosions worldwide have been attributed to ESD
+during top-fill loading, including several fatalities in the Australian petroleum distribution industry over
+recent decades.</p>
+
+<h3 class="minor-title">Current controls and their limitations</h3>
+<ul>
+  <li><strong>Manual bonding cable:</strong> Operators are expected to clip an earthing cable to the tanker
+  before opening hatches. This is a procedural control only — it is regularly skipped due to time pressure,
+  lack of familiarity, or worn/damaged equipment. There is no verification that bonding has occurred before
+  product can flow.</li>
+  <li><strong>No interlock:</strong> In the current system, product can flow regardless of whether the tanker
+  is bonded or grounded. There is no automatic prevention of product flow if grounding is absent.</li>
+  <li><strong>No ESD detection:</strong> There is no system to detect dangerous charge levels on the tanker
+  or to alert the operator.</li>
+</ul>
+
+<div class="callout danger">
+  <strong>Critical Gap</strong>
+  AS 1940:2017 Clause 5.5 requires that road tanker loading systems prevent product transfer unless effective
+  earthing/bonding of the tanker is confirmed. A manual cable without an interlock does not satisfy this
+  requirement. This is a current, auditable non-compliance.
+</div>
+
+<h3 class="minor-title">Risk rating — current state</h3>
+<table class="risk-table">
+  <tr><th>Parameter</th><th>Rating</th><th>Basis</th></tr>
+  <tr><td>Likelihood</td><td><span class="badge badge-high">Likely (4)</span></td><td>Procedural reliance only; bonding skipped or inadequate regularly across industry</td></tr>
+  <tr><td>Consequence</td><td><span class="badge badge-extreme">Catastrophic (5)</span></td><td>Ignition in Zone 1 atmosphere = explosion; multiple fatality potential</td></tr>
+  <tr><td><strong>Residual Risk</strong></td><td><span class="badge badge-extreme">EXTREME (20)</span></td><td>Highest priority action required</td></tr>
+</table>
+
+
+<h2 class="sub-title">3.4 Hazard 4: Working at Height</h2>
+
+<h3 class="minor-title">How it occurs</h3>
+<p>Top-fill loading requires operators (typically the tanker driver) to climb to the top of the tanker —
+typically 2.7 m to 3.5 m above ground level — to open hatches, insert the fill pipe, and monitor the fill
+level. This is required for every fill, every day, in all weather conditions.</p>
+
+<h3 class="minor-title">Consequences</h3>
+<ul>
+  <li><strong>Falls from height:</strong> Falls from tanker tops are a documented cause of serious injury
+  and fatality in the fuel distribution industry. Tank surfaces are often contaminated with product residue,
+  making them slippery. Operations frequently occur early morning, in wet conditions, or after long drives.</li>
+  <li><strong>Secondary ignition scenario:</strong> A fall that results in the operator losing hold of the
+  fill pipe, or knocking over a fill nozzle, can simultaneously create a product spill and a victim unable
+  to evacuate — dramatically worsening the consequence of a concurrent fire or spill incident.</li>
+  <li><strong>WHS obligation:</strong> The Work Health and Safety Regulations 2017, Regulation 78, requires
+  that any work at height where a fall of 2 m or more could occur must be managed with a fall prevention
+  device (e.g. guardrail, fall arrest system). Handrails alone may not satisfy this requirement if the
+  operator must lean over the rail to perform the task.</li>
+</ul>
+
+<div class="callout warn">
+  <strong>Note on Existing Handrails</strong>
+  Handrails on a loading gantry reduce but do not eliminate the fall risk. If operators must reach over,
+  around, or through handrails to access the tanker hatch — which is common on non-standard tanker
+  configurations — the handrail provides no protection at the point of highest risk. The correct control
+  is to eliminate the requirement to work at height entirely.
+</div>
+
+<h3 class="minor-title">Risk rating — current state</h3>
+<table class="risk-table">
+  <tr><th>Parameter</th><th>Rating</th><th>Basis</th></tr>
+  <tr><td>Likelihood</td><td><span class="badge badge-high">Likely (4)</span></td><td>Every fill requires height access; fall probability increases with volume and fatigue</td></tr>
+  <tr><td>Consequence</td><td><span class="badge badge-high">Major (4)</span></td><td>Serious injury or fatality from fall; compounding fire/spill risk</td></tr>
+  <tr><td><strong>Residual Risk</strong></td><td><span class="badge badge-extreme">EXTREME (16)</span></td><td>Immediate action required</td></tr>
+</table>
+
+
+<!-- ── 4. Risk Summary Matrix ── -->
+<h1 class="section-title">4. Risk Summary — Current vs Proposed</h1>
+
+<table class="risk-table">
+  <thead>
+    <tr>
+      <th>Hazard</th>
+      <th>Current Risk Rating</th>
+      <th>Post-Upgrade Risk Rating</th>
+      <th>Risk Reduction</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1. Tanker Overfill</td>
+      <td><span class="badge badge-extreme">EXTREME (16)</span></td>
+      <td><span class="badge badge-low">LOW (2)</span></td>
+      <td>Automatic OPV + API interlock eliminates operator reliance</td>
+    </tr>
+    <tr>
+      <td>2. Vapour Release</td>
+      <td><span class="badge badge-extreme">EXTREME (20)</span></td>
+      <td><span class="badge badge-low">LOW (3)</span></td>
+      <td>Closed-loop VRS captures &gt;95% of displaced vapours</td>
+    </tr>
+    <tr>
+      <td>3. Electrostatic / Grounding</td>
+      <td><span class="badge badge-extreme">EXTREME (20)</span></td>
+      <td><span class="badge badge-low">LOW (2)</span></td>
+      <td>Electronic grounding verification with pump interlock</td>
+    </tr>
+    <tr>
+      <td>4. Working at Height</td>
+      <td><span class="badge badge-extreme">EXTREME (16)</span></td>
+      <td><span class="badge badge-low">LOW (1)</span></td>
+      <td>All loading operations performed at ground level — fall hazard eliminated</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout ok">
+  <strong>Outcome</strong>
+  The proposed bottom-load system reduces all four hazard categories from EXTREME to LOW. This is consistent
+  with the hierarchy of controls under WHS legislation: hazards are eliminated or engineered out, not
+  managed through procedures and personal protective equipment.
+</div>
+
+
+<!-- ── 5. Proposed System ── -->
+<h1 class="section-title">5. Proposed Bottom Load System — Description &amp; Benefits</h1>
+
+<h2 class="sub-title">5.1 How Bottom Loading Works</h2>
+<p>A bottom load system delivers fuel to the tanker through a dedicated API bottom-fill inlet located on the
+underside of each tanker compartment. The tanker remains closed throughout the fill. The loading skid connects
+to the tanker via a dry-break API coupler, which forms a sealed, drip-free connection. Product flows under
+pressure from ground level into the tanker from below, displacing vapour back through a closed vapour recovery
+line. All operations are performed at ground level by the driver.</p>
+
+<h2 class="sub-title">5.2 Key System Components</h2>
+
+<h3 class="minor-title">API Dry-Break Bottom Fill Coupler</h3>
+<p>The API coupler is a standardised, self-sealing quick-connect fitting that mates with the tanker's
+bottom-fill inlet. When disconnected, both the coupler and the tanker inlet valve close simultaneously,
+preventing any spillage. This is a fundamental safety improvement — in a top-fill system, disconnection
+of the fill hose while product is flowing causes an immediate spill; in a bottom-fill system it cannot.</p>
+
+<h3 class="minor-title">Overfill Prevention Valve (OPV) / Overfill Protection System (OPS)</h3>
+<p>Each tanker compartment fitted for bottom-fill has an Overfill Prevention Valve at the top of the
+compartment. When product reaches the preset high-level, the OPV automatically closes and triggers
+a signal back to the loading skid. This signal, transmitted via the tanker's earth monitoring cable,
+causes the skid's flow control valve to close and the pump to stop — automatically, without any operator
+action. Overfill is physically impossible under normal operation.</p>
+
+<h3 class="minor-title">Vapour Recovery System (VRS)</h3>
+<p>As product enters the bottom of the tanker compartment, displaced vapours are routed back through a
+dedicated vapour recovery arm to a vapour recovery unit (VRU) on the skid. The VRU processes the
+recovered vapours, typically returning them to the fuel storage tank as liquid. Recovery efficiency
+exceeds 95%, effectively eliminating the hazardous Zone 1 atmosphere that currently exists over the
+loading area. This also eliminates the significant VOC emission and NPI reporting issue.</p>
+
+<h3 class="minor-title">Electronic Grounding Verification with Interlock</h3>
+<p>The loading skid incorporates an earth monitoring system that continuously verifies the electrical
+continuity of the bond between the loading skid and the tanker body throughout the fill. The system
+uses a coded signal — not simple continuity — to prevent bypassing with a jumper wire. If the ground
+connection is lost at any point during the fill, the system automatically stops product flow within
+milliseconds. Product flow cannot commence unless a valid ground is detected. This replaces the current
+procedural manual bonding cable with a hardware interlock.</p>
+
+<h3 class="minor-title">Ground-Level Operation</h3>
+<p>All connections, disconnections, flow start/stop, and monitoring are performed at ground level. The
+driver never climbs the tanker. The loading gantry, if retained, is used only for safety walkways and
+emergency access — not for routine fill operations. The fall hazard is eliminated by design.</p>
+
+<h3 class="minor-title">Preset / Pre-set Metered Loading</h3>
+<p>Modern bottom-load skids incorporate a preset meter — the driver enters (or selects from a preset)
+the volume to be delivered to each compartment. The skid controls the fill precisely, stopping
+automatically at the specified volume (as a secondary overfill control, working in parallel with the OPV).
+This also provides accurate volume measurement for invoicing and stock reconciliation.</p>
+
+<h3 class="minor-title">Emergency Shut-off</h3>
+<p>A clearly marked, accessible emergency stop (E-stop) button is located at each loading bay at ground
+level, and may also be distributed across the loading island. Activation of any E-stop immediately
+closes all flow control valves and stops all pumps. In a top-fill scenario, emergency shut-off often
+requires the operator to climb down from height while the spill continues — a bottom-fill E-stop
+is immediate and at hand.</p>
+
+
+<h2 class="sub-title">5.3 Side-by-Side Comparison</h2>
+
+<div class="compare-grid">
+  <div class="compare-card">
+    <div class="compare-card-head bad">Current — Top Fill System</div>
+    <div class="compare-card-body">
+      <ul>
+        <li>Overfill reliant on operator vigilance — no automatic shut-off</li>
+        <li>Open hatch during fill — vapours vented to atmosphere continuously</li>
+        <li>Manual bonding cable — no verification, no interlock, frequently skipped</li>
+        <li>Operator works at 2.7–3.5 m height every fill, every day</li>
+        <li>Hose disconnection under flow causes immediate spill</li>
+        <li>No product metering integrated into loading safety system</li>
+        <li>No automatic emergency response to plant failure</li>
+        <li>Zone 1 hazardous atmosphere maintained throughout fill</li>
+        <li>NPI VOC reporting likely required</li>
+        <li>Non-compliant with AS 1940:2017 Clause 5.5 (grounding interlock)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-card-head good">Proposed — Bottom Load Skid System</div>
+    <div class="compare-card-body">
+      <ul>
+        <li>Automatic overfill shut-off via OPV + electronic interlock — overfill impossible</li>
+        <li>Closed tanker throughout fill — vapours captured by VRS (&gt;95% recovery)</li>
+        <li>Electronic grounding verification with coded signal and pump interlock</li>
+        <li>All operations at ground level — fall hazard eliminated</li>
+        <li>Dry-break API coupler — no spill on disconnect</li>
+        <li>Preset metered delivery — accurate, auditable volume control</li>
+        <li>Ground-level E-stop — immediate, accessible emergency shut-off</li>
+        <li>Zone 2 / minimal hazardous atmosphere — dramatically reduced ignition risk</li>
+        <li>VOC emissions below reporting thresholds in most configurations</li>
+        <li>Full compliance with AS 1940:2017, WHS Regulations, ADG Code</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ── 6. Regulatory Compliance ── -->
+<h1 class="section-title">6. Regulatory Compliance Benefit</h1>
+
+<p>Installation of the proposed bottom-load system brings the facility into compliance with the following
+specific regulatory obligations that are currently unmet or at risk:</p>
+
+<table class="risk-table">
+  <thead>
+    <tr><th>Regulation / Standard</th><th>Current Status</th><th>Post-Upgrade Status</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>AS 1940:2017 Cl. 5.5 — Earthing/bonding interlock for tanker loading</td>
+      <td><span class="badge badge-high">NON-COMPLIANT</span></td>
+      <td><span class="badge badge-low">COMPLIANT</span></td>
+    </tr>
+    <tr>
+      <td>WHS Regulations 2017 Reg. 78 — Working at height controls</td>
+      <td><span class="badge badge-medium">AT RISK</span></td>
+      <td><span class="badge badge-low">COMPLIANT</span></td>
+    </tr>
+    <tr>
+      <td>WHS Act 2011 s.19 — Eliminate or minimise foreseeable risks</td>
+      <td><span class="badge badge-high">NON-COMPLIANT</span></td>
+      <td><span class="badge badge-low">COMPLIANT</span></td>
+    </tr>
+    <tr>
+      <td>NPI — VOC emission reporting obligations</td>
+      <td><span class="badge badge-medium">LIKELY REPORTABLE</span></td>
+      <td><span class="badge badge-low">BELOW THRESHOLD</span></td>
+    </tr>
+    <tr>
+      <td>State Environmental Legislation — Uncontrolled release</td>
+      <td><span class="badge badge-medium">AT RISK</span></td>
+      <td><span class="badge badge-low">CONTROLLED</span></td>
+    </tr>
+    <tr>
+      <td>ADG Code — Tanker loading at compliant facility</td>
+      <td><span class="badge badge-medium">AT RISK</span></td>
+      <td><span class="badge badge-low">COMPLIANT</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout info">
+  <strong>Insurance Note</strong>
+  Many industrial and public liability insurers are now requiring evidence of AS 1940 compliance as a
+  condition of cover for fuel handling operations. Facilities found to be non-compliant at the time of
+  an incident may face claims being declined or coverage voidance. The bottom-load upgrade removes this
+  exposure.
+</div>
+
+
+<!-- ── 7. Business Case ── -->
+<h1 class="section-title">7. Business Case &amp; Return on Investment</h1>
+
+<h2 class="sub-title">7.1 Cost of the Status Quo</h2>
+<p>The financial exposure of retaining the current system must be understood in full. The following
+categories represent quantifiable or estimable cost pools that the current configuration carries:</p>
+
+<table class="risk-table">
+  <thead><tr><th>Cost Category</th><th>Indicative Range</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>WHS regulatory prosecution (serious incident)</td>
+      <td>$50,000 – $3,000,000+</td>
+      <td>Maximum penalties under WHS Act for Category 1 offence (reckless endangerment)</td>
+    </tr>
+    <tr>
+      <td>Environmental prosecution — uncontrolled fuel release</td>
+      <td>$25,000 – $1,000,000+</td>
+      <td>State EPA penalties; remediation costs additional and unbounded</td>
+    </tr>
+    <tr>
+      <td>Tanker fire / explosion — property &amp; business interruption</td>
+      <td>$500,000 – $10,000,000+</td>
+      <td>Estimated facility replacement and BI for medium depot; does not include fatality costs</td>
+    </tr>
+    <tr>
+      <td>Product losses — overfill &amp; vapour</td>
+      <td>$5,000 – $40,000 per year</td>
+      <td>Based on medium-volume throughput; vapour losses are ongoing and continuous</td>
+    </tr>
+    <tr>
+      <td>Operational delays — incident / near-miss response</td>
+      <td>Variable</td>
+      <td>Loading bay downtime, spill response, emergency services attendance</td>
+    </tr>
+    <tr>
+      <td>Reputational damage — customer and supplier confidence</td>
+      <td>Unquantifiable</td>
+      <td>A serious incident at a fuel depot is publicly reported; long-term damage to brand</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 class="sub-title">7.2 Benefits of the Upgrade</h2>
+<ul>
+  <li><strong>Risk elimination:</strong> All four EXTREME hazard ratings reduced to LOW — full WHS and
+  environmental compliance achieved.</li>
+  <li><strong>Product recovery:</strong> Vapour recovery returns product to storage rather than losing it to
+  atmosphere — direct ongoing fuel saving.</li>
+  <li><strong>Throughput improvement:</strong> Bottom-fill loading is significantly faster than top-fill for
+  multi-compartment tankers (no height access, faster fill rates) — reduced loading times per tanker.</li>
+  <li><strong>Driver satisfaction and retention:</strong> Eliminating the requirement to climb tankers in all
+  weather conditions is a significant operational improvement for transport operators — improves relationship
+  with fleet operators.</li>
+  <li><strong>Insurance position:</strong> Demonstrated AS 1940 compliance strengthens the facility's
+  insurance position and may reduce premiums.</li>
+  <li><strong>Asset longevity:</strong> Modern metered loading systems provide better data for maintenance
+  planning and stock reconciliation.</li>
+  <li><strong>Future-proofing:</strong> Regulators are progressively tightening requirements on uncontrolled
+  VOC emissions and earthing interlocks. Installing a compliant system now avoids forced reactive compliance
+  spending later.</li>
+</ul>
+
+<h2 class="sub-title">7.3 Capital Cost Estimate</h2>
+<p>A detailed cost estimate will be provided separately by [Your Company Name] upon completion of a site
+survey and final scope confirmation. Indicative cost ranges for a 2–4 bay medium volume bottom-load
+conversion at an Australian site are:</p>
+
+<table class="risk-table">
+  <thead><tr><th>Scope Item</th><th>Indicative Range (AUD)</th></tr></thead>
+  <tbody>
+    <tr><td>Bottom-load skid (per bay) — coupler, meter, valves, controls</td><td>$45,000 – $85,000 per bay</td></tr>
+    <tr><td>Vapour recovery unit (shared, sized for site)</td><td>$30,000 – $80,000</td></tr>
+    <tr><td>Electronic grounding verification system (per bay)</td><td>$4,000 – $10,000 per bay</td></tr>
+    <tr><td>Civil and mechanical installation</td><td>$20,000 – $60,000</td></tr>
+    <tr><td>Electrical and controls</td><td>$15,000 – $40,000</td></tr>
+    <tr><td>Commissioning, testing, and documentation</td><td>$8,000 – $20,000</td></tr>
+    <tr><td><strong>Total indicative range (2–4 bays)</strong></td><td><strong>$180,000 – $450,000</strong></td></tr>
+  </tbody>
+</table>
+
+<div class="callout info">
+  <strong>Context</strong>
+  The indicative total capital cost represents a fraction of the uninsured and insured exposure of a single
+  serious incident at the facility. It is a one-time capital investment that eliminates a continuous,
+  ongoing, and growing regulatory and safety liability.
+</div>
+
+
+<!-- ── 8. Recommendation ── -->
+<h1 class="section-title">8. Recommendation &amp; Proposed Next Steps</h1>
+
+<p>Based on the hazard assessment and regulatory review above, [Your Company Name] strongly recommends
+[Customer Name] proceed with the bottom-load skid conversion as a priority safety and compliance project.
+The following steps are proposed:</p>
+
+<div class="steps">
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <b>Site Survey and Scope Confirmation</b><br>
+      [Your Company Name] to attend site to confirm bay dimensions, existing pipework and valve arrangements,
+      tanker fleet bottom-fill inlet standards (API 1 inch, 4 inch, etc.), electrical supply availability,
+      and vapour recovery outlet options. Typically 1 day on site.
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-body">
+      <b>Detailed Design and Quotation</b><br>
+      Preparation of a detailed engineering design, equipment schedule, and fixed-price quotation based on
+      confirmed site conditions and scope. Includes selection of appropriate API coupler configuration for
+      [Customer Name]'s tanker fleet.
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-body">
+      <b>Regulatory Notifications and Approvals</b><br>
+      Identification of any development, building, or dangerous goods licence amendments required. [Your
+      Company Name] can assist with preparation of documentation for relevant authorities.
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-body">
+      <b>Equipment Procurement and Fabrication</b><br>
+      Order placement and skid fabrication. Lead times vary; typically 8–14 weeks for fabricated skids from
+      Australian suppliers. Factory acceptance testing (FAT) prior to delivery can be arranged.
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">5</div>
+    <div class="step-body">
+      <b>Installation and Commissioning</b><br>
+      Mechanical and electrical installation coordinated to minimise downtime — typically completed bay by bay
+      to maintain loading throughput. Commissioning, calibration, and operator training included.
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">6</div>
+    <div class="step-body">
+      <b>Documentation and Handover</b><br>
+      As-built drawings, equipment manuals, maintenance schedules, safety data, and operator training records
+      provided at handover. [Your Company Name] can also prepare or review updated Safe Work Method Statements
+      (SWMS) for the new loading procedure.
+    </div>
+  </div>
+</div>
+
+
+<!-- ── 9. Conclusion ── -->
+<h1 class="section-title">9. Conclusion</h1>
+
+<p>The current top-fill road tanker loading configuration at [Customer Name]'s facility carries four
+simultaneously active, EXTREME-rated safety hazards — overfill, uncontrolled vapour release, electrostatic
+discharge ignition, and working at height — with no engineering controls providing automatic or reliable
+mitigation. This is not a theoretical risk profile; it is the documented cause of fatalities, serious injuries,
+and major fires across the Australian and international petroleum distribution industry.</p>
+
+<p>The proposed bottom-load skid system addresses all four hazard categories through engineered controls,
+reducing risk ratings from EXTREME to LOW and achieving compliance with the applicable Australian Standards
+and WHS legislation. The capital investment required is proportionate and predictable, and it is demonstrably
+smaller than the financial exposure of a single serious incident.</p>
+
+<p>[Customer Name] has the opportunity to make this transition proactively, from a position of choice and with
+time to plan properly — rather than reactively, following an incident. [Your Company Name] is ready to support
+this process from site survey through to commissioning and handover.</p>
+
+<div class="callout ok">
+  <strong>Recommended Action</strong>
+  Authorise a site survey and detailed design engagement with [Your Company Name] to establish the exact
+  scope, cost, and programme for the bottom-load conversion at [Customer Name]'s depot.
+</div>
+
+
+<!-- ── Footer ── -->
+<div class="page-footer">
+  <span>BLS-2026-001 Rev A &nbsp;|&nbsp; Prepared by [Your Company Name] &nbsp;|&nbsp; May 2026</span>
+  <span>Commercial in Confidence &nbsp;|&nbsp; [Customer Name]</span>
+</div>
+
+</div><!-- /body-wrap -->
+</body>
+</html>
