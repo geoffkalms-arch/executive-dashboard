@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Job Traveller Card – 7.5kl Type A New Build</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; font-size: 11px; color: #111; background: #fff; }
+
+  @media print {
+    .page-break { page-break-before: always; }
+    body { font-size: 10px; }
+  }
+
+  .header {
+    background: #1a1a2e;
+    color: white;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header h1 { font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+  .header .meta { text-align: right; font-size: 12px; }
+  .header .meta span { display: block; }
+  .header .meta .job-no { font-size: 22px; font-weight: 700; color: #f0c040; }
+
+  .job-info {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: #ccc;
+    border: 1px solid #ccc;
+    margin: 8px;
+  }
+  .job-info-cell {
+    background: #f5f5f5;
+    padding: 6px 10px;
+  }
+  .job-info-cell label { font-size: 9px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; display: block; }
+  .job-info-cell .value { font-size: 13px; font-weight: 600; border-bottom: 1px solid #999; min-height: 20px; margin-top: 2px; }
+
+  .section {
+    margin: 8px 8px 0 8px;
+    border: 2px solid #1a1a2e;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .section-header {
+    display: grid;
+    grid-template-columns: 1fr 70px 90px 90px 90px 80px;
+    background: #1a1a2e;
+    color: white;
+    padding: 6px 8px;
+    align-items: center;
+    gap: 4px;
+  }
+  .section-header.elec { background: #0d4a6e; }
+  .section-header.supervisor { background: #4a1a0d; }
+  .section-header.mixed { background: #2d4a1a; }
+
+  .section-title { font-size: 12px; font-weight: 700; }
+  .section-badge {
+    font-size: 9px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 10px;
+    padding: 2px 6px;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .section-field {
+    font-size: 9px;
+    text-align: center;
+  }
+  .section-field label { display: block; opacity: 0.7; font-size: 8px; }
+  .section-field .field-val { border-bottom: 1px solid rgba(255,255,255,0.4); min-height: 16px; margin-top: 2px; }
+
+  .checklist {
+    padding: 4px 0;
+  }
+  .check-item {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    align-items: center;
+    padding: 3px 8px;
+    border-bottom: 1px solid #eee;
+    min-height: 22px;
+  }
+  .check-item:last-child { border-bottom: none; }
+  .check-item:hover { background: #f9f9f9; }
+  .check-item.hold { background: #fff8e1; }
+  .check-item.hold .check-text { color: #b26a00; font-weight: 600; }
+  .check-item.safety { background: #fff0f0; }
+  .check-item.safety .check-text { color: #b00020; font-weight: 600; }
+  .check-item.photo { background: #f0f4ff; }
+  .check-item.photo .check-text { color: #1a40a0; }
+
+  .checkbox {
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid #555;
+    border-radius: 2px;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .check-text { font-size: 10px; line-height: 1.3; padding-left: 4px; }
+
+  .section-footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    background: #f0f0f0;
+    padding: 6px 10px;
+    border-top: 1px solid #ccc;
+    font-size: 9px;
+  }
+  .footer-field label { display: block; color: #666; text-transform: uppercase; letter-spacing: 0.4px; }
+  .footer-field .fval { border-bottom: 1px solid #999; min-height: 16px; margin-top: 2px; }
+
+  .hold-notice {
+    background: #fff3cd;
+    border: 1.5px solid #f0ad00;
+    border-radius: 3px;
+    padding: 5px 10px;
+    margin: 4px 8px;
+    font-size: 10px;
+    font-weight: 600;
+    color: #856404;
+  }
+  .hold-notice::before { content: "⚑  HOLD POINT: "; }
+
+  .legend {
+    display: flex;
+    gap: 16px;
+    padding: 6px 10px;
+    font-size: 9px;
+    background: #f5f5f5;
+    border-top: 1px solid #ddd;
+    margin-top: 8px;
+  }
+  .leg-item { display: flex; align-items: center; gap: 4px; }
+  .leg-dot { width: 10px; height: 10px; border-radius: 2px; }
+
+  .torque-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9px;
+    margin: 4px 0;
+  }
+  .torque-table th {
+    background: #e8e8e8;
+    padding: 3px 6px;
+    text-align: left;
+    border: 1px solid #ccc;
+  }
+  .torque-table td {
+    padding: 3px 6px;
+    border: 1px solid #ccc;
+  }
+
+  .summary-box {
+    margin: 8px;
+    border: 2px solid #1a1a2e;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .summary-header {
+    background: #1a1a2e;
+    color: white;
+    padding: 6px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+  }
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: #ccc;
+  }
+  .summary-cell {
+    background: white;
+    padding: 8px;
+    text-align: center;
+  }
+  .summary-cell label { font-size: 9px; color: #666; text-transform: uppercase; display: block; }
+  .summary-cell .big { font-size: 20px; font-weight: 700; }
+  .summary-cell .target { font-size: 10px; color: #888; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════ HEADER ══ -->
+<div class="header">
+  <div>
+    <h1>JOB TRAVELLER CARD</h1>
+    <div style="font-size:11px; opacity:0.8; margin-top:4px;">7.5kl Type A New Build — Stainless Tank on Customer Chassis</div>
+  </div>
+  <div class="meta">
+    <span class="job-no">JOB: _____________</span>
+    <span>Target: <strong>4 Weeks</strong> &nbsp;|&nbsp; Mech: <strong>311 hrs</strong> &nbsp;|&nbsp; Elec: <strong>51 hrs</strong></span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ JOB INFO ══ -->
+<div class="job-info">
+  <div class="job-info-cell"><label>Customer</label><div class="value">&nbsp;</div></div>
+  <div class="job-info-cell"><label>Chassis Rego / VIN</label><div class="value">&nbsp;</div></div>
+  <div class="job-info-cell"><label>Start Date</label><div class="value">&nbsp;</div></div>
+  <div class="job-info-cell"><label>Target Completion</label><div class="value">&nbsp;</div></div>
+  <div class="job-info-cell"><label>Chassis Make / Model</label><div class="value">&nbsp;</div></div>
+  <div class="job-info-cell"><label>KM Reading</label><div class="value">&nbsp;</div></div>
+  <div class="job-info-cell"><label>Mechanical Tradesperson</label><div class="value">&nbsp;</div></div>
+  <div class="job-info-cell"><label>Electrical Tradesperson</label><div class="value">&nbsp;</div></div>
+</div>
+
+<div class="legend">
+  <div class="leg-item"><div class="leg-dot" style="background:#fff3cd; border:1px solid #f0ad00;"></div> Hold point — stop and review before continuing</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#fff0f0; border:1px solid #b00020;"></div> Safety critical — must not be skipped</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#f0f4ff; border:1px solid #1a40a0;"></div> Photo required — save to job folder in app</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#e8f5e9; border:1px solid #2e7d32;"></div> Supervisor sign-off required to proceed</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════ STAGE 1 ══ -->
+<div class="section">
+  <div class="section-header">
+    <div><span class="section-title">STAGE 1 — Inwards Vehicle &amp; Tank Inspection</span></div>
+    <div class="section-badge">MECHANICAL</div>
+    <div class="section-field"><label>Target Hrs</label><div class="field-val" style="text-align:center; font-size:14px; font-weight:700;">2</div></div>
+    <div class="section-field"><label>Start</label><div class="field-val">&nbsp;</div></div>
+    <div class="section-field"><label>Finish</label><div class="field-val">&nbsp;</div></div>
+    <div class="section-field"><label>Actual Hrs</label><div class="field-val">&nbsp;</div></div>
+  </div>
+  <div class="checklist">
+    <div class="check-item photo"><span class="checkbox"></span><span class="check-text">📷 Photograph cabin — all 4 sides exterior + interior</span></div>
+    <div class="check-item photo"><span class="checkbox"></span><span class="check-text">📷 Photograph odometer (KM reading)</span></div>
+    <div class="check-item photo"><span class="checkbox"></span><span class="check-text">📷 Photograph VIN plate</span></div>
+    <div class="check-item hold"><span class="checkbox"></span><span class="check-text">Any damage to vehicle? → Photograph, highlight and escalate to Supervisor BEFORE proceeding</span></div>
+    <div class="check-item photo"><span class="checkbox"></span><span class="check-text">📷 Photograph tank — all sides</span></div>
+    <div class="check-item hold"><span class="checkbox"></span><span class="check-text">Any damage to tank? → Photograph, highlight and escalate to Supervisor BEFORE proceeding</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Tank inspected, documented and cleared for entry to production area</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Inspection completed by: _____________________________ &nbsp; Date: ___________</span></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════ STAGE 2 ══ -->
+<div class="section">
+  <div class="section-header">
+    <div><span class="section-title">STAGE 2 — New Chassis Preparation</span></div>
+    <div class="section-badge">MECHANICAL</div>
+    <div class="section-field"><label>Target Hrs</label><div class="field-val" style="text-align:center; font-size:14px; font-weight:700;">4</div></div>
+    <div class="section-field"><label>Start</label><div class="field-val">&nbsp;</div></div>
+    <div class="section-field"><label>Finish</label><div class="field-val">&nbsp;</div></div>
+    <div class="section-field"><label>Actual Hrs</label><div class="field-val">&nbsp;</div></div>
+  </div>
+  <div class="checklist">
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Review Job Scope document</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Advise Supervisor of hose requirement</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Job Scope clearly attached to vehicle</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Bill of Materials placed on shelf, clearly marked with job number</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Axle calculations available and confirmed</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Measure and mark: Axle Centre → Tank Centre</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Measure and mark: Tank Centre → Centre of Cabinet</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Measure and mark: Axle Centre → Rear Bumper (subtract 40mm for bumper allowance)</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Remove spare tyre and store outside</span></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════ STAGE 3 ══ -->
+<div class="hold-notice">Supervisor review required at end of Stage 3 before progressing to Stage 5.</div>
+<div class="section">
+  <div class="section-header">
+    <div><span class="section-title">STAGE 3 — New Chassis Build Step 1</span></div>
+    <div class="section-badge">MECHANICAL</div>
+    <div class="section-field"><label>Target Hrs</label><div class="field-val" style="text-align:center; font-size:14px; font-weight:700;">75</div></div>
+    <div class="section-field"><label>Start</label><div class="field-val">&nbsp;</div></div>
+    <div class="section-field"><label>Finish</label><div class="field-val">&nbsp;</div></div>
+    <div class="section-field"><label>Actual Hrs</label><div class="field-val">&nbsp;</div></div>
+  </div>
+  <div class="checklist">
+    <div class="check-item safety"><span class="checkbox"></span><span class="check-text">🚫 NO grinder use allowed while equipment is on chassis</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Start subframe fabrication from 75×75 SHS — seam facing inside or bottom of rails</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Place subframe rails on chassis — cabin end to go OVER first spring hanger</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Cut subframe cabin end: 45° with 15mm landing</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Mark holes from chassis to subframe for rivets — cut out with plasma cutter</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fit subframe mounting plates to subframe and tack fit</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Measure and cut cross members — tack in position</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Mark out positions: tank, cabinet, mudguards, toolbox</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Lift tank onto chassis — CAREFUL with paint/stainless finish</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Using square: ensure tank is even and correctly located</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Mark rear tank mount position — as close to rear axle centre as possible</span></div>
+    <div class="check-item safety"><span class="checkbox"></span><span class="check-text">Do NOT drill near electrical wires or plastic airlines</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Subframe mounting plates: max 900mm apart</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Mounting plates: min 50mm from any spring hanger bolt or rivet</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Bolt centres: min 50mm from nearest hole</span></div>
+    <div class="check-item hold"><span class="checkbox"></span><span class="check-text">If any nearby hole &gt;17mm — STOP and escalate to Supervisor (VSB Section H)</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Use 14mm High Tensile 10.9 Bolts — holes in chassis max 1mm oversize</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Hardened washer between chassis and nut — bolt unthreaded section must not contact chassis</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Relocate rear OEM cross beam forward — drill new holes for 14mm 10.9 Bolts</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Remove excess chassis length, allowing for bumper</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Initial tank mounting — fit rubber or aluminium spacer per spec (rubber = full-length channel; aluminium = countersunk bolts)</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fabricate and fit front mounts — MUST have springs on bolts</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">If possible: fit foot valves and piping while vehicle is in the air</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fabricate and test-fit bumper</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Measure, mark and drill: hydraulic tank holes</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Measure, mark and drill: toolbox holes</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Measure, mark and drill: pump frame holes</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Measure, mark and drill: slops tin holes</span></div>
+    <div class="check-item hold"><span class="checkbox"></span><span class="check-text">Remove subframe for welding out — HOLD: do not proceed past this point until Supervisor review below</span></div>
+  </div>
+  <div class="section-footer" style="background:#e8f5e9; border-top: 2px solid #2e7d32;">
+    <div class="footer-field"><label>Supervisor Review</label><div class="fval">&nbsp;</div></div>
+    <div class="footer-field"><label>Review Date</label><div class="fval">&nbsp;</div></div>
+    <div class="footer-field"><label>Cleared to Proceed</label><div class="fval">YES / NO</div></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════ STAGE 4 ══ -->
+<div class="section">
+  <div class="section-header elec">
+    <div><span class="section-title">STAGE 4 — Cabin Works &amp; Pre-Wiring</span></div>
+    <div class="section-badge">ELECTRICAL</div>
+    <div class="section-field"><label>Target Hrs</label><div class="field-val" style="text-align:center; font-size:14px; font-weight:700;">14</div></div>
+    <div class="section-field"><label>Start</label><div class="field-val">&nbsp;</div></div>
+    <div class="section-field"><label>Finish</label><div class="field-val">&nbsp;</div></div>
+    <div class="section-field"><label>Actual Hrs</label><div class="field-val">&nbsp;</div></div>
+  </div>
+  <div class="checklist">
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Chassis pre-wiring — tail light wiring</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fit main junction box behind / in chassis cab</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">PTO wiring and interlock fitted</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">In-dash electrical works completed (minute meter, float indicators)</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">In-cab stickers fitted</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Printer / PC power cabling fitted</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Power filter fitted</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Communication cables fitted</span></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════ STAGE 5 ══ -->
+<div class="section">
+  <div class="section-header">
+    <div><span class="section-title">STAGE 5 — Metal Fabrication Step 1</span></div>
+    <div class="section-badge">MECHANICAL</div>
+    <div class="section-field"><label>Target Hrs</label><div class="field-val" style="text-align:center; font-size:14px; font-weight:700;">20</div></div>
+    <div class="section-field"><label>Start</label><div class="field-val">&nbsp;</div></div>
+    <div class="section-field"><label>Finish</label><div class="field-val">&nbsp;</div></div>
+    <div class="section-field"><label>Actual Hrs</label><div class="field-val">&nbsp;</div></div>
+  </div>
+  <div class="checklist">
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Toolbox and pump brackets folded and ready for fitment</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Aluminium AdBlue cover folded</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Aluminium cover for pneumatics (driver's side) folded</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Aluminium money box fabricated</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Stainless steel float boxes fabricated</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Stainless steel slops tank fabricated</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Aluminium printer tray fabricated</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fit all fabricated aluminium items</span></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════ STAGE 6 ══ -->
+<div class="hold-notice">Supervisor sign-off required at end of Stage 6 — pressure test must pass before welding out.</div>
+<div class="section">
+  <div class="section-header mixed">
+    <div><span class="section-title">STAGE 6 — Cabinet Works</span></div>
+    <div class="section-badge">MECH + ELEC</div>
+    <div class="section-field"><label>Target Hrs</label><div class="field-val" style="text-align:center; font-size:14px; font-weight:700;">80</div></div>
+    <div class="section-field"><label>Start</label><div class="field-val">&nbsp;</div></div>
+    <div class="section-field"><label>Finish</label><div class="field-val">&nbsp;</div></div>
+    <div class="section-field"><label>Actual Hrs</label><div class="field-val">&nbsp;</div></div>
+  </div>
+  <div class="checklist">
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fold required items for cabinet frame</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Assemble cabinet frame</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">If Liquip reels installed — ensure cheek plates are fitted</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fit hose reel bases and reels — confirm LE and RE motors on correct side</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fit meters to cabinet base</span></div>
+    <div class="check-item photo"><span class="checkbox"></span><span class="check-text">📷 Photograph both meter serial numbers (×2 photos)</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fabricate basket strainer</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Locate and fit basket strainer and UCO pump</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fit out cabinet internals</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Tack all pipes together</span></div>
+    <div class="check-item hold"><span class="checkbox"></span><span class="check-text">HOLD — pressure test pipework BEFORE full weld-out</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Pressure test passed — fully weld out pipes</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Passivate all welds</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Refit internal pipework after passivation</span></div>
+    <div class="check-item photo"><span class="checkbox"></span><span class="check-text">📷 Photograph fitted pipework</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fit registers, lighting and other electricals to cabinet</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fit pneumatics to cabinet for hose reels</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fit pneumatic controls for footvalves on vessel</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fit hydraulic controls</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fit hoses, check valves, swivels and nozzles (adaptor welded to nozzle tip)</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Swivel assembled in line with nozzle</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fit roller doors — keys attached to vehicle keys</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Confirm: nozzle does not hinder roller door and sits neatly in parking spot</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Sweep / vacuum cabinet internals</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fit cabinet skin — leave protection film on outside</span></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════ STAGE 7 ══ -->
+<div class="section">
+  <div class="section-header">
+    <div><span class="section-title">STAGE 7 — Paint</span></div>
+    <div class="section-badge">MECHANICAL</div>
+    <div class="section-field"><label>Target Hrs</label><div class="field-val" style="text-align:center; font-size:14px; font-weight:700;">10</div></div>
+    <div class="section-field"><label>Start</label><div class="field-val">&nbsp;</div></div>
+    <div class="section-field"><label>Finish</label><div class="field-val">&nbsp;</div></div>
+    <div class="section-field"><label>Actual Hrs</label><div class="field-val">&nbsp;</div></div>
+  </div>
+  <div class="checklist">
+    <div class="check-item safety"><span class="checkbox"></span><span class="check-text">Meters are NOT to be painted — mask before any painting commences</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Paint subframe</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Paint rear bumper</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Paint pump frame and toolbox brackets</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Paint any steel internal components of cabinet</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Paint 2× Ebsray pumps</span></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════ STAGE 8 ══ -->
+<div class="section">
+  <div class="section-header">
+    <div><span class="section-title">STAGE 8 — Cabin Works Fitout</span></div>
+    <div class="section-badge">MECHANICAL</div>
+    <div class="section-field"><label>Target Hrs</label><div class="field-val" style="text-align:center; font-size:14px; font-weight:700;">3</div></div>
+    <div class="section-field"><label>Start</label><div class="field-val">&nbsp;</div></div>
+    <div class="section-field"><label>Finish</label><div class="field-val">&nbsp;</div></div>
+    <div class="section-field"><label>Actual Hrs</label><div class="field-val">&nbsp;</div></div>
+  </div>
+  <div class="checklist">
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Remove centre seat</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fit printer base and cushion</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fit money box</span></div>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ══════════════════════════════════════════ STAGE 9 ══ -->
+<div class="hold-notice">Supervisor review required at end of Stage 9 — all torque witness marks must be photographed before sign-off.</div>
+
+<div style="margin: 8px; font-size:9px;">
+  <strong>Torque Reference — Stage 9:</strong>
+  <table class="torque-table">
+    <tr><th>Item</th><th>Bolt Spec</th><th>Torque</th><th>Notes</th></tr>
+    <tr><td>Subframe</td><td>M14 Gr 10.9</td><td><strong>218 Nm</strong></td><td>Hardened washers on nut side (min)</td></tr>
+    <tr><td>Cabinet</td><td>M14 Gr 8.8</td><td><strong>148 Nm</strong></td><td>Hardened washers on nut side (min)</td></tr>
+    <tr><td>Pump Frame</td><td>M12 Gr 8.8</td><td><strong>93 Nm</strong></td><td>&nbsp;</td></tr>
+    <tr><td>Mudguards</td><td>M16 Gr 8.8</td><td><strong>148 Nm</strong></td><td>&nbsp;</td></tr>
+    <tr><td>Toolbox Brackets</td><td>M12 Gr 8.8</td><td><strong>93 Nm</strong></td><td>&nbsp;</td></tr>
+    <tr><td>Bell Housing</td><td>6mm×50mm MZPBSS</td><td>Loctite RED</td><td>Bell housing covers also Loctite</td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <div><span class="section-title">STAGE 9 — Chassis Fitout Step 2</span></div>
+    <div class="section-badge">MECHANICAL</div>
+    <div class="section-field"><label>Target Hrs</label><div class="field-val" style="text-align:center; font-size:14px; font-weight:700;">30</div></div>
+    <div class="section-field"><label>Start</label><div class="field-val">&nbsp;</div></div>
+    <div class="section-field"><label>Finish</label><div class="field-val">&nbsp;</div></div>
+    <div class="section-field"><label>Actual Hrs</label><div class="field-val">&nbsp;</div></div>
+  </div>
+  <div class="checklist">
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Mount painted subframe — M14 10.9 @ 218 Nm, hardened washers nut side</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Mount fitted-out cabinet — M14 8.8 @ 148 Nm, hardened washers nut side</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Mount tank</span></div>
+    <div class="check-item safety"><span class="checkbox"></span><span class="check-text">All mounting bolts tightened to spec and witness marked</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fit pump frame — M12 8.8 @ 93 Nm</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fit mudguards — M16 8.8 @ 148 Nm</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fit toolbox brackets and toolbox — M12 8.8 @ 93 Nm</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fit toolbox complete with chain and mat</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fit slops container</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fit minor mechanicals: cone holder, rear checker plate, rear handholds</span></div>
+    <div class="check-item photo"><span class="checkbox"></span><span class="check-text">📷 Photograph witness marks on ALL items bolted to chassis</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fit painted Ebsray pumps to pump base</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fabricate and fit bell housing — 6mm×50mm MZPBSS Bolts, RED Loctite</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fabricate and fit bell housing covers — Loctite</span></div>
+  </div>
+  <div class="section-footer" style="background:#e8f5e9; border-top: 2px solid #2e7d32;">
+    <div class="footer-field"><label>Supervisor Review</label><div class="fval">&nbsp;</div></div>
+    <div class="footer-field"><label>Review Date</label><div class="fval">&nbsp;</div></div>
+    <div class="footer-field"><label>Cleared to Proceed</label><div class="fval">YES / NO</div></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════ STAGE 10 ══ -->
+<div class="hold-notice">Supervisor review required at end of Stage 10 — pipework layout confirmed before final weld-out.</div>
+<div class="section">
+  <div class="section-header">
+    <div><span class="section-title">STAGE 10 — Fabricate Pipework</span></div>
+    <div class="section-badge">MECHANICAL</div>
+    <div class="section-field"><label>Target Hrs</label><div class="field-val" style="text-align:center; font-size:14px; font-weight:700;">22</div></div>
+    <div class="section-field"><label>Start</label><div class="field-val">&nbsp;</div></div>
+    <div class="section-field"><label>Finish</label><div class="field-val">&nbsp;</div></div>
+    <div class="section-field"><label>Actual Hrs</label><div class="field-val">&nbsp;</div></div>
+  </div>
+  <div class="checklist">
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fabricate and tack pipework in position</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fit float boxes and plumb clear tubing to slops via cabinet</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Float boxes must be well inside the vehicle line (inside line of pump frame)</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">¼" drain points fitted to delivery side of pumps</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Unloading outlet secured and not subject to vibration</span></div>
+    <div class="check-item safety"><span class="checkbox"></span><span class="check-text">NO hoses between pump and cabinet (rigid pipe only in this run)</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Flanged join fitted in pipework between cabinet and tank</span></div>
+  </div>
+  <div class="section-footer" style="background:#e8f5e9; border-top: 2px solid #2e7d32;">
+    <div class="footer-field"><label>Supervisor Review</label><div class="fval">&nbsp;</div></div>
+    <div class="footer-field"><label>Review Date</label><div class="fval">&nbsp;</div></div>
+    <div class="footer-field"><label>Cleared to Proceed</label><div class="fval">YES / NO</div></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════ STAGE 11 ══ -->
+<div class="section">
+  <div class="section-header elec">
+    <div><span class="section-title">STAGE 11 — Final Electrical Fitout</span></div>
+    <div class="section-badge">ELECTRICAL</div>
+    <div class="section-field"><label>Target Hrs</label><div class="field-val" style="text-align:center; font-size:14px; font-weight:700;">22</div></div>
+    <div class="section-field"><label>Start</label><div class="field-val">&nbsp;</div></div>
+    <div class="section-field"><label>Finish</label><div class="field-val">&nbsp;</div></div>
+    <div class="section-field"><label>Actual Hrs</label><div class="field-val">&nbsp;</div></div>
+  </div>
+  <div class="checklist">
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Carry out final connection to cabinet</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fit floats to float box and wire in</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Terminate solenoids</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Cables to solenoids: point to rear of truck, sealed and fitted with heat shrink</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Pneumatics — Wabco, Handrail, Comp 2 &amp; 3 fitted and connected</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Update firmware in registers to correct customer version</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fit and wire rear tail lights and side marker lights</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Fit and wire LED work lights to cabinet and rear bumper reverse lights</span></div>
+    <div class="check-item hold"><span class="checkbox"></span><span class="check-text">Electrical works complete — sign off below before Stage 12</span></div>
+  </div>
+  <div class="section-footer">
+    <div class="footer-field"><label>Electrical Works Completed By</label><div class="fval">&nbsp;</div></div>
+    <div class="footer-field"><label>Date</label><div class="fval">&nbsp;</div></div>
+    <div class="footer-field"><label>Cleared to Proceed</label><div class="fval">YES / NO</div></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════ STAGE 12 ══ -->
+<div class="section">
+  <div class="section-header supervisor">
+    <div><span class="section-title">STAGE 12 — Final Scheduling</span></div>
+    <div class="section-badge">SUPERVISOR</div>
+    <div class="section-field"><label>Target Hrs</label><div class="field-val" style="text-align:center; font-size:14px; font-weight:700;">2</div></div>
+    <div class="section-field"><label>Start</label><div class="field-val">&nbsp;</div></div>
+    <div class="section-field"><label>Finish</label><div class="field-val">&nbsp;</div></div>
+    <div class="section-field"><label>Actual Hrs</label><div class="field-val">&nbsp;</div></div>
+  </div>
+  <div class="checklist">
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Schedule hydraulics contractor — confirm date: _______________</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Schedule VSB inspection — confirm date: _______________</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Ensure data uploaded to tablet for testing</span></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════ STAGE 13 ══ -->
+<div class="hold-notice">Weighbridge must be completed BEFORE flow testing. Do not commence flow tests without weighbridge certificate in folder.</div>
+<div class="section">
+  <div class="section-header mixed">
+    <div><span class="section-title">STAGE 13 — Final Works</span></div>
+    <div class="section-badge">MECH + ELEC</div>
+    <div class="section-field"><label>Target Hrs</label><div class="field-val" style="text-align:center; font-size:14px; font-weight:700;">60</div></div>
+    <div class="section-field"><label>Start</label><div class="field-val">&nbsp;</div></div>
+    <div class="section-field"><label>Finish</label><div class="field-val">&nbsp;</div></div>
+    <div class="section-field"><label>Actual Hrs</label><div class="field-val">&nbsp;</div></div>
+  </div>
+  <div class="checklist">
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Side amber reflectors fitted — outside edges of rear bumper</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Side amber reflectors fitted — tank</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">'Do Not Overtake' signs fitted to rear bumper</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Customer mudflaps fitted</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">All labels fitted</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Hydraulics fitout completed</span></div>
+    <div class="check-item safety"><span class="checkbox"></span><span class="check-text">Confirm hydraulic hoses NOT rubbing on fuel tank or AdBlue tank</span></div>
+    <div class="check-item hold"><span class="checkbox"></span><span class="check-text">HOLD — Weighbridge completed BEFORE flow testing. Certificate in job folder: YES / NO</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">VSB carried out and completed</span></div>
+    <div class="check-item photo"><span class="checkbox"></span><span class="check-text">📷 Test communications to tablet and printer — photograph printouts</span></div>
+    <div class="check-item photo"><span class="checkbox"></span><span class="check-text">📷 Confirm minute meter on dash working — photograph</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Remove all plastic coating from cabinet</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Hydraulic oil level checked and correct</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Engine speed with PTO engaged: <strong>830 RPM</strong> — confirm: _______ RPM</span></div>
+    <div class="check-item photo"><span class="checkbox"></span><span class="check-text">📷 Flow Test Meter 1: min 70 lpm — record result: _______ lpm</span></div>
+    <div class="check-item photo"><span class="checkbox"></span><span class="check-text">📷 Flow Test Meter 2: min 70 lpm — record result: _______ lpm</span></div>
+    <div class="check-item photo"><span class="checkbox"></span><span class="check-text">📷 Flow Test UCO Hose: min 80 lpm — record result: _______ lpm</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Calibration completed</span></div>
+    <div class="check-item hold"><span class="checkbox"></span><span class="check-text">Vehicle suitable for inspection — confirm before scheduling customer visit</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Schedule customer inspection — confirm date: _______________</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Tank clean — documents placed in job folder</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Customer visit completed — date: _______________</span></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════ STAGE 14 ══ -->
+<div class="hold-notice">Supervisor final inspection is the LAST step. Folder must be fully closed before handover.</div>
+<div class="section">
+  <div class="section-header supervisor">
+    <div><span class="section-title">STAGE 14 — Testing &amp; Handover</span></div>
+    <div class="section-badge">SUPERVISOR</div>
+    <div class="section-field"><label>Target Hrs</label><div class="field-val" style="text-align:center; font-size:14px; font-weight:700;">3</div></div>
+    <div class="section-field"><label>Start</label><div class="field-val">&nbsp;</div></div>
+    <div class="section-field"><label>Finish</label><div class="field-val">&nbsp;</div></div>
+    <div class="section-field"><label>Actual Hrs</label><div class="field-val">&nbsp;</div></div>
+  </div>
+  <div class="checklist">
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Dates and times on register are current and correct</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Print settings from register — include in job folder</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">PTO minute meter turns on and off with PTO — confirmed</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Seal off tank, valves and nozzles with customer-supplied tags — record tag numbers in app</span></div>
+    <div class="check-item"><span class="checkbox"></span><span class="check-text">Close off folder and hand finished folder to Operations</span></div>
+    <div class="check-item hold"><span class="checkbox"></span><span class="check-text">Supervisor final inspection checks completed</span></div>
+  </div>
+  <div class="section-footer" style="background:#e8f5e9; border-top: 2px solid #2e7d32;">
+    <div class="footer-field"><label>Final Inspection By (Supervisor)</label><div class="fval">&nbsp;</div></div>
+    <div class="footer-field"><label>Completion Date</label><div class="fval">&nbsp;</div></div>
+    <div class="footer-field"><label>Total Calendar Days</label><div class="fval">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; / 20 target</div></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════ SUMMARY ══ -->
+<div class="summary-box">
+  <div class="summary-header">JOB COMPLETION SUMMARY — Record in Benchmark Tracker</div>
+  <div class="summary-grid">
+    <div class="summary-cell"><label>Job Number</label><div class="big">&nbsp;</div></div>
+    <div class="summary-cell"><label>Mech Hours (Target 311)</label><div class="big">&nbsp;</div><div class="target">Target: 311</div></div>
+    <div class="summary-cell"><label>Elec Hours (Target 51)</label><div class="big">&nbsp;</div><div class="target">Target: 51</div></div>
+    <div class="summary-cell"><label>Calendar Days (Target 20)</label><div class="big">&nbsp;</div><div class="target">Target: 20</div></div>
+  </div>
+  <div class="summary-grid" style="margin-top:1px;">
+    <div class="summary-cell"><label>Biggest Overrun Stage</label><div style="font-size:13px; font-weight:600; min-height:24px;">&nbsp;</div></div>
+    <div class="summary-cell"><label>Hrs Over/Under Budget</label><div style="font-size:13px; font-weight:600; min-height:24px;">&nbsp;</div></div>
+    <div class="summary-cell"><label>Main Delay Reason</label><div style="font-size:13px; font-weight:600; min-height:24px;">&nbsp;</div></div>
+    <div class="summary-cell"><label>Improvement Action</label><div style="font-size:13px; font-weight:600; min-height:24px;">&nbsp;</div></div>
+  </div>
+</div>
+
+<div style="text-align:center; font-size:9px; color:#888; padding: 8px; margin-top:4px;">
+  7.5kl Type A New Build — Job Traveller Card v1.0 &nbsp;|&nbsp; Target: 4 weeks / 311 mech hrs / 51 elec hrs
+  <br>Dark navy = Mechanical &nbsp;|&nbsp; Blue = Electrical &nbsp;|&nbsp; Dark red = Supervisor &nbsp;|&nbsp; Green = Sign-off required
+</div>
+
+</body>
+</html>
