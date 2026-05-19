@@ -1,4 +1,4 @@
-# Action Register — Executive Dashboard
+# Action Register — The Works
 **Active items only. Read at session open. Completed items → ACTION_REGISTER_ARCHIVE.md**
 **Last updated:** 19 May 2026 — MEO
 
