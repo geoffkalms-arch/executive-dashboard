@@ -1,0 +1,12 @@
+7.5kl Type A New Build — BENCHMARK TRACKER,,,,,,,,,,,,,,,,,,,
+"One row per completed job. Fill in actuals from the Job Traveller Card. Over time this becomes your real benchmark.",,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
+TARGET HOURS,,,2,4,75,14,20,80,10,3,30,22,22,2,60,3,311,51,362
+Job No.,Start Date,Finish Date,S1 Inwards (T:2),S2 Chassis Prep (T:4),S3 Build Step 1 (T:75),S4 Cabin Prewire E (T:14),S5 Metal Fab (T:20),S6 Cabinet (T:80),S7 Paint (T:10),S8 Cabin Fitout (T:3),S9 Chassis Fitout (T:30),S10 Pipework (T:22),S11 Final Elec E (T:22),S12 Scheduling (T:2),S13 Final Works (T:60),S14 Testing (T:3),Total Mech Actual,Total Elec Actual,Total Hrs Actual,Calendar Days,On Time? (Y/N),Biggest Overrun Stage,Main Delay Reason,Actions Taken
+30001 (first job — set benchmark),,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
+RUNNING AVERAGE (formula row — update manually or use AVERAGE() in each column),,,,,,,,,,,,,,,,,,,
