@@ -225,6 +225,66 @@ Spare wheel | Ladder | Fuel circuit plate/label | Control panel nutserts | 5th w
 
 ---
 
+## Discipline and Governance — How We Lock This In
+
+Strategy is easy. Execution is where organisations fail. The difference between a plan that runs for six months and one that runs for three years is not motivation — it is architecture. Discipline built into the system, not dependent on willpower.
+
+### What "discipline" means here
+
+Discipline is not about working harder or caring more. Our people already do both. Discipline means building structures that make the right behaviour the default, and make skipping the standard harder than following it.
+
+> *"Every system is perfectly designed to get the results it gets."*
+> The current system produces late engineering releases and incomplete BOMs. We need a different system.
+
+### Layer 1 — Non-Negotiables (Things That Cannot Be Skipped)
+
+Three hard stops that apply regardless of schedule pressure:
+
+1. **Engineering release checklist is mandatory** — no package leaves engineering without it complete. The checklist exists precisely for moments of pressure. If we bypass it when we're running late, we have taught the organisation that standards only apply when convenient.
+
+2. **Root cause closure before a repair action closes** — every completed repair action requires a documented root cause owner and category before it can be marked resolved. This single rule converts the repair system from a fix register into a learning system.
+
+3. **Weekly engineering throughput review — never cancelled** — especially not under pressure. The moments when leadership most wants to skip the review meeting are exactly the moments when it is most needed.
+
+### Layer 2 — The Visible Cadence
+
+Governance that isn't visible isn't governance. Every team needs to know when the questions will be asked — and who will be asking them.
+
+| Frequency | Forum | Owner | Core question |
+|---|---|---|---|
+| **Daily** | Cell floor review | Cell supervisors | What's late? What's at risk today? |
+| **Weekly** | Engineering throughput review | Manufacturing Mgr + Eng leads | Jobs in, released, late — why? |
+| **Weekly** | Open repair action review | After-Sales | Count by cell, age, over 30 days |
+| **Monthly** | BSC traffic light | All dept heads | One page, RAG status, one action per red |
+| **Quarterly** | Strategic review | CEO + leadership | Are the initiatives moving? What's blocked? |
+
+These meetings are not status updates. They are accountability forums. The output of each meeting is an action, an owner, and a due date.
+
+### Layer 3 — Ownership With Consequence
+
+A KPI without a name is decoration.
+
+- Every KPI has a named owner — not a function, a person
+- The monthly BSC report is produced **by** the owner, not **for** them
+- Performance reviews ask two questions: did your KPIs move this year? What did you do when they didn't?
+- The CEO asks the same questions every month — **consistency is the discipline signal**
+
+When the CEO asks the same question every review cycle, it signals to the organisation that this is permanent, not a project. People adjust their behaviour to what leadership consistently measures.
+
+### The CEO's Role in Holding the Standard
+
+The single most powerful governance lever in this business is the CEO asking the same questions every month and not accepting "we've been busy" as an answer. Everything else — the checklists, the reviews, the KPIs — is scaffolding. Leadership consistency is the structure.
+
+Specifically, this means:
+
+- **When someone proposes skipping the release checklist because we're running late** — the answer is no. The checklist exists for that moment.
+- **When a KPI has been red for two months** — the question is not "why is it red?" but "what has changed since last month?"
+- **When an initiative stalls** — a named owner is asked to explain what happened, not to submit a report about it
+
+> *The message the organisation needs to receive: we are building the infrastructure of a scalable business, and we are not stopping when it gets hard. The discipline we install in the next 12 months determines whether we are still talking about the same problems in 2028.*
+
+---
+
 ## The 3-Year Vision (2027–2029)
 ### *"The Scalable Business"*
 
