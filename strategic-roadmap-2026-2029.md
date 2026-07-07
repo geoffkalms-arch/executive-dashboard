@@ -285,6 +285,52 @@ Specifically, this means:
 
 ---
 
+## Building a Culture of Ownership — Leadership Behaviour
+
+There is a second governance challenge that sits alongside the structural one. The CEO has identified that people are not taking control of their workplaces and teams at the level the business now requires. This is a leadership behaviour problem — and paradoxically, strong leadership at the top is often the cause of it.
+
+### Why This Happens
+
+**The shadow of the leader.** When a strong CEO consistently has the best answer, makes fast decisions, and holds high standards, people unconsciously learn to wait. They've been corrected or overridden enough times — even with the best intentions — that taking initiative feels risky. The rational response becomes: defer.
+
+**Decision rights are unclear.** If people don't know where their authority ends and the CEO's begins, they escalate everything upward to be safe. They're not being passive — they're being sensible given the rules they've inferred from experience.
+
+**No consequence for not deciding.** If the CEO will eventually make the call anyway, there is no cost to waiting. The absence of consequence trains the behaviour over time.
+
+**Fear of the standard, not the person.** In a culture that cares deeply about quality, people may hesitate to act because they're not confident they'll meet the standard. Better to do nothing than to do it wrong in front of someone who cares.
+
+**Growth outpaced role clarity.** The business doubled in 2.5 years. People who were "just getting it done" in a smaller team now manage teams and workplaces — but their identity and muscle memory is still individual contributor. No one formally gave them the authority signal.
+
+### The Change Pathway — Six Steps in Order
+
+**Step 1 — The CEO stops answering questions they should be asking back.**
+When someone brings a problem upward, the response changes from "here's what I'd do" to "what do you think we should do?" This will feel slower. It is the most important lever. Every time the CEO solves a problem that someone else should own, it withdraws a unit of that person's confidence and ownership.
+
+**Step 2 — Make decision rights explicit.**
+For each leadership role, define: what can you decide alone, what do you consult on, what do you escalate? A one-page authority map per role is sufficient. The goal is to remove ambiguity. People need to know that acting within their domain is not just permitted — it is expected.
+
+**Step 3 — Let people own failures inside a boundary.**
+A team leader who makes a call that doesn't work out perfectly needs to experience the CEO backing their right to have made it, while coaching the quality of the decision. If the response to a mistake is the CEO taking over, the lesson learned is: don't decide.
+
+**Step 4 — KPI ownership creates the accountability reflex.**
+The monthly BSC report produced *by* the owner — not *for* them — is exactly the right mechanism. When someone has to stand in front of the room and explain their number, they begin to feel genuine ownership of it. This takes 2–3 cycles to embed.
+
+**Step 5 — Performance reviews ask the right questions.**
+Add to the annual review: *"What decisions did you make this year that you're proud of? What would you do differently?"* This signals that deciding is part of the job description — not just delivering outcomes when directed.
+
+**Step 6 — Visible praise for initiative, not just results.**
+When someone takes charge of something without being asked — even imperfectly — name it publicly. The culture needs to see that the CEO values the act of ownership, not only perfect outcomes.
+
+### The Honest Message
+
+The strongest signal a CEO can send is to *visibly not decide things they could decide.* When the team sees the CEO say "that's [name]'s call — what did you decide?" in a group setting, the whole room recalibrates. It takes consistent repetition over months, not a single speech about empowerment.
+
+A CEO strong enough to build a great culture is sometimes strong enough to accidentally suppress the initiative that culture needs to scale. The next leadership skill is learning which decisions to give away permanently — and then genuinely not taking them back.
+
+> *"The goal is not a business that runs because the CEO is in the room. The goal is a business that runs because the right people own the right things — and know it."*
+
+---
+
 ## The 3-Year Vision (2027–2029)
 ### *"The Scalable Business"*
 
