@@ -207,18 +207,18 @@ Spare wheel | Ladder | Fuel circuit plate/label | Control panel nutserts | 5th w
 
 ---
 
-# PART THREE — FINANCE
-## Finance Manager
+# PART THREE — OPERATIONS
+## Operations Manager
 
 ---
 
 ## Your Place in the Picture
 
-Finance sits downstream in the value stream — but upstream of the decisions that determine whether throughput targets are met. When costing is slow, allocation decisions are made on incomplete information. When allocation decisions are wrong, production plans break down. When production plans break down, pressure builds — and pressure is what drives errors.
+Operations owns costing and allocation — the step that converts a completed build into a closed job and a correct invoice. When this is slow, the consequences run in two directions: cash flow delays upstream and production plan failures downstream. Every job that sits in the costing queue is a job not yet closed, not yet invoiced, and not yet informing the next allocation decision.
 
-The costing and allocation process is a constraint on throughput. You are not the root cause of the cascade — engineering is. But your turnaround speed is a lever that, when improved, releases capacity across the whole operation.
+The costing and allocation process is a real constraint on throughput. Engineering is the root cause of the cascade — but Operations is where the pressure of late engineering is most visibly felt, and where the fix must be most operationally practical.
 
-**The target is clear: costing turnaround reduced 40% within 6 months.**
+**The target: costing turnaround reduced 40% within 6 months.**
 
 ---
 
@@ -226,38 +226,33 @@ The costing and allocation process is a constraint on throughput. You are not th
 
 **Step 1 — Map the process (this month)**
 
-Before we can fix the costing process, we need to understand exactly where it waits. This is a simple exercise: trace a typical job from "fabrication close" to "costing complete" and mark every point where it pauses and why.
+Trace a typical job from fabrication close to costing complete and mark every point where it pauses and why. The goal is to distinguish between:
+- A **workflow problem** — the process has unnecessary steps, handoffs, or approval loops
+- A **capacity problem** — the volume has outgrown the headcount available to do the work
+- An **information problem** — costing can't start because the job information from upstream is incomplete
 
-Common causes to investigate:
-- Incomplete information from upstream (BOMs, job cards, actual hours)
-- Approval steps that could be streamlined or delegated
-- Manual processes that could be systematised
-- Capacity — is this a volume problem or a workflow problem?
+Bring the process map to the next monthly review. That's the basis for the improvement plan.
 
-The output of this exercise is a process map with identified bottlenecks. Bring it to the next monthly review.
+**Step 2 — Define what Operations needs from upstream to start costing immediately**
 
-**Step 2 — Identify what Finance needs from upstream**
+If jobs arrive with incomplete hours, missing job cards, or unclear BOM actuals, costing waits. The engineering release gate addresses package quality — but Operations must define exactly what a "costable job" looks like the moment it arrives. Document it. Share it with Engineering and Production.
 
-If costing is slow because engineering releases late or incomplete job information, that is an upstream fix — and it's being addressed through the engineering release gate. Define exactly what Finance needs from each upstream function to begin costing immediately on receipt.
+**Step 3 — Assess systems (within 6 months)**
 
-**Step 3 — Assess systems**
-
-The current process may be operating at the limit of what manual workflows can support at this volume. Part of the 6-month mandate is to assess whether an ERP or cost management system investment would materially improve turnaround. Bring a recommendation to the CEO within 6 months — not a shortlist, a recommendation.
+At current volume, manual costing processes may be at their limit. Assess whether a job costing or ERP system would materially improve turnaround speed and accuracy. Bring a recommendation to the CEO within 6 months — not a shortlist, a recommendation with a preferred option and rationale.
 
 ---
 
 ## Your Role in the Ownership Culture
 
-Finance has something no other function has: **visibility across the whole business.** Revenue per head, build margins, cost per job type, costing turnaround — these numbers tell a story about the health of the operation that no other manager can see in the same way.
+Operations sits at the intersection of production, finance, and planning. When allocation decisions are wrong or slow, every other function feels it. That cross-functional visibility is a responsibility — you are often the first person who can see when the build plan and the resourcing reality are diverging.
 
-That visibility is a responsibility, not just a reporting function.
+**What ownership looks like for Operations:**
+- When you can see a costing backlog building — surface it and propose the fix before being asked
+- Monthly BSC operational perspective produced by Operations, not received by Operations
+- Allocation decisions within your authority are made and communicated quickly — not held pending perfect information
 
-**What ownership looks like for Finance:**
-- When the numbers show something is wrong — a margin deteriorating, a job type consistently over-running cost — Finance surfaces it before being asked
-- The monthly BSC financial perspective is produced by Finance, not received by Finance
-- When a KPI trend is negative for two months, Finance comes to the review with a hypothesis about why — not just the number
-
-**The shift:** from reporting what happened → to explaining what it means and recommending what to do next.
+**The shift:** from processing jobs → to actively managing the throughput of the operation.
 
 ---
 
@@ -265,13 +260,95 @@ That visibility is a responsibility, not just a reporting function.
 
 | Decision | Owner | Consult | Escalate |
 |---|---|---|---|
-| Costing process design | Finance Manager | Operations Manager | — |
-| Reporting cadence and format | Finance Manager | — | — |
-| Systems investment recommendation | Finance Manager | IT/Operations | CEO (approval) |
-| Cost allocation methodology | Finance Manager | Operations Manager, Production GM | CEO if material change |
-| Flagging margin risk on specific jobs | Finance Manager | Relevant GM | CEO if threshold exceeded |
+| Costing process design | Operations Manager | Finance Manager | — |
+| Job allocation decisions (within capacity) | Operations Manager | Production GM | — |
+| Escalating resourcing constraints | Operations Manager | Production GM | CEO if unresolvable |
+| Systems investment recommendation | Operations Manager | Finance Manager | CEO (approval) |
+| Defining "costable job" standard | Operations Manager | Engineering Manager | — |
 
-**The rule:** Your financial analysis and process design decisions are yours. Recommendations on spend or significant process changes go to the CEO with a recommendation, not a question.
+---
+
+## Operations KPI Summary
+
+| KPI | Owner | Target |
+|---|---|---|
+| Costing turnaround time (days) | Operations Manager | Reduce 40% within 6 months |
+| Allocation accuracy (jobs to plan) | Operations Manager | Baseline + improve QoQ |
+| BSC operational perspective (monthly) | Operations Manager | Produced and presented — not received |
+| Systems recommendation | Operations Manager | Delivered within 6 months |
+
+---
+
+## The Ask of Operations
+
+1. Map the costing process this month — where does it wait, and why?
+2. Define what a "costable job" looks like — share it with Engineering and Production
+3. Assess systems and bring a recommendation within 6 months
+4. Surface backlog build-up before being asked — don't wait for month-end to raise it
+
+---
+
+---
+
+# PART FOUR — FINANCE
+## Finance Manager
+
+---
+
+## Your Role in the Business
+
+Finance's role in this business is not costing — that sits with Operations. Finance's mandate is the financial integrity and visibility of the operation: accurate job time reporting, AP and AR management, and the monthly financial narrative that tells leadership whether the business is performing as expected.
+
+Done well, Finance is an early warning system. Done poorly, Finance is a reporting function that confirms what everyone already suspects.
+
+---
+
+## Job Time Reporting — a Strategic Asset
+
+Finance tracks actual job hours. Right now that data is used for reporting. It should also be used for improvement.
+
+**What changes:**
+- Actual hours by job type are shared with Engineering Manager monthly — this is the actuals database that makes future estimates more accurate
+- Variance reports (actual vs estimated hours) are produced and presented, not just filed
+- When a job type is consistently running over estimate, Finance flags it — it's a signal of either a scoping problem in Engineering or a production problem on the floor
+
+**System consideration:** If job time monitoring is currently manual, the volume of work at 160 people makes this worth reviewing. A proper time and job tracking system — even a lightweight one — would improve both the accuracy and the speed of this data. Bring a view on this within 6 months.
+
+---
+
+## AP and AR — Cash is the Engine
+
+At $70–100M revenue and growing, the timing of AP and AR is a cash flow lever, not just an admin function.
+
+**AR:** Customer invoices go out promptly when jobs close. A job that sits in the costing queue is a job not yet invoiced. The costing turnaround improvement in Operations directly improves AR timing — Finance and Operations are connected here.
+
+**AP:** Supplier payment terms are managed actively. Early payment discounts are taken where they make sense. Overdue supplier relationships are flagged before they become supply chain problems.
+
+---
+
+## Monthly Finance Reports — Own the Narrative
+
+The monthly finance report is not a spreadsheet sent to leadership. It is Finance's interpretation of what the numbers mean for the business — produced by Finance, presented by Finance, owned by Finance.
+
+**What this looks like:**
+- Revenue per head trending — is throughput improving or declining per person?
+- Margin by job type — are some product types consistently under-performing?
+- Cash position and forecast — where are the next 90 days heading?
+- BSC financial perspective — produced by Finance for the monthly review
+
+**The shift:** from distributing numbers → to interpreting them and recommending action.
+
+---
+
+## Your Decision Rights
+
+| Decision | Owner | Consult | Escalate |
+|---|---|---|---|
+| Reporting format and cadence | Finance Manager | — | — |
+| Job time system recommendation | Finance Manager | IT / Operations | CEO (approval) |
+| AP payment timing within policy | Finance Manager | — | — |
+| AR follow-up process | Finance Manager | Sales Manager | — |
+| Flagging margin or cash risk | Finance Manager | Relevant GM | CEO if material |
 
 ---
 
@@ -279,19 +356,21 @@ That visibility is a responsibility, not just a reporting function.
 
 | KPI | Owner | Target |
 |---|---|---|
-| Costing turnaround time (days) | Finance Manager | Reduce 40% within 6 months |
 | Revenue per head ($) | Finance Manager (tracking) | Increase YoY |
-| BSC financial perspective (monthly) | Finance Manager | Produced and presented — not received |
-| Systems investment recommendation | Finance Manager | Delivered within 6 months |
+| Debtors days (AR turnaround) | Finance Manager | Baseline + improve |
+| Job time variance report (monthly) | Finance Manager | Produced and shared with Engineering |
+| Monthly finance report | Finance Manager | Produced and presented — not distributed |
+| System recommendation (job time) | Finance Manager | View delivered within 6 months |
 
 ---
 
 ## The Ask of Finance
 
-1. Map the costing process this month — where does it wait?
-2. Define what you need from upstream to start costing immediately on receipt
-3. Assess ERP/systems options and bring a recommendation within 6 months
-4. Start producing the financial BSC section — own it, don't just report it
+1. Start sharing actual job hours with Engineering Manager monthly — that data improves their estimates
+2. Produce a job time variance report (actual vs estimated) — flag the outliers
+3. Review AR timing: are invoices going out promptly when jobs close?
+4. Bring a view on job time monitoring systems within 6 months
+5. Own the monthly finance report — present it, don't just send it
 
 ---
 
