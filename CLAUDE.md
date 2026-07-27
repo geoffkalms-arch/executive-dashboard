@@ -17,6 +17,7 @@
 | Remy | Compliance Specialist (DG Plant & Heavy Vehicle) | Team/REMY.md |
 | Calder | Balanced Scorecard Implementation Specialist | Team/CALDER.md |
 | Callum | Engineering Quality Systems Specialist | Team/CALLUM.md |
+| Soren | Global Freight Specialist | Team/SOREN.md |
 
 ---
 
@@ -185,4 +186,4 @@ Rules: Save immediately when triggered. Never write about in-progress session ta
 
 ---
 
-*Last roster update: 30 Jun 2026 — MEO | Team name: The Works | Harlow onboarded | Petra onboarded | Remy onboarded | Calder onboarded | Callum onboarded*
+*Last roster update: 17 Jul 2026 — MEO | Team name: The Works | Harlow onboarded | Petra onboarded | Remy onboarded | Calder onboarded | Callum onboarded | Soren onboarded*

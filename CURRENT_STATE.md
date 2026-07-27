@@ -8,7 +8,7 @@
 | Dimension | Status | Notes |
 |-----------|--------|-------|
 | Project | Executive Dashboard — Engineering & Manufacturing, Transport | Active |
-| Team size | 7 | Nolan (HR), Felix (Research), Harlow (Body Engineer), Petra (P&I Engineer), Remy (Compliance), Calder (BSC), Callum (Quality Systems) |
+| Team size | 8 | Nolan (HR), Felix (Research), Harlow (Body Engineer), Petra (P&I Engineer), Remy (Compliance), Calder (BSC), Callum (Quality Systems), Soren (Global Freight) |
 | Active tasks | 0 | Session tasks completed |
 | Open actions | 2 | See Action Register |
 | Data feeds | Pending configuration | portfolio_pro.py present |
@@ -45,6 +45,7 @@
 | Remy | Compliance Specialist (DG Plant & Heavy Vehicle) | Active — onboarded 26 Jun 2026 |
 | Calder | Balanced Scorecard Implementation Specialist | Active — onboarded 30 Jun 2026 |
 | Callum | Engineering Quality Systems Specialist | Active — onboarded 30 Jun 2026 |
+| Soren | Global Freight Specialist | Active — onboarded 17 Jul 2026 |
 
 ---
 
@@ -70,3 +71,4 @@
 | Jun 2026 | HARLOW-PETRA-001 PTO template suite delivered (full template, quick spec, rationale one-pager). Wiggins ZZ9A1 assessments delivered. |
 | 26 Jun 2026 | Remy (Compliance Specialist) onboarded via full hire pipeline — BRIEF-003 (Felix), profile approved (Nolan/MEO). Owner Inbox/Compliance/ directory structure created. |
 | 30 Jun 2026 | Calder (BSC Specialist) and Callum (Quality Systems Specialist) onboarded via full hire pipeline — BRIEF-004/005 (Felix), profiles approved (Nolan/MEO). Owner Inbox/Scorecard/ and Owner Inbox/Quality/ directories created. |
+| 17 Jul 2026 | Soren (Global Freight Specialist) onboarded via full hire pipeline — BRIEF-006 (Felix), profile approved (Nolan/MEO). Covers H&H RoRo, Melbourne→Jeddah lane, ABF/DAFF/ZATCA/SASO compliance. Owner Inbox/Freight/ to be created on first shipment. |
