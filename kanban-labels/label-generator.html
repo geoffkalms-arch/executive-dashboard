@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kanban Tub Label Generator</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         color: #16181d; background: #eceef2; }
+
+  /* ---------- Control panel (never prints) ---------- */
+  .panel { max-width: 1000px; margin: 0 auto; padding: 28px 24px 40px; }
+  .panel h1 { font-size: 22px; margin: 0 0 4px; letter-spacing: -0.01em; }
+  .panel .sub { color: #5c6370; margin: 0 0 24px; font-size: 14px; }
+  fieldset { border: 1px solid #d3d7de; border-radius: 8px; background: #fff;
+             padding: 16px 18px 18px; margin: 0 0 16px; }
+  legend { font-size: 12px; font-weight: 600; text-transform: uppercase;
+           letter-spacing: 0.06em; color: #5c6370; padding: 0 6px; }
+  .row { display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-end; }
+  label.f { display: flex; flex-direction: column; gap: 5px; font-size: 12px;
+            font-weight: 600; color: #454b57; }
+  select, input[type=number], input[type=text] {
+    font: inherit; font-size: 14px; padding: 7px 9px; border: 1px solid #c3c8d1;
+    border-radius: 6px; background: #fff; min-width: 90px; }
+  textarea { width: 100%; min-height: 190px; font: 13px/1.6 ui-monospace, SFMono-Regular,
+             Menlo, Consolas, monospace; padding: 11px 12px; border: 1px solid #c3c8d1;
+             border-radius: 6px; resize: vertical; white-space: pre; overflow-wrap: normal;
+             overflow-x: auto; }
+  button { font: inherit; font-weight: 600; font-size: 14px; padding: 9px 18px;
+           border-radius: 6px; border: 1px solid transparent; cursor: pointer; }
+  .primary { background: #16181d; color: #fff; }
+  .ghost { background: #fff; border-color: #c3c8d1; color: #16181d; }
+  .hint { font-size: 12.5px; color: #5c6370; margin: 10px 0 0; }
+  .hint code { background: #e4e7ec; padding: 1px 5px; border-radius: 3px; font-size: 12px; }
+  .warn { color: #9a3a12; background: #fdf0e7; border: 1px solid #f0cdb4;
+          padding: 9px 12px; border-radius: 6px; font-size: 13px; margin: 12px 0 0; }
+  .warn:empty { display: none; }
+  .count { font-size: 13px; color: #5c6370; margin-left: auto; }
+
+  /* ---------- Sheets ---------- */
+  #sheets { padding: 0 0 60px; }
+  .sheet { position: relative; background: #fff; margin: 0 auto 22px;
+           box-shadow: 0 2px 14px rgba(0,0,0,.16); overflow: hidden; }
+  .label { position: absolute; overflow: hidden; display: flex;
+           font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; color: #000; }
+  .guides .label { outline: 1px dashed #b9bec7; outline-offset: -0.5px; }
+
+  .spine { flex: 0 0 auto; }
+  .body  { flex: 1 1 auto; display: flex; flex-direction: column; min-width: 0; }
+
+  .part { font-weight: 800; letter-spacing: -0.02em; line-height: 0.95;
+          white-space: nowrap; overflow: hidden; }
+  .desc { font-weight: 500; line-height: 1.15; overflow: hidden;
+          display: -webkit-box; -webkit-box-orient: vertical; }
+  .facts { display: flex; border-top: 1.5px solid #000; border-bottom: 1.5px solid #000;
+           margin-top: auto; }
+  .fact { flex: 1 1 0; min-width: 0; border-left: 1px solid #000; overflow: hidden; }
+  .fact:first-child { border-left: 0; }
+  .fact .k { font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+             opacity: 0.72; white-space: nowrap; }
+  .fact .v { font-weight: 800; line-height: 1; white-space: nowrap; overflow: hidden; }
+  .code { display: flex; align-items: center; gap: 0.06in; }
+  .code svg { display: block; }
+  .hri { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+         font-weight: 700; letter-spacing: 0.06em; white-space: nowrap; }
+
+  @media print {
+    body { background: #fff; }
+    .panel { display: none !important; }
+    #sheets { padding: 0; }
+    .sheet { margin: 0; box-shadow: none; page-break-after: always; break-after: page; }
+    .sheet:last-child { page-break-after: auto; break-after: auto; }
+    .guides .label { outline: none; }
+  }
+  @page { size: letter portrait; margin: 0; }
+</style>
+</head>
+<body>
+
+<div class="panel">
+  <h1>Kanban tub label generator</h1>
+  <p class="sub">Prints onto polyester label sheets or plain card for label holders. Black-only,
+     no bleeds, no background fills &mdash; designed so toner coverage stays low and edges stay crisp.</p>
+
+  <fieldset>
+    <legend>Stock &amp; layout</legend>
+    <div class="row">
+      <label class="f">Label size
+        <select id="layout"></select>
+      </label>
+      <label class="f">Barcode
+        <select id="barcode">
+          <option value="part">Encode part number</option>
+          <option value="tub">Encode tub ID</option>
+          <option value="none">None</option>
+        </select>
+      </label>
+      <label class="f">Nudge right (mm)
+        <input type="number" id="offx" value="0" step="0.5">
+      </label>
+      <label class="f">Nudge down (mm)
+        <input type="number" id="offy" value="0" step="0.5">
+      </label>
+      <label class="f">Cut guides
+        <select id="guides">
+          <option value="on">Show</option>
+          <option value="off">Hide</option>
+        </select>
+      </label>
+    </div>
+    <p class="hint">Print one sheet on plain paper first and hold it against a label sheet
+       up to the light. If it&rsquo;s off, correct it with the nudge fields &mdash; most laser
+       printers drift 1&ndash;2&nbsp;mm. Set your print dialog to <code>Scale: 100%</code>
+       (not &ldquo;Fit to page&rdquo;), or the barcodes will be out of spec.</p>
+  </fieldset>
+
+  <fieldset>
+    <legend>Data</legend>
+    <textarea id="data" spellcheck="false"></textarea>
+    <p class="hint">One label per line, fields separated by <code>|</code> (pipe) or tab &mdash;
+       paste straight from a spreadsheet. Columns:
+       <code>part | description | location | qty | card | of | tubID | colour</code>.
+       Trailing columns can be left off. Blank lines and lines starting with <code>#</code> are ignored.</p>
+    <div class="row" style="margin-top:14px">
+      <button class="primary" id="render">Render sheets</button>
+      <button class="ghost" id="print">Print&hellip;</button>
+      <button class="ghost" id="sample">Restore sample data</button>
+      <span class="count" id="count"></span>
+    </div>
+    <div class="warn" id="warn"></div>
+  </fieldset>
+</div>
+
+<div id="sheets"></div>
+
+<script>
+"use strict";
+
+/* ------------------------------------------------------------------ *
+ * Sheet layouts. All dimensions in inches, measured from the top-left
+ * corner of the physical page.
+ * ------------------------------------------------------------------ */
+const LAYOUTS = {
+  "4x2-10up": {
+    name: '4" x 2" — 10 per US Letter sheet (Avery 5163 / 5963 / UltraDuty 60505 geometry)',
+    page: [8.5, 11], w: 4, h: 2, cols: 2, rows: 5,
+    left: 0.15625, top: 0.5, gapX: 0.1875, gapY: 0
+  },
+  "4x3.33-6up": {
+    name: '4" x 3-1/3" — 6 per US Letter sheet (Avery 5164 geometry)',
+    page: [8.5, 11], w: 4, h: 3.3333, cols: 2, rows: 3,
+    left: 0.15625, top: 0.5, gapX: 0.1875, gapY: 0
+  },
+  "2.625x1-30up": {
+    name: '2-5/8" x 1" — 30 per US Letter sheet (Avery 5160 geometry) — tub ID only',
+    page: [8.5, 11], w: 2.625, h: 1, cols: 3, rows: 10,
+    left: 0.1875, top: 0.5, gapX: 0.125, gapY: 0
+  },
+  "4x6-card": {
+    name: '4" x 6" kanban card — 1 per page, for card holders / continuous roll',
+    page: [4, 6], w: 4, h: 6, cols: 1, rows: 1,
+    left: 0, top: 0, gapX: 0, gapY: 0
+  }
+};
+
+/* ------------------------------------------------------------------ *
+ * Code 39. Each character is 9 elements, alternating bar/space,
+ * starting with a bar. 1 = wide, 0 = narrow. Three of the nine are
+ * always wide, hence "3 of 9".
+ * ------------------------------------------------------------------ */
+const C39 = {
+  "0":"000110100","1":"100100001","2":"001100001","3":"101100000","4":"000110001",
+  "5":"100110000","6":"001110000","7":"000100101","8":"100100100","9":"001100100",
+  "A":"100001001","B":"001001001","C":"101001000","D":"000011001","E":"100011000",
+  "F":"001011000","G":"000001101","H":"100001100","I":"001001100","J":"000011100",
+  "K":"100000011","L":"001000011","M":"101000010","N":"000010011","O":"100010010",
+  "P":"001010010","Q":"000000111","R":"100000110","S":"001000110","T":"000010110",
+  "U":"110000001","V":"011000001","W":"111000000","X":"010010001","Y":"110010000",
+  "Z":"011010000","-":"010000101",".":"110000100"," ":"011000100","$":"010101000",
+  "/":"010100010","+":"010001010","%":"000101010","*":"010010100"
+};
+const WIDE_RATIO = 2.5;   // wide:narrow. Must stay >= 2.2:1 below 20 mil narrow width.
+const QUIET = 10;         // quiet zone, in narrow-module widths, each side
+
+/* Renders Code 39 as inline SVG sized to fit exactly `widthIn`.
+   Returns { svg, mils } so the caller can warn on an out-of-spec module. */
+function code39(text, widthIn, heightIn) {
+  const clean = String(text).toUpperCase().replace(/[^0-9A-Z\-. $\/+%]/g, "");
+  if (!clean) return null;
+  const chars = ("*" + clean + "*").split("");
+  if (chars.some(c => !C39[c])) return null;
+
+  // Width budget in narrow-module units: per char 6 narrow + 3 wide,
+  // plus one narrow inter-character gap after every char.
+  const perChar = 6 + 3 * WIDE_RATIO + 1;
+  const units = chars.length * perChar - 1 + 2 * QUIET;
+  const X = widthIn / units;                       // narrow module, inches
+
+  let x = QUIET * X, d = "";
+  for (let ci = 0; ci < chars.length; ci++) {
+    const pat = C39[chars[ci]];
+    for (let i = 0; i < 9; i++) {
+      const w = (pat[i] === "1" ? WIDE_RATIO : 1) * X;
+      if (i % 2 === 0) d += `M${x.toFixed(5)} 0h${w.toFixed(5)}v${heightIn.toFixed(4)}h-${w.toFixed(5)}z`;
+      x += w;
+    }
+    if (ci < chars.length - 1) x += X;             // inter-character gap
+  }
+
+  const svg =
+    `<svg width="${widthIn.toFixed(4)}in" height="${heightIn.toFixed(4)}in" ` +
+    `viewBox="0 0 ${widthIn.toFixed(4)} ${heightIn.toFixed(4)}" ` +
+    `shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">` +
+    `<path d="${d}" fill="#000"/></svg>`;
+
+  return { svg, mils: X * 1000, text: clean };
+}
+
+/* ------------------------------------------------------------------ *
+ * Data parsing
+ * ------------------------------------------------------------------ */
+const SAMPLE = [
+  "# part | description | location | qty | card | of | tubID | colour",
+  "BRK-2204-A  | Brake lever, left hand, anodised | A-12-03 | 250 | 1 | 4 | TUB-04821 | #000000",
+  "BRK-2204-B  | Brake lever, right hand, anodised | A-12-04 | 250 | 2 | 4 | TUB-04822 | #000000",
+  "SEAL-118    | O-ring, nitrile, 18mm ID         | B-04-11 | 1000 | 1 | 3 | TUB-01190 | #000000",
+  "FAST-M6-25  | Cap screw M6 x 25, A2 stainless  | C-01-07 | 500 | 1 | 6 | TUB-07740 | #000000",
+  "HRN-9902    | Wiring harness, main loom        | D-08-02 | 40  | 3 | 5 | TUB-09902 | #000000",
+  "PLT-0031    | Mounting plate, 3mm, powder coat | A-02-09 | 120 | 2 | 2 | TUB-00310 | #000000"
+].join("\n");
+
+function parseData(raw) {
+  return raw.split(/\r?\n/)
+    .map(l => l.trim())
+    .filter(l => l && !l.startsWith("#"))
+    .map(line => {
+      const f = line.split(/\s*\|\s*|\t+/).map(s => s.trim());
+      return {
+        part: f[0] || "", desc: f[1] || "", loc: f[2] || "", qty: f[3] || "",
+        card: f[4] || "", of: f[5] || "", tub: f[6] || "", colour: f[7] || "#000000"
+      };
+    });
+}
+
+/* ------------------------------------------------------------------ *
+ * Label rendering
+ * ------------------------------------------------------------------ */
+function buildLabel(rec, L, mode, warnings) {
+  const el = document.createElement("div");
+  el.className = "label";
+  el.style.width  = L.w + "in";
+  el.style.height = L.h + "in";
+
+  const compact = L.h < 1.4;                  // the 30-up tub-ID sticker
+  const pad = compact ? 0.07 : 0.11;
+  const inner = L.w - 2 * pad - (compact ? 0 : 0.13);
+
+  // Colour spine — a family/value-stream marker down the left edge.
+  if (!compact) {
+    const spine = document.createElement("div");
+    spine.className = "spine";
+    spine.style.width = "0.13in";
+    spine.style.background = rec.colour || "#000";
+    el.appendChild(spine);
+  }
+
+  const body = document.createElement("div");
+  body.className = "body";
+  body.style.padding = pad + "in";
+  el.appendChild(body);
+
+  /* --- compact tub-ID sticker: ID + barcode only --- */
+  if (compact) {
+    const id = rec.tub || rec.part;
+    const bc = mode === "none" ? null : code39(id, inner, 0.34);
+    if (bc) {
+      if (bc.mils < 7.5) warnings.add(`Narrow bar is ${bc.mils.toFixed(1)} mil on "${id}" — below the 7.5 mil floor most scanners need. Use a shorter ID or a larger label.`);
+      const w = document.createElement("div");
+      w.innerHTML = bc.svg;
+      body.appendChild(w);
+    }
+    const t = document.createElement("div");
+    t.className = "hri";
+    t.style.fontSize = "0.15in";
+    t.style.marginTop = "0.035in";
+    t.style.textAlign = "center";
+    t.textContent = id;
+    body.appendChild(t);
+    return el;
+  }
+
+  /* --- part number: shrink to fit the label width --- */
+  const part = document.createElement("div");
+  part.className = "part";
+  const base = L.h >= 5 ? 0.62 : 0.40;
+  // ~0.56 em per character for this weight; clamp so long numbers still fit.
+  const fit = rec.part.length ? Math.min(base, inner / (rec.part.length * 0.56)) : base;
+  part.style.fontSize = Math.max(fit, 0.13).toFixed(3) + "in";
+  part.textContent = rec.part;
+  body.appendChild(part);
+
+  const desc = document.createElement("div");
+  desc.className = "desc";
+  desc.style.fontSize = (L.h >= 5 ? 0.20 : 0.135).toFixed(3) + "in";
+  desc.style.marginTop = "0.05in";
+  desc.style.webkitLineClamp = L.h >= 3 ? 3 : 2;
+  desc.textContent = rec.desc;
+  body.appendChild(desc);
+
+  /* --- fact strip: location / qty / card n of m --- */
+  const facts = document.createElement("div");
+  facts.className = "facts";
+  const cardTxt = rec.card && rec.of ? `${rec.card} / ${rec.of}` : (rec.card || "");
+  [["Location", rec.loc], ["Qty per tub", rec.qty], ["Card", cardTxt]]
+    .filter(([, v]) => v)
+    .forEach(([k, v], i) => {
+      const c = document.createElement("div");
+      c.className = "fact";
+      c.style.padding = "0.035in 0.05in";
+      if (i > 0) c.style.paddingLeft = "0.07in";
+      c.innerHTML =
+        `<div class="k" style="font-size:${(L.h >= 5 ? 0.115 : 0.082).toFixed(3)}in"></div>` +
+        `<div class="v" style="font-size:${(L.h >= 5 ? 0.26 : 0.17).toFixed(3)}in;margin-top:0.02in"></div>`;
+      c.querySelector(".k").textContent = k;
+      c.querySelector(".v").textContent = v;
+      facts.appendChild(c);
+    });
+  if (facts.children.length) {
+    facts.style.marginTop = "0.06in";
+    body.appendChild(facts);
+  }
+
+  /* --- barcode --- */
+  if (mode !== "none") {
+    const val = mode === "tub" ? (rec.tub || rec.part) : (rec.part || rec.tub);
+    const bcH = L.h >= 5 ? 0.75 : 0.42;
+    const hriW = 1.05;
+    const bc = code39(val, inner - hriW, bcH);
+    if (bc) {
+      if (bc.mils < 7.5) warnings.add(`Narrow bar is ${bc.mils.toFixed(1)} mil on "${val}" — below the 7.5 mil floor most scanners need. Shorten the code or move up a label size.`);
+      const wrap = document.createElement("div");
+      wrap.className = "code";
+      wrap.style.marginTop = "0.06in";
+      wrap.innerHTML = bc.svg +
+        `<span class="hri" style="font-size:${(L.h >= 5 ? 0.17 : 0.125).toFixed(3)}in"></span>`;
+      wrap.querySelector(".hri").textContent = bc.text;
+      body.appendChild(wrap);
+    }
+  } else if (rec.tub) {
+    const t = document.createElement("div");
+    t.className = "hri";
+    t.style.fontSize = "0.13in";
+    t.style.marginTop = "0.07in";
+    t.textContent = rec.tub;
+    body.appendChild(t);
+  }
+
+  return el;
+}
+
+/* ------------------------------------------------------------------ *
+ * Sheet assembly
+ * ------------------------------------------------------------------ */
+function render() {
+  const L = LAYOUTS[document.getElementById("layout").value];
+  const mode = document.getElementById("barcode").value;
+  const offX = (parseFloat(document.getElementById("offx").value) || 0) / 25.4;
+  const offY = (parseFloat(document.getElementById("offy").value) || 0) / 25.4;
+  const guides = document.getElementById("guides").value === "on";
+  const recs = parseData(document.getElementById("data").value);
+  const warnings = new Set();
+
+  const host = document.getElementById("sheets");
+  host.innerHTML = "";
+
+  const perSheet = L.cols * L.rows;
+  for (let i = 0; i < recs.length; i += perSheet) {
+    const sheet = document.createElement("div");
+    sheet.className = "sheet" + (guides ? " guides" : "");
+    sheet.style.width  = L.page[0] + "in";
+    sheet.style.height = L.page[1] + "in";
+
+    recs.slice(i, i + perSheet).forEach((rec, n) => {
+      const col = n % L.cols, row = Math.floor(n / L.cols);
+      const lab = buildLabel(rec, L, mode, warnings);
+      lab.style.left = (L.left + col * (L.w + L.gapX) + offX).toFixed(4) + "in";
+      lab.style.top  = (L.top  + row * (L.h + L.gapY) + offY).toFixed(4) + "in";
+      sheet.appendChild(lab);
+    });
+    host.appendChild(sheet);
+  }
+
+  const sheets = Math.ceil(recs.length / perSheet);
+  document.getElementById("count").textContent =
+    recs.length ? `${recs.length} label${recs.length === 1 ? "" : "s"} · ${sheets} sheet${sheets === 1 ? "" : "s"}` : "";
+  document.getElementById("warn").textContent = [...warnings].join("  ");
+}
+
+/* ------------------------------------------------------------------ *
+ * Wire-up
+ * ------------------------------------------------------------------ */
+const sel = document.getElementById("layout");
+Object.entries(LAYOUTS).forEach(([k, v]) => sel.add(new Option(v.name, k)));
+
+document.getElementById("data").value = SAMPLE;
+document.getElementById("render").addEventListener("click", render);
+document.getElementById("print").addEventListener("click", () => { render(); window.print(); });
+document.getElementById("sample").addEventListener("click", () => {
+  document.getElementById("data").value = SAMPLE; render();
+});
+["layout", "barcode", "offx", "offy", "guides"].forEach(id =>
+  document.getElementById(id).addEventListener("change", render));
+
+render();
+</script>
+</body>
+</html>
