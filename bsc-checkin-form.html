@@ -1,0 +1,767 @@
+<title>BSC Check-In</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+
+<style>
+/* ── tokens ── */
+:root {
+  --bg:        #EEF1F6;
+  --surface:   #FFFFFF;
+  --surface2:  #F5F7FA;
+  --border:    #D4DCE8;
+  --border2:   #B8C4D4;
+  --navy:      #0D1B35;
+  --navy2:     #1E3158;
+  --amber:     #FFC000;
+  --amber-dk:  #B38600;
+  --text:      #0D1B35;
+  --text2:     #566880;
+  --text3:     #8899AA;
+  --g-bg:      #DCFCE7; --g-txt: #15803D; --g-border: #86EFAC;
+  --a-bg:      #FEF3C7; --a-txt: #B45309; --a-border: #FCD34D;
+  --r-bg:      #FEE2E2; --r-txt: #B91C1C; --r-border: #FCA5A5;
+  --p-bg:      #F1F5F9; --p-txt: #64748B; --p-border: #CBD5E1;
+  --g-stripe:  #22C55E;
+  --a-stripe:  #F59E0B;
+  --r-stripe:  #EF4444;
+  --p-stripe:  #CBD5E1;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:        #080F1E;
+    --surface:   #0D1B35;
+    --surface2:  #0A1628;
+    --border:    #1E3158;
+    --border2:   #2A4270;
+    --text:      #D6E4F5;
+    --text2:     #7A90AC;
+    --text3:     #3A5070;
+    --g-bg:      rgba(34,197,94,0.1);  --g-txt: #4ADE80; --g-border: rgba(34,197,94,0.3);
+    --a-bg:      rgba(245,158,11,0.1); --a-txt: #FCD34D; --a-border: rgba(245,158,11,0.3);
+    --r-bg:      rgba(239,68,68,0.1);  --r-txt: #F87171; --r-border: rgba(239,68,68,0.3);
+    --p-bg:      rgba(255,255,255,0.04); --p-txt: #3A5070; --p-border: rgba(255,255,255,0.1);
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg:        #080F1E;
+  --surface:   #0D1B35;
+  --surface2:  #0A1628;
+  --border:    #1E3158;
+  --border2:   #2A4270;
+  --text:      #D6E4F5;
+  --text2:     #7A90AC;
+  --text3:     #3A5070;
+  --g-bg:      rgba(34,197,94,0.1);  --g-txt: #4ADE80; --g-border: rgba(34,197,94,0.3);
+  --a-bg:      rgba(245,158,11,0.1); --a-txt: #FCD34D; --a-border: rgba(245,158,11,0.3);
+  --r-bg:      rgba(239,68,68,0.1);  --r-txt: #F87171; --r-border: rgba(239,68,68,0.3);
+  --p-bg:      rgba(255,255,255,0.04); --p-txt: #3A5070; --p-border: rgba(255,255,255,0.1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 100px;
+}
+
+/* ── header ── */
+.page-header {
+  background: var(--navy);
+  padding: 0;
+}
+.page-header-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 28px 24px 26px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+.header-amber-bar { height: 4px; background: var(--amber); }
+
+.org-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--amber); margin-bottom: 5px;
+}
+.page-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 34px; font-weight: 800; color: #fff;
+  line-height: 0.95; letter-spacing: 0.01em;
+}
+.page-sub {
+  margin-top: 8px; font-size: 12px; color: rgba(255,255,255,0.4);
+}
+
+.step-indicator {
+  display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0;
+}
+.step-dot-row { display: flex; gap: 5px; }
+.step-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  transition: background 0.2s;
+}
+.step-dot.active { background: var(--amber); }
+.step-label { font-size: 10px; color: rgba(255,255,255,0.3); letter-spacing: 0.08em; }
+
+/* ── layout ── */
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+/* ── section card ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-top: 16px;
+  overflow: hidden;
+}
+
+.card-head {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 20px 13px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface2);
+}
+.card-stripe { width: 4px; height: 20px; border-radius: 2px; background: var(--navy); flex-shrink: 0; }
+.card-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--text);
+}
+.card-body { padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+
+/* ── form controls ── */
+label {
+  display: block;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.07em;
+  text-transform: uppercase; color: var(--text2);
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+select,
+textarea {
+  width: 100%;
+  background: var(--surface);
+  color: var(--text);
+  border: 1.5px solid var(--border);
+  border-radius: 5px;
+  padding: 9px 12px;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  outline: none;
+  transition: border-color 0.15s;
+  appearance: none;
+}
+input[type="text"]:focus,
+select:focus,
+textarea:focus { border-color: var(--navy2); }
+textarea { resize: vertical; min-height: 72px; }
+
+.field-row { display: grid; gap: 12px; }
+.field-row.cols-2 { grid-template-columns: 1fr 1fr; }
+.field-row.cols-3 { grid-template-columns: 2fr 1fr 1fr; }
+
+/* ── function select styled ── */
+.fn-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.fn-btn {
+  border: 1.5px solid var(--border);
+  background: var(--surface2);
+  color: var(--text2);
+  border-radius: 5px;
+  padding: 10px 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+  line-height: 1.3;
+}
+.fn-btn:hover { border-color: var(--border2); color: var(--text); }
+.fn-btn.selected {
+  border-color: var(--navy);
+  background: var(--navy);
+  color: #fff;
+}
+
+/* ── KPI rows ── */
+.kpi-list { display: flex; flex-direction: column; gap: 0; }
+
+.kpi-row {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 8px;
+  transition: box-shadow 0.15s;
+}
+.kpi-row:focus-within { box-shadow: 0 0 0 2px rgba(13,27,53,0.12); }
+
+.kpi-stripe {
+  width: 5px;
+  flex-shrink: 0;
+  background: var(--p-stripe);
+  transition: background 0.2s;
+}
+.kpi-stripe.g { background: var(--g-stripe); }
+.kpi-stripe.a { background: var(--a-stripe); }
+.kpi-stripe.r { background: var(--r-stripe); }
+
+.kpi-body { flex: 1; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; }
+
+.kpi-row-top { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: start; }
+.kpi-name-input {
+  border: none; border-bottom: 1.5px solid var(--border);
+  background: transparent; color: var(--text);
+  font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600;
+  padding: 4px 0; outline: none; border-radius: 0;
+  width: 100%;
+  transition: border-color 0.15s;
+}
+.kpi-name-input:focus { border-color: var(--navy2); }
+.kpi-target-wrap { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+.target-label { font-size: 11px; color: var(--text3); }
+.kpi-target-input {
+  border: 1.5px solid var(--border); border-radius: 4px;
+  background: var(--surface2); color: var(--text2);
+  font-family: 'DM Sans', sans-serif; font-size: 12px;
+  padding: 4px 8px; outline: none; width: 110px;
+  transition: border-color 0.15s;
+}
+.kpi-target-input:focus { border-color: var(--border2); }
+
+.kpi-row-mid {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+}
+
+.value-field {
+  display: flex; align-items: center; gap: 6px;
+}
+.value-label { font-size: 11px; color: var(--text3); white-space: nowrap; }
+.kpi-value-input {
+  width: 110px;
+  border: 1.5px solid var(--border); border-radius: 4px;
+  background: var(--surface); color: var(--text);
+  font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600;
+  padding: 6px 10px; outline: none;
+  font-variant-numeric: tabular-nums;
+  transition: border-color 0.15s;
+}
+.kpi-value-input:focus { border-color: var(--navy2); }
+
+.toggle-group { display: flex; gap: 2px; }
+.toggle-btn {
+  border: 1.5px solid var(--border);
+  background: var(--surface2); color: var(--text2);
+  border-radius: 4px; padding: 5px 10px;
+  font-family: 'DM Sans', sans-serif; font-size: 13px;
+  cursor: pointer; transition: all 0.12s;
+  line-height: 1;
+}
+.toggle-btn:hover { border-color: var(--border2); color: var(--text); }
+
+/* trend toggles */
+.trend-btn.selected-up   { background: #EFF6FF; border-color: #3B82F6; color: #1D4ED8; }
+.trend-btn.selected-flat { background: var(--surface2); border-color: var(--border2); color: var(--text); }
+.trend-btn.selected-down { background: #FFF7ED; border-color: #F97316; color: #C2410C; }
+
+/* RAG toggles */
+.rag-btn { font-size: 12px; font-weight: 600; padding: 5px 11px; }
+.rag-btn.sel-g { background: var(--g-bg); border-color: var(--g-border); color: var(--g-txt); }
+.rag-btn.sel-a { background: var(--a-bg); border-color: var(--a-border); color: var(--a-txt); }
+.rag-btn.sel-r { background: var(--r-bg); border-color: var(--r-border); color: var(--r-txt); }
+.rag-btn.sel-p { background: var(--p-bg); border-color: var(--p-border); color: var(--p-txt); }
+
+.kpi-comment-input {
+  width: 100%;
+  border: 1.5px solid var(--border); border-radius: 4px;
+  background: var(--surface2); color: var(--text);
+  font-family: 'DM Sans', sans-serif; font-size: 13px;
+  padding: 7px 10px; outline: none; resize: none; min-height: 52px;
+  transition: border-color 0.15s;
+}
+.kpi-comment-input:focus { border-color: var(--border2); }
+.kpi-comment-input::placeholder { color: var(--text3); font-style: italic; }
+
+.kpi-remove-btn {
+  position: absolute; right: 10px; top: 10px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: transparent; border: none;
+  color: var(--text3); cursor: pointer; font-size: 16px;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.15s, color 0.15s;
+}
+.kpi-row:hover .kpi-remove-btn { opacity: 1; }
+.kpi-remove-btn:hover { color: #EF4444; }
+
+.kpi-row-outer { position: relative; }
+
+.add-kpi-btn {
+  border: 1.5px dashed var(--border);
+  background: transparent; color: var(--text2);
+  border-radius: 6px; padding: 10px;
+  font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+  width: 100%; cursor: pointer; text-align: center;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  margin-top: 4px;
+}
+.add-kpi-btn:hover { border-color: var(--navy2); color: var(--text); background: var(--surface2); }
+
+/* ── questions ── */
+.q-block { display: flex; flex-direction: column; gap: 5px; }
+.q-label {
+  display: flex; align-items: baseline; gap: 10px;
+}
+.q-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px; font-weight: 800; letter-spacing: 0.06em;
+  background: var(--navy); color: #fff;
+  border-radius: 3px; padding: 1px 7px 2px;
+  flex-shrink: 0;
+}
+.q-text { font-size: 13px; font-weight: 500; color: var(--text2); font-style: italic; }
+
+/* ── sticky footer ── */
+.sticky-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  z-index: 100;
+  padding: 0;
+}
+.sticky-bar-inner {
+  max-width: 760px; margin: 0 auto;
+  padding: 14px 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.status-text { font-size: 12px; color: var(--text2); }
+.status-text strong { color: var(--text); }
+
+.download-btn {
+  background: var(--amber); color: var(--navy);
+  border: none; border-radius: 6px;
+  padding: 11px 28px;
+  font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700;
+  cursor: pointer; flex-shrink: 0;
+  transition: background 0.15s, transform 0.1s;
+}
+.download-btn:hover { background: #E6AC00; }
+.download-btn:active { transform: scale(0.98); }
+
+.toast {
+  position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
+  background: var(--navy); color: #fff;
+  border-radius: 6px; padding: 10px 20px;
+  font-size: 13px; font-weight: 500;
+  pointer-events: none; opacity: 0;
+  transition: opacity 0.2s;
+  white-space: nowrap; z-index: 200;
+}
+.toast.show { opacity: 1; }
+
+@media (max-width: 600px) {
+  .fn-grid { grid-template-columns: repeat(2, 1fr); }
+  .field-row.cols-3 { grid-template-columns: 1fr 1fr; }
+  .kpi-row-mid { gap: 8px; }
+  .page-header-inner { flex-direction: column; align-items: flex-start; }
+}
+</style>
+
+<!-- HEADER -->
+<div class="page-header">
+  <div class="header-amber-bar"></div>
+  <div class="page-header-inner">
+    <div>
+      <div class="org-eyebrow">Liquip Victoria · Strategic Performance</div>
+      <div class="page-title">Monthly Check-In</div>
+      <div class="page-sub">Fill in · Download JSON · Send to your BSC coordinator</div>
+    </div>
+    <div class="step-indicator">
+      <div class="step-dot-row">
+        <div class="step-dot active" id="dot0"></div>
+        <div class="step-dot" id="dot1"></div>
+        <div class="step-dot" id="dot2"></div>
+      </div>
+      <div class="step-label">Your details</div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- IDENTITY -->
+  <div class="card" id="section-identity">
+    <div class="card-head">
+      <div class="card-stripe" style="background:#FFC000;"></div>
+      <span class="card-title">Your Details</span>
+    </div>
+    <div class="card-body">
+      <div class="field-row cols-2">
+        <div>
+          <label for="inp-name">Name</label>
+          <input type="text" id="inp-name" placeholder="First Last" autocomplete="name">
+        </div>
+        <div>
+          <label for="inp-month">Month / Year</label>
+          <input type="text" id="inp-month" placeholder="August 2026">
+        </div>
+      </div>
+      <div>
+        <label>Function</label>
+        <div class="fn-grid" id="fn-grid">
+          <button class="fn-btn" data-fn="Finance">Finance</button>
+          <button class="fn-btn" data-fn="Sales">Sales</button>
+          <button class="fn-btn" data-fn="Operations">Operations</button>
+          <button class="fn-btn" data-fn="Procurement">Procurement</button>
+          <button class="fn-btn" data-fn="Quality">Quality</button>
+          <button class="fn-btn" data-fn="Safety &amp; Compliance">Safety &amp; Compliance</button>
+          <button class="fn-btn" data-fn="Production">Production</button>
+          <button class="fn-btn" data-fn="Engineering">Engineering</button>
+          <button class="fn-btn" data-fn="Stores">Stores</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KPI SNAPSHOT -->
+  <div class="card" id="section-kpis">
+    <div class="card-head">
+      <div class="card-stripe" style="background:#3B82F6;"></div>
+      <span class="card-title">KPI Snapshot — This Month</span>
+    </div>
+    <div class="card-body">
+      <div class="kpi-list" id="kpi-list">
+        <!-- rows injected by JS -->
+      </div>
+      <button class="add-kpi-btn" id="add-kpi-btn" onclick="addKpiRow()">+ Add KPI</button>
+    </div>
+  </div>
+
+  <!-- THREE QUESTIONS -->
+  <div class="card" id="section-questions">
+    <div class="card-head">
+      <div class="card-stripe" style="background:#A855F7;"></div>
+      <span class="card-title">Three Questions — Think, Don't Just Report</span>
+    </div>
+    <div class="card-body">
+
+      <div class="q-block">
+        <div class="q-label">
+          <span class="q-tag">Q1</span>
+          <span class="q-text">Which KPI moved this month — and what specifically did YOU do to move it?</span>
+        </div>
+        <textarea id="q1" placeholder="Be specific — name the action, not the intention."></textarea>
+      </div>
+
+      <div class="q-block">
+        <div class="q-label">
+          <span class="q-tag" style="background:#1E3158;">Q2</span>
+          <span class="q-text">What decision did you make this month inside your domain that you're proud of?</span>
+        </div>
+        <textarea id="q2" placeholder="A decision you owned, not one made above you."></textarea>
+      </div>
+
+      <div class="q-block">
+        <div class="q-label">
+          <span class="q-tag" style="background:#B45309;">Q3</span>
+          <span class="q-text">What is the one thing that, if fixed, would most improve your results next month?</span>
+        </div>
+        <textarea id="q3" placeholder="One thing. Be honest."></textarea>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- STICKY BAR -->
+<div class="sticky-bar">
+  <div class="sticky-bar-inner">
+    <div class="status-text" id="status-text">Fill in your details to begin</div>
+    <button class="download-btn" onclick="downloadJSON()">Download JSON</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const KPI_PRESETS = {
+  Finance: [
+    { name: 'Revenue per Head',                    target: '$47,841' },
+    { name: 'Debtors Days (AR Turnaround)',         target: '40 days' },
+    { name: 'Job Time Variance Report',             target: '1 / month' },
+    { name: 'Monthly Finance Report',               target: '1 / month' },
+    { name: 'Job Time System Recommendation',       target: '6-month plan' },
+  ],
+  Sales: [
+    { name: 'Sales Pipeline',                       target: 'Fully loaded' },
+    { name: 'Quote Conversion Rate',                target: '≥ 30%' },
+    { name: 'Revenue vs Target',                    target: 'On target' },
+    { name: 'Engineering Handover Quality',         target: 'Clean process' },
+  ],
+  Operations: [
+    { name: 'Job Costing Turnaround',               target: '3 days' },
+    { name: 'Monthly Pipeline Report',              target: 'Monthly' },
+    { name: 'Sales Order Process',                  target: 'Documented' },
+    { name: 'Aviation Job Costings',                target: 'Included monthly' },
+    { name: 'BOM Release Discipline',               target: 'Zero post-release' },
+  ],
+  Procurement: [
+    { name: 'Supplier On-Time Delivery',            target: 'On-time' },
+    { name: 'POs Affected by Portfolio',            target: '≤ 19 @' },
+    { name: 'Cost of Emergency POs',                target: 'Reduce vs baseline' },
+    { name: 'Supplier Performance Report',          target: 'Monthly' },
+    { name: 'Monthly Procurement BSC',              target: '1 / month' },
+  ],
+  Quality: [
+    { name: 'Root Cause Completion Rate',           target: '100%' },
+    { name: 'Repair Actions per Job',               target: 'Trend down' },
+    { name: 'Actions Open > 30 Days',               target: '0' },
+    { name: 'Engineering-Originated Repair Actions',target: 'Reduce 50%' },
+  ],
+  'Safety & Compliance': [
+    { name: 'LTIFR YTD',                           target: '0' },
+    { name: 'Near Miss Reports',                    target: '0' },
+    { name: 'Safety Observations',                  target: '≥ 1 / month' },
+    { name: 'Toolbox Talks',                        target: '1 / month' },
+    { name: 'Reportable Incidents',                 target: '0' },
+    { name: 'Hazard Reports Filed',                 target: '≥ 5 / month' },
+  ],
+  Production: [
+    { name: 'Jobs on Schedule',                     target: 'All jobs on time' },
+    { name: 'Packages Returned to Engineering',     target: '0' },
+    { name: 'Rework Items Identified',              target: '0' },
+    { name: 'Hours vs Estimate',                    target: 'Within estimate' },
+    { name: 'Daily Production Sheet Completed',     target: 'Daily' },
+  ],
+  Engineering: [
+    { name: 'BOM Released on Time',                 target: 'Before production start' },
+    { name: 'Post-Release BOM Additions',           target: '0' },
+    { name: 'Drawing First-Pass Accuracy',          target: '100%' },
+    { name: 'Engineering Change Orders',            target: 'Trend down' },
+    { name: 'BOMs Released This Month',             target: 'Per schedule' },
+  ],
+  Stores: [
+    { name: 'Inventory Accuracy',                  target: '≥ 98%' },
+    { name: 'Goods Received on Time',              target: '100%' },
+    { name: 'Stockouts',                           target: '0' },
+    { name: 'Goods Receipting Turnaround',         target: 'Same day' },
+    { name: 'Pick Accuracy',                       target: '100%' },
+  ],
+};
+
+let selectedFn = null;
+let kpiCount = 0;
+
+// set default month
+const now = new Date();
+const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+document.getElementById('inp-month').value = `${months[now.getMonth()]} ${now.getFullYear()}`;
+
+// function selection
+document.getElementById('fn-grid').addEventListener('click', e => {
+  const btn = e.target.closest('.fn-btn');
+  if (!btn) return;
+  document.querySelectorAll('.fn-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedFn = btn.dataset.fn;
+  loadPreset(selectedFn);
+  updateStatus();
+});
+
+function loadPreset(fn) {
+  const list = document.getElementById('kpi-list');
+  list.innerHTML = '';
+  kpiCount = 0;
+  (KPI_PRESETS[fn] || []).forEach(kpi => addKpiRow(kpi.name, kpi.target));
+}
+
+function addKpiRow(name = '', target = '') {
+  const id = ++kpiCount;
+  const list = document.getElementById('kpi-list');
+  const outer = document.createElement('div');
+  outer.className = 'kpi-row-outer';
+  outer.innerHTML = `
+    <div class="kpi-row" id="kpi-row-${id}">
+      <div class="kpi-stripe" id="stripe-${id}"></div>
+      <div class="kpi-body">
+        <div class="kpi-row-top">
+          <input class="kpi-name-input" type="text" placeholder="KPI name" value="${escHtml(name)}" id="kname-${id}">
+          <div class="kpi-target-wrap">
+            <span class="target-label">Target</span>
+            <input class="kpi-target-input" type="text" placeholder="e.g. 40 days" value="${escHtml(target)}" id="ktgt-${id}">
+          </div>
+        </div>
+        <div class="kpi-row-mid">
+          <div class="value-field">
+            <span class="value-label">This month</span>
+            <input class="kpi-value-input" type="text" placeholder="—" id="kval-${id}">
+          </div>
+          <div class="toggle-group" id="trend-${id}">
+            <button type="button" class="toggle-btn trend-btn" data-trend="↑" onclick="setTrend(${id},'↑')">↑</button>
+            <button type="button" class="toggle-btn trend-btn" data-trend="→" onclick="setTrend(${id},'→')">→</button>
+            <button type="button" class="toggle-btn trend-btn" data-trend="↓" onclick="setTrend(${id},'↓')">↓</button>
+          </div>
+          <div class="toggle-group">
+            <button type="button" class="toggle-btn rag-btn" onclick="setRag(${id},'g')">Green</button>
+            <button type="button" class="toggle-btn rag-btn" onclick="setRag(${id},'a')">Amber</button>
+            <button type="button" class="toggle-btn rag-btn" onclick="setRag(${id},'r')">Red</button>
+            <button type="button" class="toggle-btn rag-btn" onclick="setRag(${id},'p')">Pending</button>
+          </div>
+        </div>
+        <textarea class="kpi-comment-input" id="kcom-${id}" placeholder="Action if Red / comment…" rows="2"></textarea>
+      </div>
+    </div>
+    <button type="button" class="kpi-remove-btn" onclick="removeKpi(${id})" title="Remove">×</button>
+  `;
+  list.appendChild(outer);
+
+  // store state
+  outer._rag = 'p';
+  outer._trend = null;
+  outer._id = id;
+}
+
+function setTrend(id, trend) {
+  const group = document.getElementById(`trend-${id}`);
+  group.querySelectorAll('.trend-btn').forEach(btn => {
+    btn.className = 'toggle-btn trend-btn';
+    if (btn.dataset.trend === trend) {
+      btn.className += trend === '↑' ? ' selected-up' : trend === '↓' ? ' selected-down' : ' selected-flat';
+    }
+  });
+  document.getElementById(`kpi-row-${id}`).__trend = trend;
+}
+
+function setRag(id, rag) {
+  const row = document.getElementById(`kpi-row-${id}`);
+  const stripe = document.getElementById(`stripe-${id}`);
+  // clear all rag buttons in this row
+  row.querySelectorAll('.rag-btn').forEach(btn => {
+    btn.className = 'toggle-btn rag-btn';
+  });
+  // set selected
+  const btn = Array.from(row.querySelectorAll('.rag-btn')).find(b => b.textContent.toLowerCase().startsWith(rag === 'g' ? 'gr' : rag === 'a' ? 'am' : rag === 'r' ? 're' : 'pe'));
+  if (btn) btn.classList.add(`sel-${rag}`);
+  // stripe
+  stripe.className = `kpi-stripe ${rag}`;
+  row.__rag = rag;
+}
+
+function removeKpi(id) {
+  const outer = document.getElementById(`kpi-row-${id}`)?.parentElement;
+  if (outer) outer.remove();
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function updateStatus() {
+  const name = document.getElementById('inp-name').value.trim();
+  const month = document.getElementById('inp-month').value.trim();
+  const st = document.getElementById('status-text');
+  if (!name && !selectedFn) { st.textContent = 'Fill in your details to begin'; return; }
+  const parts = [];
+  if (name) parts.push(name);
+  if (selectedFn) parts.push(selectedFn);
+  if (month) parts.push(month);
+  st.innerHTML = `Ready to download · <strong>${parts.join(' · ')}</strong>`;
+}
+
+document.getElementById('inp-name').addEventListener('input', updateStatus);
+document.getElementById('inp-month').addEventListener('input', updateStatus);
+
+function collectKpis() {
+  const rows = document.querySelectorAll('[id^="kpi-row-"]');
+  return Array.from(rows).map(row => {
+    const id = row.id.replace('kpi-row-', '');
+    const trendBtns = document.getElementById(`trend-${id}`);
+    let trend = '→';
+    trendBtns?.querySelectorAll('.trend-btn').forEach(btn => {
+      if (btn.className.includes('selected')) trend = btn.dataset.trend;
+    });
+    const ragMap = { 'sel-g': 'green', 'sel-a': 'amber', 'sel-r': 'red', 'sel-p': 'pending' };
+    let rag = 'pending';
+    row.querySelectorAll('.rag-btn').forEach(btn => {
+      for (const [cls, val] of Object.entries(ragMap)) {
+        if (btn.classList.contains(cls)) rag = val;
+      }
+    });
+    return {
+      name:    document.getElementById(`kname-${id}`)?.value.trim() || '',
+      target:  document.getElementById(`ktgt-${id}`)?.value.trim() || '',
+      value:   document.getElementById(`kval-${id}`)?.value.trim() || '',
+      trend,
+      rag,
+      comment: document.getElementById(`kcom-${id}`)?.value.trim() || '',
+    };
+  }).filter(k => k.name);
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+function downloadJSON() {
+  const name  = document.getElementById('inp-name').value.trim();
+  const month = document.getElementById('inp-month').value.trim();
+  const fn    = selectedFn || 'Unknown';
+
+  if (!name) { showToast('Please enter your name first'); return; }
+  if (!selectedFn) { showToast('Please select your function'); return; }
+
+  const data = {
+    name,
+    function: fn,
+    month,
+    generated: new Date().toISOString(),
+    kpis: collectKpis(),
+    q1: document.getElementById('q1').value.trim(),
+    q2: document.getElementById('q2').value.trim(),
+    q3: document.getElementById('q3').value.trim(),
+  };
+
+  const slug = fn.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
+  const mSlug = month.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
+  const filename = `bsc-checkin-${slug}-${mSlug}.json`;
+
+  const json = JSON.stringify(data, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast(`Downloaded ${filename}`);
+}
+
+// scroll dots
+const sections = ['section-identity','section-kpis','section-questions'];
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    const i = sections.indexOf(e.target.id);
+    if (i >= 0 && e.isIntersecting) {
+      document.querySelectorAll('.step-dot').forEach((d, di) => d.classList.toggle('active', di === i));
+    }
+  });
+}, { threshold: 0.4 });
+sections.forEach(id => { const el = document.getElementById(id); if (el) obs.observe(el); });
+</script>

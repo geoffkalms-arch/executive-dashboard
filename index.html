@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liquip Victoria — Strategic Performance</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:wght@400;500;600&display=swap">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #0A1628;
+  color: #D6E4F5;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 15px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}
+.wrap { max-width: 680px; width: 100%; }
+.amber-bar { height: 4px; background: #FFC000; border-radius: 2px 2px 0 0; }
+.card {
+  background: #0D1B35;
+  border: 1px solid #1E3158;
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  padding: 40px 44px 44px;
+}
+.eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; color: #FFC000; margin-bottom: 8px;
+}
+.title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 42px; font-weight: 800; color: #fff;
+  line-height: 0.95; letter-spacing: 0.01em;
+  text-wrap: balance;
+}
+.sub { margin-top: 12px; font-size: 13px; color: #3A5878; line-height: 1.6; }
+.divider { border: none; border-top: 1px solid #1E3158; margin: 36px 0; }
+.tools { display: flex; flex-direction: column; gap: 12px; }
+.tool-link {
+  display: flex; align-items: center; gap: 20px;
+  border: 1px solid #1E3158;
+  border-radius: 8px;
+  padding: 20px 24px;
+  text-decoration: none;
+  background: #0A1628;
+  transition: border-color 0.15s, background 0.15s;
+}
+.tool-link:hover { border-color: #2A4270; background: #0D1B35; }
+.tool-icon {
+  width: 44px; height: 44px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; flex-shrink: 0;
+}
+.tool-icon.amber { background: rgba(255,192,0,0.12); }
+.tool-icon.blue  { background: rgba(59,130,246,0.12); }
+.tool-text { flex: 1; }
+.tool-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px; font-weight: 700; color: #D6E4F5;
+  letter-spacing: 0.04em; text-transform: uppercase;
+}
+.tool-desc { font-size: 12.5px; color: #3A5878; margin-top: 3px; }
+.tool-arrow { color: #2A4270; font-size: 18px; flex-shrink: 0; }
+.footer-note {
+  margin-top: 28px; font-size: 11px; color: #1E3050;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="amber-bar"></div>
+  <div class="card">
+    <div class="eyebrow">Liquip Victoria · Strategic Performance</div>
+    <div class="title">Balanced Scorecard<br>Management System</div>
+    <div class="sub">Monthly check-in tools for the leadership team.</div>
+    <hr class="divider">
+    <div class="tools">
+      <a class="tool-link" href="bsc-checkin-form.html">
+        <div class="tool-icon amber">📋</div>
+        <div class="tool-text">
+          <div class="tool-name">Monthly Check-In Form</div>
+          <div class="tool-desc">Fill in your KPIs, RAG status, and three questions — download your JSON file to send to the BSC coordinator.</div>
+        </div>
+        <div class="tool-arrow">→</div>
+      </a>
+      <a class="tool-link" href="bsc-infographic.html">
+        <div class="tool-icon blue">📊</div>
+        <div class="tool-text">
+          <div class="tool-name">BSC Master Dashboard</div>
+          <div class="tool-desc">August 2026 · 6 perspectives · 28 KPIs · Full leadership view updated from all manager check-ins.</div>
+        </div>
+        <div class="tool-arrow">→</div>
+      </a>
+    </div>
+    <div class="footer-note">Liquip Victoria · FY2026–27 · Internal use only</div>
+  </div>
+</div>
+</body>
+</html>
