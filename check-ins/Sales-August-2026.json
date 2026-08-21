@@ -1,0 +1,15 @@
+{
+  "name": "Hayden Schulz",
+  "function": "Sales",
+  "month": "August 2026",
+  "generated": "2026-08-19T00:00:00.000Z",
+  "kpis": [
+    { "name": "Sales Pipeline", "target": "Fully loaded", "value": "Loaded", "trend": "↑", "rag": "green", "comment": "Built and shared with LV and RI teams. Live and visible to senior leadership." },
+    { "name": "Quote Conversion Rate", "target": "≥ 30%", "value": "In Progress", "trend": "→", "rag": "amber", "comment": "Tracking initiated. Sales order process review underway; baseline to be set by end of Month 1." },
+    { "name": "Revenue vs Target", "target": "On target", "value": "TBC", "trend": "→", "rag": "pending", "comment": "Month-end figures pending. First formal check-in next cycle." },
+    { "name": "Engineering Handover Quality", "target": "Clean process", "value": "In Progress", "trend": "→", "rag": "amber", "comment": "Review initiated. Clean-handover criteria being defined with Engineering. Target: signed-off process by Month 2." }
+  ],
+  "q1": "Built and shared live Sales Pipeline with LV and RI leadership teams.",
+  "q2": "Initiated sales order process review and defined clean-handover criteria with Engineering.",
+  "q3": "Finalise baseline for Quote Conversion Rate by end of Month 1."
+}
