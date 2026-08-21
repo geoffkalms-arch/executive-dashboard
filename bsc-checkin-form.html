@@ -491,7 +491,7 @@ textarea { resize: vertical; min-height: 72px; }
 <div class="sticky-bar">
   <div class="sticky-bar-inner">
     <div class="status-text" id="status-text">Fill in your details to begin</div>
-    <button class="download-btn" onclick="downloadJSON()">Download JSON</button>
+    <button class="download-btn" onclick="submitCheckin()">Submit Check-In</button>
   </div>
 </div>
 
@@ -719,13 +719,16 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2200);
 }
 
-function downloadJSON() {
+const GITHUB_REPO = 'geoffkalms-arch/executive-dashboard';
+const GITHUB_BRANCH = 'main';
+
+async function submitCheckin() {
   const name  = document.getElementById('inp-name').value.trim();
   const month = document.getElementById('inp-month').value.trim();
   const fn    = selectedFn || 'Unknown';
 
-  if (!name) { showToast('Please enter your name first'); return; }
-  if (!selectedFn) { showToast('Please select your function'); return; }
+  if (!name)      { showToast('Please enter your name first'); return; }
+  if (!selectedFn){ showToast('Please select your function'); return; }
 
   const data = {
     name,
@@ -740,17 +743,69 @@ function downloadJSON() {
 
   const slug = fn.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
   const mSlug = month.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
-  const filename = `bsc-checkin-${slug}-${mSlug}.json`;
-
+  const filename = `${slug}-${mSlug}.json`;
+  const path = `check-ins/${filename}`;
   const json = JSON.stringify(data, null, 2);
-  const blob = new Blob([json], { type: 'application/json' });
-  const url  = URL.createObjectURL(blob);
-  const a    = document.createElement('a');
-  a.href = url; a.download = filename;
-  document.body.appendChild(a); a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-  showToast(`Downloaded ${filename}`);
+  const encoded = btoa(unescape(encodeURIComponent(json)));
+
+  // Prompt for token if not cached in sessionStorage
+  let token = sessionStorage.getItem('bsc_gh_token') || '';
+  if (!token) {
+    token = prompt('Enter your GitHub access token (stored in this browser tab only):');
+    if (!token) { showToast('Cancelled — no token provided'); return; }
+    sessionStorage.setItem('bsc_gh_token', token.trim());
+    token = token.trim();
+  }
+
+  const btn = document.querySelector('.download-btn');
+  btn.textContent = 'Submitting…';
+  btn.disabled = true;
+
+  try {
+    // Check if file exists (to get SHA for update)
+    let sha;
+    const check = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${path}?ref=${GITHUB_BRANCH}`, {
+      headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json' }
+    });
+    if (check.ok) {
+      const existing = await check.json();
+      sha = existing.sha;
+    }
+
+    const body = {
+      message: `Check-in: ${fn} — ${month}`,
+      content: encoded,
+      branch: GITHUB_BRANCH,
+    };
+    if (sha) body.sha = sha;
+
+    const res = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${path}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/vnd.github+json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (res.ok) {
+      showToast('Check-in submitted! Dashboard will update in ~1 minute.');
+    } else {
+      const err = await res.json();
+      if (res.status === 401) {
+        sessionStorage.removeItem('bsc_gh_token');
+        showToast('Token rejected — please try again with a valid token');
+      } else {
+        showToast(`Submit failed: ${err.message || res.status}`);
+      }
+    }
+  } catch (e) {
+    showToast('Network error — check your connection');
+  } finally {
+    btn.textContent = 'Submit Check-In';
+    btn.disabled = false;
+  }
 }
 
 // scroll dots
