@@ -105,6 +105,7 @@
   .s-prcm .section-stripe { background: #FB923C; }
   .s-qual .section-stripe { background: #E11D48; }
   .s-lgr  .section-stripe { background: #A855F7; }
+  .s-str  .section-stripe { background: #0EA5E9; }
 
   .section-inner { flex: 1; padding: 0 28px; }
 
@@ -245,14 +246,14 @@
         <div class="mast-title">Balanced Scorecard<br>Master Dashboard</div>
         <div class="mast-sub">
           <strong>August 2026</strong> &nbsp;·&nbsp; Month 1 of FY2026–27 &nbsp;·&nbsp;
-          6 perspectives &nbsp;·&nbsp; 28 KPIs tracked &nbsp;·&nbsp;
-          Check-ins: Finance · Sales · Operations · Procurement · Quality · Safety
+          7 perspectives &nbsp;·&nbsp; 33 KPIs tracked &nbsp;·&nbsp;
+          Check-ins: Finance · Sales · Operations · Procurement · Quality · Safety · Stores
         </div>
       </div>
       <div class="rag-row">
         <div class="rag-block g"><span class="n">6</span><span class="lbl">On Track</span></div>
-        <div class="rag-block a"><span class="n">12</span><span class="lbl">Monitor</span></div>
-        <div class="rag-block r"><span class="n">7</span><span class="lbl">Action</span></div>
+        <div class="rag-block a"><span class="n">14</span><span class="lbl">Monitor</span></div>
+        <div class="rag-block r"><span class="n">10</span><span class="lbl">Action</span></div>
         <div class="rag-block p"><span class="n">3</span><span class="lbl">Pending</span></div>
       </div>
     </div>
@@ -708,11 +709,88 @@
     </div>
   </div>
 
+  <!-- ── STORES ── -->
+  <div class="section s-str">
+    <div class="section-stripe"></div>
+    <div class="section-inner">
+      <div class="section-head">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span class="section-name">Stores</span>
+          <span class="section-source">Taylah · Store Manager · Aug 2026</span>
+        </div>
+        <span class="section-desc">Material availability, inventory accuracy &amp; BOM gap reporting</span>
+      </div>
+      <div class="kpi-list">
+
+        <div class="kpi-row">
+          <div class="kpi-dot a"></div>
+          <div>
+            <div class="kpi-name">Material Availability</div>
+            <div class="kpi-comment">Improved this month. Paint Race and Gail Yard now clearly accessible. Job material more accurately staged in store. Trend improving.</div>
+          </div>
+          <div class="kpi-right">
+            <span class="kv-chip a">Improved</span>
+            <span class="kpi-target">target: improve</span>
+          </div>
+        </div>
+
+        <div class="kpi-row">
+          <div class="kpi-dot r"></div>
+          <div>
+            <div class="kpi-name">Material Unavailability</div>
+            <div class="kpi-comment">Not changed. Outstanding pick items for line 2 jobs — very little picked fully in advance. Pre-picking discipline needs to improve.</div>
+          </div>
+          <div class="kpi-right">
+            <span class="kv-chip r">Not Changed</span>
+            <span class="kpi-target">target: zero</span>
+          </div>
+        </div>
+
+        <div class="kpi-row">
+          <div class="kpi-dot r"></div>
+          <div>
+            <div class="kpi-name">Inventory Accuracy</div>
+            <div class="kpi-comment">10% vs 100% target — significant gap. Accurate BOMs identified as the primary lever: incorrect BOMs drive store queries and manual workarounds.</div>
+          </div>
+          <div class="kpi-right">
+            <span class="kpi-value r">10%</span>
+            <span class="kpi-target">target: 100%</span>
+          </div>
+        </div>
+
+        <div class="kpi-row">
+          <div class="kpi-dot r"></div>
+          <div>
+            <div class="kpi-name">BOM Gaps Flagged</div>
+            <div class="kpi-comment">10% this month vs improve target. BOM accuracy is downstream of Engineering — early release and clean BOMs would directly reduce store pressure and people dependency.</div>
+          </div>
+          <div class="kpi-right">
+            <span class="kpi-value r">10%</span>
+            <span class="kpi-target">target: improve</span>
+          </div>
+        </div>
+
+        <div class="kpi-row">
+          <div class="kpi-dot a"></div>
+          <div>
+            <div class="kpi-name">Material Check</div>
+            <div class="kpi-comment">10% completion. Process in place but not yet consistently executed. Linked to BOM accuracy improvement.</div>
+          </div>
+          <div class="kpi-right">
+            <span class="kpi-value a">10%</span>
+            <span class="kpi-target">target: 100%</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
   <!-- ── ACTION REQUIRED ── -->
   <div class="action-callout">
     <div class="action-head">
       <div class="action-icon"></div>
-      <div class="action-title">Action Required — 7 KPIs need immediate attention</div>
+      <div class="action-title">Action Required — 10 KPIs need immediate attention</div>
     </div>
     <div class="action-body">
       <div class="action-item">
@@ -750,12 +828,27 @@
         <div class="action-desc">August report not completed. Establish monthly cadence for September. Early BOM release from Engineering will unlock procurement planning capacity.</div>
         <div class="action-owner">Saurabh G</div>
       </div>
+      <div class="action-item">
+        <div class="action-kpi">Inventory Accuracy &nbsp;·&nbsp; <span style="color:#EF4444">10% vs target 100%</span></div>
+        <div class="action-desc">Critical gap. Root cause is BOM inaccuracy — Engineering must prioritise clean, complete BOMs before release. Stores cannot achieve accuracy on incorrect inputs.</div>
+        <div class="action-owner">Taylah · Engineering</div>
+      </div>
+      <div class="action-item">
+        <div class="action-kpi">Material Unavailability &nbsp;·&nbsp; <span style="color:#EF4444">Not Changed</span></div>
+        <div class="action-desc">Pre-picking for line 2 jobs not happening. Establish a pick schedule discipline aligned to production plan — material must be staged before the job starts.</div>
+        <div class="action-owner">Taylah</div>
+      </div>
+      <div class="action-item">
+        <div class="action-kpi">BOM Gaps Flagged &nbsp;·&nbsp; <span style="color:#EF4444">10% vs improve target</span></div>
+        <div class="action-desc">BOM gap flagging is a leading indicator for Engineering quality. Cross-functional loop between Stores and Engineering needed to close gaps at source.</div>
+        <div class="action-owner">Taylah · Engineering</div>
+      </div>
     </div>
   </div>
 
   <!-- ── FOOTER ── -->
   <div class="footer">
-    <span class="footer-note">Check-ins received: Finance · Sales · Operations · Procurement · Quality (Aug 2026) · Safety &amp; Compliance (Jul 2026) · Production check-in pending</span>
+    <span class="footer-note">Check-ins received: Finance · Sales · Operations · Procurement · Quality (Aug 2026) · Safety &amp; Compliance (Jul 2026) · Stores (Aug 2026) · Production check-in pending</span>
     <span class="footer-date">Next full review: September 2026 &nbsp;·&nbsp; Produced 20 Aug 2026</span>
   </div>
 
