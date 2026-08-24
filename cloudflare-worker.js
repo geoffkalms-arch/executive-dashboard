@@ -19,6 +19,15 @@ export default {
       return cors(new Response('Forbidden', { status: 403 }));
     }
 
+    // Validate passcode
+    const passcode = request.headers.get('X-BSC-Code') || '';
+    if (passcode !== env.SUBMIT_CODE) {
+      return cors(new Response(JSON.stringify({ ok: false, error: 'Invalid access code' }), {
+        status: 401,
+        headers: { 'Content-Type': 'application/json' },
+      }));
+    }
+
     let data;
     try {
       data = await request.json();
