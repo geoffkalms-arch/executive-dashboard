@@ -747,6 +747,14 @@ async function submitCheckin() {
   const json = JSON.stringify(data, null, 2);
   const encoded = btoa(unescape(encodeURIComponent(json)));
 
+  let code = sessionStorage.getItem('bsc_code') || '';
+  if (!code) {
+    code = prompt('Enter the team access code:');
+    if (!code) { showToast('Cancelled'); return; }
+    sessionStorage.setItem('bsc_code', code.trim());
+    code = code.trim();
+  }
+
   const btn = document.querySelector('.download-btn');
   btn.textContent = 'Submitting…';
   btn.disabled = true;
@@ -754,7 +762,7 @@ async function submitCheckin() {
   try {
     const res = await fetch(WORKER_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'X-BSC-Code': code },
       body: JSON.stringify(data),
     });
 
@@ -762,6 +770,7 @@ async function submitCheckin() {
     if (result.ok) {
       showToast('Check-in submitted! Dashboard will update in ~1 minute.');
     } else {
+      if (res.status === 401) sessionStorage.removeItem('bsc_code');
       showToast(`Submit failed: ${result.error || res.status}`);
     }
   } catch (e) {
