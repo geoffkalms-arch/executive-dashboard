@@ -8,7 +8,8 @@
     { "name": "Near miss reports per month", "target": "Baseline + increase", "value": "2", "trend": "→", "rag": "amber", "comment": "Two near-misses reported and under investigation. Reporting culture healthy; root causes being addressed." },
     { "name": "Safety observations completed", "target": "100% of programme", "value": "0", "trend": "↓", "rag": "red", "comment": "Below target. Calendar invite in place. Commitment: consistent monthly cadence beginning August." },
     { "name": "Toolbox talks delivered", "target": "Monthly - no cancellations", "value": "1", "trend": "→", "rag": "green", "comment": "On target. Delivered on schedule in July." },
-    { "name": "Recordable incidents", "target": "MD notified same day", "value": "0", "trend": "→", "rag": "green", "comment": "Zero reportable incidents. WFH policy issued. ISO 45001 re-certification progressing." }
+    { "name": "Recordable incidents", "target": "MD notified same day", "value": "0", "trend": "→", "rag": "green", "comment": "Zero reportable incidents. WFH policy issued. ISO 45001 re-certification progressing." },
+    { "name": "Hazard reports filed", "target": "≥ 5 / month", "value": "3", "trend": "→", "rag": "amber", "comment": "Below target. Risk assessment embedded in Engineering Drawings Checklist. Hazard identification focus increasing." }
   ],
   "q1": "Strengthened prevention protocols following recordable injury; safety team now involved before events, not after.",
   "q2": "Issued WFH policy and embedded risk assessment into Engineering Drawings Checklist.",
