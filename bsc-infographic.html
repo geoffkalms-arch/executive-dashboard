@@ -4,7 +4,16 @@
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: #0A1628; color: #F0F4FA; font-family: 'Inter', system-ui, sans-serif; font-size: 13px; line-height: 1.5; padding: 32px 20px 56px; -webkit-font-smoothing: antialiased; }
-  .wrap { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 4px; }
+  #gate { position:fixed;inset:0;z-index:9999;background:#0A1628;display:flex;align-items:center;justify-content:center; }
+  #gate-box { background:#0D1B35;border:1px solid #1E3158;border-radius:10px;padding:40px 36px;width:340px;text-align:center; }
+  #gate-eyebrow { font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#FFC000;margin-bottom:8px; }
+  #gate-title { font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;color:#fff;margin-bottom:24px; }
+  #gate-input { width:100%;background:#0A1628;color:#F0F4FA;border:1.5px solid #1E3158;border-radius:6px;padding:11px 14px;font-size:15px;text-align:center;letter-spacing:0.12em;outline:none;margin-bottom:12px;font-family:'Inter',system-ui,sans-serif; }
+  #gate-input:focus { border-color:#FFC000; }
+  #gate-btn { width:100%;background:#FFC000;color:#0D1B35;border:none;border-radius:6px;padding:12px;font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;letter-spacing:0.06em;cursor:pointer; }
+  #gate-btn:hover { background:#E6AC00; }
+  #gate-err { font-size:12px;color:#EF4444;margin-top:10px;min-height:18px; }
+  .wrap { max-width: 1100px; margin: 0 auto; display: none; flex-direction: column; gap: 4px; }
   .masthead { background: #0D1B35; border: 1px solid #1E3158; border-radius: 10px 10px 0 0; overflow: hidden; }
   .mast-amber-bar { height: 5px; background: linear-gradient(90deg, #FFC000 0%, #E6AC00 100%); }
   .mast-body { padding: 24px 32px 22px; display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
@@ -634,6 +643,43 @@
 
   <div class="footer">
     <span class="footer-note">Check-ins received: Finance · Sales · Operations · Procurement · Quality · Safety &amp; Compliance · Stores</span>
-    <span class="footer-date">Next full review: September 2026 &nbsp;·&nbsp; Generated 21 August 2026</span>
+    <span class="footer-date">Next full review: September 2026 &nbsp;·&nbsp; Generated 26 August 2026</span>
   </div>
 </div>
+
+<div id="gate">
+  <div id="gate-box">
+    <div id="gate-eyebrow">Liquip Victoria · Strategic Performance</div>
+    <div id="gate-title">BSC Dashboard</div>
+    <input id="gate-input" type="password" placeholder="Access code" autocomplete="off">
+    <button id="gate-btn" onclick="checkCode()">View Dashboard</button>
+    <div id="gate-err"></div>
+  </div>
+</div>
+
+<script>
+const HASH = '76f38c6ad4c2cdf925fa7dacab14e77b08a2c9126c89ebfd5182e3be8bfcd6a2';
+async function sha256(msg) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(msg));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+async function checkCode() {
+  const val = document.getElementById('gate-input').value.trim();
+  if (!val) return;
+  const h = await sha256(val);
+  if (h === HASH) {
+    sessionStorage.setItem('bsc_auth','1');
+    document.getElementById('gate').remove();
+    document.querySelector('.wrap').style.display = 'flex';
+  } else {
+    document.getElementById('gate-err').textContent = 'Incorrect code — try again';
+    document.getElementById('gate-input').value = '';
+    document.getElementById('gate-input').focus();
+  }
+}
+document.getElementById('gate-input').addEventListener('keydown', e => { if (e.key === 'Enter') checkCode(); });
+if (sessionStorage.getItem('bsc_auth') === '1') {
+  document.getElementById('gate').remove();
+  document.querySelector('.wrap').style.display = 'flex';
+}
+</script>
