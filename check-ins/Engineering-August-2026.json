@@ -1,0 +1,16 @@
+{
+  "name": "Engineering Manager",
+  "function": "Engineering",
+  "month": "August 2026",
+  "generated": "2026-08-19T00:00:00.000Z",
+  "kpis": [
+    { "name": "On-time release rate", "target": "85% @ 6mo - 95% @ 12mo", "value": "Pending", "trend": "→", "rag": "pending", "comment": "Baseline being established in Month 1. Tracking framework being put in place." },
+    { "name": "BOM-originated production stops", "target": "Zero in 12mo", "value": "Pending", "trend": "→", "rag": "pending", "comment": "First month baseline. Tracking to commence immediately." },
+    { "name": "Repair actions per job (eng-origin)", "target": "↓ 50% in 12mo", "value": "Pending", "trend": "→", "rag": "pending", "comment": "Baseline to be set in Month 1. Quality team cross-referencing Engineering-originated actions." },
+    { "name": "Interference checks completed", "target": "100% on relevant jobs", "value": "Pending", "trend": "→", "rag": "pending", "comment": "Process being formalised. Checklist embedded into Engineering Drawings workflow." },
+    { "name": "Checklist compliance", "target": "100% - no exceptions", "value": "Pending", "trend": "→", "rag": "pending", "comment": "Engineering Drawings Checklist in place. Compliance tracking to begin September." }
+  ],
+  "q1": "Establishing baseline tracking for on-time release rate and BOM-originated production stops in Month 1.",
+  "q2": "Embedding interference checks and checklist compliance into Engineering Drawings workflow.",
+  "q3": "Confirm on-time release rate baseline and begin formal tracking before end of August."
+}
