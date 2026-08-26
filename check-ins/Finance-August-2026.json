@@ -4,11 +4,11 @@
   "month": "August 2026",
   "generated": "2026-08-19T00:00:00.000Z",
   "kpis": [
-    { "name": "Revenue per Head", "target": "$47,841", "value": "Pending", "trend": "→", "rag": "pending", "comment": "Baseline calculated for previous FY. August figure pending month-end close." },
-    { "name": "Debtors Days (AR Turnaround)", "target": "40 days", "value": "52.4", "trend": "↑", "rag": "red", "comment": "31% above target. Business-wide cash-chase effort required. DSO method confirmed." },
-    { "name": "Job Time Variance Report", "target": "1 / month", "value": "0", "trend": "→", "rag": "red", "comment": "Not yet started. Effort to begin September. 6-month target for system recommendation." },
-    { "name": "Monthly Finance Report", "target": "1 / month", "value": "1", "trend": "→", "rag": "green", "comment": "Delivered on time. Reporting cadence established." },
-    { "name": "Job Time System Recommendation", "target": "6-month plan", "value": "On Track", "trend": "→", "rag": "green", "comment": "6-month development timeline in place. On track for the committed date." }
+    { "name": "Revenue per head ($)", "target": "↑ YoY", "value": "Pending", "trend": "→", "rag": "pending", "comment": "Baseline calculated for previous FY. August figure pending month-end close." },
+    { "name": "Debtors days (AR turnaround)", "target": "Baseline + improve", "value": "52.4", "trend": "↑", "rag": "red", "comment": "31% above target. Business-wide cash-chase effort required. DSO method confirmed." },
+    { "name": "Job time variance report", "target": "Monthly to Engineering", "value": "0", "trend": "→", "rag": "red", "comment": "Not yet started. Effort to begin September. 6-month target for system recommendation." },
+    { "name": "Monthly finance report", "target": "Produced by you", "value": "1", "trend": "→", "rag": "green", "comment": "Delivered on time. Reporting cadence established." },
+    { "name": "Job time system recommendation", "target": "View in 6mo", "value": "On Track", "trend": "→", "rag": "green", "comment": "6-month development timeline in place. On track for the committed date." }
   ],
   "q1": "Established DSO methodology and confirmed reporting approach for Debtors Days.",
   "q2": "Agreed 6-month plan for Job Time system recommendation with leadership.",

@@ -4,10 +4,11 @@
   "month": "August 2026",
   "generated": "2026-08-19T00:00:00.000Z",
   "kpis": [
-    { "name": "Root Cause Completion Rate", "target": "100%", "value": "0%", "trend": "→", "rag": "red", "comment": "No root causes documented this month. Consensus for weekly Repair Actions review needed across all functions." },
-    { "name": "Repair Actions per Job", "target": "Trend down", "value": "56", "trend": "↑", "rag": "amber", "comment": "July: 56 actions (YTD avg 46). Trending up. Checksheet updated for re-chassis; TFO usage pending." },
-    { "name": "Actions Open > 30 Days", "target": "0", "value": "730", "trend": "↑", "rag": "red", "comment": "730 open actions ageing beyond 30 days. Weekly cross-functional review required immediately." },
-    { "name": "Engineering-Originated Repair Actions", "target": "Reduce 50%", "value": "14%", "trend": "→", "rag": "amber", "comment": "Historical baseline: 14% of all repair actions. Standard sales checksheet and weekly engineering/sales forum to be established." }
+    { "name": "Root cause closure rate", "target": "100% - no exceptions", "value": "0%", "trend": "→", "rag": "red", "comment": "No root causes documented this month. Consensus for weekly Repair Actions review needed across all functions." },
+    { "name": "Repair actions per job (all functions)", "target": "Trend down - baseline M1", "value": "56", "trend": "↑", "rag": "amber", "comment": "July: 56 actions (YTD avg 46). Trending up. Checksheet updated for re-chassis; TFO usage pending." },
+    { "name": "Engineering-originated repair actions/job", "target": "Reduce 50% in 12mo", "value": "14%", "trend": "→", "rag": "amber", "comment": "Historical baseline: 14% of all repair actions. Standard sales checksheet and weekly engineering/sales forum to be established." },
+    { "name": "Actions open >30 days", "target": "Zero - escalate all", "value": "730", "trend": "↑", "rag": "red", "comment": "730 open actions ageing beyond 30 days. Weekly cross-functional review required immediately." },
+    { "name": "Customer-visible defects", "target": "Trending to zero", "value": "Pending", "trend": "→", "rag": "pending", "comment": "Tracking framework being established. Baseline to be set in September." }
   ],
   "q1": "Updated checksheet for re-chassis jobs. Identified Engineering as key contributor to repair actions at 14% of total.",
   "q2": "Established framework for cross-functional weekly Repair Actions review — pending consensus from all functions.",

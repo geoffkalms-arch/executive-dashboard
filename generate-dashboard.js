@@ -8,18 +8,19 @@ const CHECKINS_DIR = path.join(__dirname, 'check-ins');
 const OUT_FILE     = path.join(__dirname, 'bsc-infographic.html');
 
 const PERSPECTIVE = {
-  Finance:              { cls: 's-fin',  stripe: '#3B82F6', desc: 'Revenue, cash flow & financial reporting' },
-  Sales:                { cls: 's-cust', stripe: '#22C55E', desc: 'Delivery performance & commercial pipeline' },
-  Operations:           { cls: 's-proc', stripe: '#F59E0B', desc: 'Operational efficiency, costing & process quality' },
-  Procurement:          { cls: 's-prcm', stripe: '#FB923C', desc: 'Supplier performance, cost discipline & procurement cadence' },
-  Quality:              { cls: 's-qual', stripe: '#E11D48', desc: 'First-pass build rate, repair actions & defect trending' },
-  'Safety & Compliance':{ cls: 's-lgr',  stripe: '#A855F7', desc: 'People capability, compliance & safety culture' },
-  Stores:               { cls: 's-str',  stripe: '#0EA5E9', desc: 'Material availability, inventory accuracy & BOM gap reporting' },
-  Production:           { cls: 's-prod', stripe: '#10B981', desc: 'Production schedule adherence & daily output' },
-  Engineering:          { cls: 's-eng',  stripe: '#6366F1', desc: 'BOM quality, drawing accuracy & release discipline' },
+  Finance:     { cls: 's-fin',  stripe: '#3B82F6', desc: 'Revenue, cash flow & financial reporting' },
+  Sales:       { cls: 's-cust', stripe: '#22C55E', desc: 'Delivery performance & commercial pipeline' },
+  Operations:  { cls: 's-proc', stripe: '#F59E0B', desc: 'Operational efficiency, costing & process quality' },
+  Procurement: { cls: 's-prcm', stripe: '#FB923C', desc: 'Supplier performance, cost discipline & procurement cadence' },
+  Quality:     { cls: 's-qual', stripe: '#E11D48', desc: 'First-pass build rate, repair actions & defect trending' },
+  'Safety & Compliance': { cls: 's-lgr', stripe: '#A855F7', desc: 'Safety culture, incident reporting & compliance' },
+  Stores:      { cls: 's-str',  stripe: '#0EA5E9', desc: 'Material availability, inventory accuracy & BOM gap reporting' },
+  Production:  { cls: 's-prod', stripe: '#10B981', desc: 'Production schedule adherence & daily output' },
+  Engineering: { cls: 's-eng',  stripe: '#6366F1', desc: 'BOM quality, release discipline & repair action reduction' },
+  Aviation:    { cls: 's-avi',  stripe: '#EC4899', desc: 'Aviation revenue, delivery performance & defect reporting' },
 };
 
-const ORDER = ['Finance','Sales','Operations','Procurement','Quality','Safety & Compliance','Stores','Production','Engineering'];
+const ORDER = ['Finance','Sales','Operations','Procurement','Quality','Safety & Compliance','Stores','Production','Engineering','Aviation'];
 
 function esc(s) {
   return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -346,9 +347,9 @@ const ALL_DATA = ${ALL_DATA};
 const STRIPE = {
   Finance:'#3B82F6', Sales:'#22C55E', Operations:'#F59E0B',
   Procurement:'#FB923C', Quality:'#E11D48', 'Safety & Compliance':'#A855F7',
-  Stores:'#0EA5E9', Production:'#10B981', Engineering:'#6366F1',
+  Stores:'#0EA5E9', Production:'#10B981', Engineering:'#6366F1', Aviation:'#EC4899',
 };
-const ORDER = ['Finance','Sales','Operations','Procurement','Quality','Safety & Compliance','Stores','Production','Engineering'];
+const ORDER = ['Finance','Sales','Operations','Procurement','Quality','Safety & Compliance','Stores','Production','Engineering','Aviation'];
 
 // ── gate ───────────────────────────────────────────────────────────────────────
 const HASH = '${GATE_HASH}';

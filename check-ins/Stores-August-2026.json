@@ -4,11 +4,11 @@
   "month": "August 2026",
   "generated": "2026-08-21T00:00:00.000Z",
   "kpis": [
-    { "name": "Material Availability", "target": "Improve", "value": "Improved", "trend": "↑", "rag": "amber", "comment": "Improved this month. Paint Race and Gail Yard now clearly accessible. Job material more accurately staged in store." },
-    { "name": "Material Unavailability", "target": "Zero", "value": "Not Changed", "trend": "↓", "rag": "red", "comment": "Outstanding pick items for line 2 jobs — very little picked fully in advance. Pre-picking discipline needs to improve." },
-    { "name": "Inventory Accuracy", "target": "100%", "value": "10%", "trend": "↓", "rag": "red", "comment": "Significant gap. Accurate BOMs are the primary lever — incorrect BOMs drive store queries and manual workarounds." },
-    { "name": "BOM Gaps Flagged", "target": "Improve", "value": "10%", "trend": "↓", "rag": "red", "comment": "BOM accuracy is downstream of Engineering — early release and clean BOMs would directly reduce store pressure." },
-    { "name": "Material Check", "target": "100%", "value": "10%", "trend": "→", "rag": "amber", "comment": "Process in place but not yet consistently executed. Linked to BOM accuracy improvement." }
+    { "name": "Material availability on scheduled start (%)", "target": "Baseline + improve QoQ", "value": "Improved", "trend": "↑", "rag": "amber", "comment": "Improved this month. Paint Race and Gail Yard now clearly accessible. Job material more accurately staged in store." },
+    { "name": "Production stops — material unavailability", "target": "Trending to zero", "value": "Not Changed", "trend": "↓", "rag": "red", "comment": "Outstanding pick items for line 2 jobs — very little picked fully in advance. Pre-picking discipline needs to improve." },
+    { "name": "Inventory accuracy (%)", "target": "Baseline + improve", "value": "10%", "trend": "↓", "rag": "red", "comment": "Significant gap. Accurate BOMs are the primary lever — incorrect BOMs drive store queries and manual workarounds." },
+    { "name": "BOM gaps flagged to Engineering", "target": "Same day - 100%", "value": "10%", "trend": "↓", "rag": "red", "comment": "BOM accuracy is downstream of Engineering — early release and clean BOMs would directly reduce store pressure." },
+    { "name": "Material check before scheduling", "target": "100% compliance", "value": "10%", "trend": "→", "rag": "amber", "comment": "Process in place but not yet consistently executed. Linked to BOM accuracy improvement." }
   ],
   "q1": "Material unavailability — outstanding picks for line 2 jobs. Very little picked fully in advance. Working on pick schedule.",
   "q2": "Gail Yard / Paint Race now clearly accessible — stock more accurate as job material, now in store location.",
