@@ -20,7 +20,7 @@ const PERSPECTIVE = {
   Aviation:    { cls: 's-avi',  stripe: '#EC4899', desc: 'Aviation revenue, delivery performance & defect reporting' },
 };
 
-const ORDER = ['Finance','Sales','Operations','Procurement','Quality','Safety & Compliance','Stores','Production','Engineering','Aviation'];
+const ORDER = ['Engineering','Finance','Sales','Operations','Procurement','Quality','Safety & Compliance','Stores','Production','Aviation'];
 
 function esc(s) {
   return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -349,7 +349,7 @@ const STRIPE = {
   Procurement:'#FB923C', Quality:'#E11D48', 'Safety & Compliance':'#A855F7',
   Stores:'#0EA5E9', Production:'#10B981', Engineering:'#6366F1', Aviation:'#EC4899',
 };
-const ORDER = ['Finance','Sales','Operations','Procurement','Quality','Safety & Compliance','Stores','Production','Engineering','Aviation'];
+const ORDER = ['Engineering','Finance','Sales','Operations','Procurement','Quality','Safety & Compliance','Stores','Production','Aviation'];
 
 // ── gate ───────────────────────────────────────────────────────────────────────
 const HASH = '${GATE_HASH}';
