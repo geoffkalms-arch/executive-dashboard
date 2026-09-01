@@ -726,14 +726,6 @@ async function submitCheckin() {
   const json = JSON.stringify(data, null, 2);
   const encoded = btoa(unescape(encodeURIComponent(json)));
 
-  let code = sessionStorage.getItem('bsc_code') || '';
-  if (!code) {
-    code = prompt('Enter the team access code:');
-    if (!code) { showToast('Cancelled'); return; }
-    sessionStorage.setItem('bsc_code', code.trim());
-    code = code.trim();
-  }
-
   const btn = document.querySelector('.download-btn');
   btn.textContent = 'Submitting…';
   btn.disabled = true;
@@ -741,7 +733,7 @@ async function submitCheckin() {
   try {
     const res = await fetch(WORKER_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'X-BSC-Code': code },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
 
