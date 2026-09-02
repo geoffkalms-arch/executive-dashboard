@@ -1,0 +1,16 @@
+{
+  "name": "Production Manager",
+  "function": "Production",
+  "month": "August 2026",
+  "generated": "2026-08-19T00:00:00.000Z",
+  "kpis": [
+    { "name": "On-time delivery to customer (%)", "target": "Baseline Aug 2026", "value": "Pending", "trend": "→", "rag": "pending", "comment": "Baseline being established this month. Tracking framework being put in place." },
+    { "name": "First-pass build rate (no rework)", "target": "Baseline + improve QoQ", "value": "Pending", "trend": "→", "rag": "pending", "comment": "First month baseline. Rework tracking to commence immediately." },
+    { "name": "Production stops — incomplete packages", "target": "Trending to zero", "value": "Pending", "trend": "→", "rag": "pending", "comment": "Tracking initiated. Linked to Stores and Engineering package completeness." },
+    { "name": "Hours per job vs estimate", "target": "Tracked monthly", "value": "Pending", "trend": "→", "rag": "pending", "comment": "Hours tracking to be set up in Month 1. Baseline to be confirmed with Finance." },
+    { "name": "Daily cell floor review", "target": "Every day — no exceptions", "value": "Pending", "trend": "→", "rag": "pending", "comment": "Process being formalised. Cadence to be confirmed and embedded." }
+  ],
+  "q1": "Establishing baseline tracking for on-time delivery and first-pass build rate in Month 1.",
+  "q2": "Initiating daily cell floor review cadence and production stop tracking.",
+  "q3": "Confirm on-time delivery baseline and hours per job tracking before end of August."
+}

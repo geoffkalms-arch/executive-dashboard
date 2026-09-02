@@ -1,0 +1,16 @@
+{
+  "name": "Saurabh G / Sai Paksha G",
+  "function": "Procurement",
+  "month": "August 2026",
+  "generated": "2026-08-19T00:00:00.000Z",
+  "kpis": [
+    { "name": "Supplier on-time delivery rate (%)", "target": "Baseline + improve QoQ", "value": "In Process", "trend": "→", "rag": "amber", "comment": "Working stone pick schedule before pick starts. Baseline month; formal tracking cadence being established." },
+    { "name": "POs affected by post-release BOM changes", "target": "Trending to zero in 12mo", "value": "19", "trend": "↑", "rag": "amber", "comment": "19 suppliers active. $4,512.40 noted. August trending up — first month baseline." },
+    { "name": "Cost of emergency purchases per month", "target": "Tracked and reported", "value": "$4,512.40", "trend": "↑", "rag": "amber", "comment": "First month tracking — baseline only. Focus on eliminating reactive purchasing." },
+    { "name": "Supplier performance report", "target": "Monthly - produced by you", "value": "Not Done", "trend": "→", "rag": "red", "comment": "Not completed for August. Reporting cadence to be confirmed; expected September." },
+    { "name": "Monthly Procurement BSC section", "target": "Produced by you", "value": "Submitted", "trend": "→", "rag": "green", "comment": "Submitted on time. Sai submitted BSC for smooth process. Co-ordinated with Rob/Garry for Hydraulics and JW items." }
+  ],
+  "q1": "Tracked down emergency POs and costs — first month baseline established ($4,512.40). Working stone pick schedule for supplier on-time delivery.",
+  "q2": "Sai submitted BSC for smooth process. Saurabh proactively contacted supplier for Mexico in-cab boxes — secured $6,000 discount from IPD.",
+  "q3": "If Engineering spare some time before releasing the BOM, procurement can be stress-free and add more value to the company."
+}

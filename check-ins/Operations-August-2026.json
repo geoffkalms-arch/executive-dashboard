@@ -1,0 +1,16 @@
+{
+  "name": "Rita Kelly",
+  "function": "Operations",
+  "month": "August 2026",
+  "generated": "2026-08-19T00:00:00.000Z",
+  "kpis": [
+    { "name": "Costing turnaround time (days)", "target": "↓ 40% in 6mo", "value": "5 days", "trend": "→", "rag": "amber", "comment": "5-day average vs 3-day target. PO receipting delays (esp. contracted works) identified as primary blocker." },
+    { "name": "Cost allocation accuracy", "target": "Baseline + improve QoQ", "value": "In Progress", "trend": "→", "rag": "amber", "comment": "First report in progress. Pipeline live across LV & RI; report format being established." },
+    { "name": "Costing backlog (jobs pending)", "target": "Visible monthly", "value": "In Progress", "trend": "→", "rag": "amber", "comment": "Review initiated August 2026. BSC direction discussed with leadership. Documentation in progress." },
+    { "name": "BSC operational perspective", "target": "Produced by you", "value": "Sep Target", "trend": "→", "rag": "amber", "comment": "Excluded from August count. Targeted for September. Brainstorming session with MD required." },
+    { "name": "Systems recommendation", "target": "View in 6mo", "value": "Pending", "trend": "→", "rag": "pending", "comment": "Check-in pending. Data available via BOM Addition Tracker." }
+  ],
+  "q1": "Identified PO receipting delays as primary blocker for job costing turnaround; process improvement underway.",
+  "q2": "Shared vision with team on job costing improvement pathway.",
+  "q3": "Resolve PO receipting delays for contracted works to hit 3-day turnaround target."
+}
