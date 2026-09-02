@@ -2,15 +2,51 @@
   "name": "Taylah",
   "function": "Stores",
   "month": "August 2026",
-  "generated": "2026-08-21T00:00:00.000Z",
+  "reportType": "End-of-Month",
+  "generated": "2026-09-02T02:35:41.995Z",
   "kpis": [
-    { "name": "Material availability on scheduled start (%)", "target": "Baseline + improve QoQ", "value": "Improved", "trend": "↑", "rag": "amber", "comment": "Improved this month. Paint Race and Gail Yard now clearly accessible. Job material more accurately staged in store." },
-    { "name": "Production stops — material unavailability", "target": "Trending to zero", "value": "Not Changed", "trend": "↓", "rag": "red", "comment": "Outstanding pick items for line 2 jobs — very little picked fully in advance. Pre-picking discipline needs to improve." },
-    { "name": "Inventory accuracy (%)", "target": "Baseline + improve", "value": "10%", "trend": "↓", "rag": "red", "comment": "Significant gap. Accurate BOMs are the primary lever — incorrect BOMs drive store queries and manual workarounds." },
-    { "name": "BOM gaps flagged to Engineering", "target": "Same day - 100%", "value": "10%", "trend": "↓", "rag": "red", "comment": "BOM accuracy is downstream of Engineering — early release and clean BOMs would directly reduce store pressure." },
-    { "name": "Material check before scheduling", "target": "100% compliance", "value": "10%", "trend": "→", "rag": "amber", "comment": "Process in place but not yet consistently executed. Linked to BOM accuracy improvement." }
+    {
+      "name": "Material availability on scheduled start (%)",
+      "target": "Baseline + improve QoQ",
+      "value": "Increased",
+      "trend": "↑",
+      "rag": "green",
+      "comment": "Cevol manager created"
+    },
+    {
+      "name": "Production stops — material unavailability",
+      "target": "Trending to zero",
+      "value": "Improved",
+      "trend": "→",
+      "rag": "amber",
+      "comment": "Fulfilment has improved, purchasing / min/max to be commented on by purchasing. Some of this is out of our control when stock is not here yet. Improvement in chasing up purchasing when an issue arises."
+    },
+    {
+      "name": "Inventory accuracy (%)",
+      "target": "Baseline + improve",
+      "value": "Starting to decline",
+      "trend": "→",
+      "rag": "amber",
+      "comment": "JK / TB reviewing as they arise - sales area is an issue that we are tackling"
+    },
+    {
+      "name": "BOM gaps flagged to Engineering",
+      "target": "Same day - 100%",
+      "value": "Review",
+      "trend": "→",
+      "rag": "red",
+      "comment": "how should this be done? Need an efficient way to do so, and ensure its captured by engineering."
+    },
+    {
+      "name": "Material check before scheduling",
+      "target": "100% compliance",
+      "value": "Unsure",
+      "trend": "→",
+      "rag": "red",
+      "comment": "Still unsure how to tackle this / what is expected to be addressed? is store the most effective team to manage this?"
+    }
   ],
-  "q1": "Material unavailability — outstanding picks for line 2 jobs. Very little picked fully in advance. Working on pick schedule.",
-  "q2": "Gail Yard / Paint Race now clearly accessible — stock more accurate as job material, now in store location.",
-  "q3": "Correct BOMs would mean less people needed — accurate BOMs reduce store queries and dependency on manual knowledge."
+  "q1": "Material availability on scheduled start (%) - Created a cevol manager - someone who is in charge of knowing what cevols are where in the workshop, and displaying this on a spreadsheet for stores and workshop to view. Saves time and makes it easier for stores to put receipted items in correct location to prevent \"lost parts\".",
+  "q2": "Re-alignment of sales / dispatch process.",
+  "q3": "Utilising R3 racking - would create much safer mezzanine environment if most can go on racking. 36 unused pallet spots currently."
 }
