@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - 'check-ins/**'
+      - 'bsc-checkin-form.html'
+      - 'bsc-infographic.html'
+      - 'generate-dashboard.js'
     branches:
       - main
 
