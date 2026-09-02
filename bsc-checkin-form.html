@@ -384,8 +384,15 @@ textarea { resize: vertical; min-height: 72px; }
           <input type="text" id="inp-name" placeholder="First Last" autocomplete="name">
         </div>
         <div>
-          <label for="inp-month">Month / Year</label>
+          <label for="inp-month">Report Month</label>
           <input type="text" id="inp-month" placeholder="August 2026">
+        </div>
+        <div>
+          <label>Report Type <span style="color:var(--r-txt);font-size:10px;">required</span></label>
+          <div class="toggle-group" id="report-type-group">
+            <button class="toggle-btn" data-type="mid" style="flex:1;text-align:center;" onclick="selectReportType(this)">Mid-Month</button>
+            <button class="toggle-btn" data-type="eom" style="flex:1;text-align:center;" onclick="selectReportType(this)">End-of-Month</button>
+          </div>
         </div>
       </div>
       <div>
@@ -543,7 +550,15 @@ const KPI_PRESETS = {
 };
 
 let selectedFn = null;
+let selectedReportType = null;
 let kpiCount = 0;
+
+function selectReportType(btn) {
+  document.querySelectorAll('#report-type-group .toggle-btn').forEach(b => b.classList.remove('selected-up'));
+  btn.classList.add('selected-up');
+  selectedReportType = btn.dataset.type;
+  updateStatus();
+}
 
 // set default month
 const now = new Date();
@@ -658,7 +673,8 @@ function updateStatus() {
   if (name) parts.push(name);
   if (selectedFn) parts.push(selectedFn);
   if (month) parts.push(month);
-  st.innerHTML = `Ready to download · <strong>${parts.join(' · ')}</strong>`;
+  if (selectedReportType) parts.push(selectedReportType === 'mid' ? 'Mid-Month' : 'End-of-Month');
+  st.innerHTML = `Ready to submit · <strong>${parts.join(' · ')}</strong>`;
 }
 
 document.getElementById('inp-name').addEventListener('input', updateStatus);
@@ -705,13 +721,17 @@ async function submitCheckin() {
   const month = document.getElementById('inp-month').value.trim();
   const fn    = selectedFn || 'Unknown';
 
-  if (!name)      { showToast('Please enter your name first'); return; }
-  if (!selectedFn){ showToast('Please select your function'); return; }
+  if (!name)             { showToast('Please enter your name first'); return; }
+  if (!selectedFn)       { showToast('Please select your function'); return; }
+  if (!selectedReportType){ showToast('Please select Mid-Month or End-of-Month'); return; }
+
+  const reportTypeLabel = selectedReportType === 'mid' ? 'Mid-Month' : 'End-of-Month';
 
   const data = {
     name,
     function: fn,
     month,
+    reportType: reportTypeLabel,
     generated: new Date().toISOString(),
     kpis: collectKpis(),
     q1: document.getElementById('q1').value.trim(),
@@ -721,7 +741,7 @@ async function submitCheckin() {
 
   const slug = fn.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
   const mSlug = month.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
-  const filename = `${slug}-${mSlug}.json`;
+  const filename = `${slug}-${mSlug}-${selectedReportType}.json`;
   const path = `check-ins/${filename}`;
   const json = JSON.stringify(data, null, 2);
   const encoded = btoa(unescape(encodeURIComponent(json)));
