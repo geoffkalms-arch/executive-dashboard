@@ -385,7 +385,9 @@ textarea { resize: vertical; min-height: 72px; }
         </div>
         <div>
           <label for="inp-month">Report Month</label>
-          <input type="text" id="inp-month" placeholder="August 2026">
+          <select id="inp-month">
+            <option value="">— Select month —</option>
+          </select>
         </div>
         <div>
           <label>Report Type <span style="color:var(--r-txt);font-size:10px;">required</span></label>
@@ -563,7 +565,19 @@ function selectReportType(btn) {
 // set default month
 const now = new Date();
 const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-document.getElementById('inp-month').value = `${months[now.getMonth()]} ${now.getFullYear()}`;
+
+// Populate month dropdown: 6 months back through 1 month ahead
+(function populateMonthSelect() {
+  const sel = document.getElementById('inp-month');
+  for (let offset = -6; offset <= 1; offset++) {
+    const d = new Date(now.getFullYear(), now.getMonth() + offset, 1);
+    const label = `${months[d.getMonth()]} ${d.getFullYear()}`;
+    const opt = document.createElement('option');
+    opt.value = label;
+    opt.textContent = label;
+    sel.appendChild(opt);
+  }
+})();
 
 // function selection
 document.getElementById('fn-grid').addEventListener('click', e => {
@@ -678,7 +692,7 @@ function updateStatus() {
 }
 
 document.getElementById('inp-name').addEventListener('input', updateStatus);
-document.getElementById('inp-month').addEventListener('input', updateStatus);
+document.getElementById('inp-month').addEventListener('change', updateStatus);
 
 function collectKpis() {
   const rows = document.querySelectorAll('[id^="kpi-row-"]');
