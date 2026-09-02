@@ -721,9 +721,26 @@ async function submitCheckin() {
   const month = document.getElementById('inp-month').value.trim();
   const fn    = selectedFn || 'Unknown';
 
-  if (!name)             { showToast('Please enter your name first'); return; }
-  if (!selectedFn)       { showToast('Please select your function'); return; }
+  if (!name)              { showToast('Please enter your name'); return; }
+  if (!selectedFn)        { showToast('Please select your function'); return; }
+  if (!month)             { showToast('Please enter the report month'); return; }
   if (!selectedReportType){ showToast('Please select Mid-Month or End-of-Month'); return; }
+
+  // Validate KPIs — every row needs a value entered
+  const kpiRows = document.querySelectorAll('[id^="kpi-row-"]');
+  for (const row of kpiRows) {
+    const id = row.id.replace('kpi-row-', '');
+    const kname = document.getElementById(`kname-${id}`)?.value.trim();
+    const kval  = document.getElementById(`kval-${id}`)?.value.trim();
+    if (!kval) { showToast(`Enter a value for: ${kname || 'KPI ' + id}`); return; }
+  }
+
+  const q1 = document.getElementById('q1').value.trim();
+  const q2 = document.getElementById('q2').value.trim();
+  const q3 = document.getElementById('q3').value.trim();
+  if (!q1) { showToast('Please answer question 1'); return; }
+  if (!q2) { showToast('Please answer question 2'); return; }
+  if (!q3) { showToast('Please answer question 3'); return; }
 
   const reportTypeLabel = selectedReportType === 'mid' ? 'Mid-Month' : 'End-of-Month';
 
@@ -734,9 +751,9 @@ async function submitCheckin() {
     reportType: reportTypeLabel,
     generated: new Date().toISOString(),
     kpis: collectKpis(),
-    q1: document.getElementById('q1').value.trim(),
-    q2: document.getElementById('q2').value.trim(),
-    q3: document.getElementById('q3').value.trim(),
+    q1,
+    q2,
+    q3,
   };
 
   const slug = fn.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
