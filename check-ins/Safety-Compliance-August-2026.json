@@ -1,0 +1,60 @@
+{
+  "name": "Alison Chetcuti",
+  "function": "Safety & Compliance",
+  "month": "August 2026",
+  "reportType": "End-of-Month",
+  "generated": "2026-09-03T03:38:40.579Z",
+  "kpis": [
+    {
+      "name": "Lost Time Injury Frequency Rate (LTIFR)",
+      "target": "Zero - always",
+      "value": "42.517",
+      "trend": "↓",
+      "rag": "green",
+      "comment": ""
+    },
+    {
+      "name": "Near miss reports per month",
+      "target": "Zero",
+      "value": "1",
+      "trend": "↑",
+      "rag": "amber",
+      "comment": ""
+    },
+    {
+      "name": "Safety observations completed",
+      "target": "100% of programme",
+      "value": "1",
+      "trend": "↑",
+      "rag": "green",
+      "comment": ""
+    },
+    {
+      "name": "Toolbox talks delivered",
+      "target": "Monthly - no cancellations",
+      "value": "1",
+      "trend": "↑",
+      "rag": "green",
+      "comment": ""
+    },
+    {
+      "name": "Recordable incidents",
+      "target": "MD notified same day",
+      "value": "0",
+      "trend": "→",
+      "rag": "green",
+      "comment": ""
+    },
+    {
+      "name": "Hazard reports filed",
+      "target": "≥ 5 / month",
+      "value": "2",
+      "trend": "↓",
+      "rag": "amber",
+      "comment": ""
+    }
+  ],
+  "q1": "Safety Observations - calendar reminders show's it works",
+  "q2": "LPSA Note Books - Sample to be provided shortly",
+  "q3": "Updated LPSA Training - time"
+}
