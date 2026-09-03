@@ -2,15 +2,51 @@
   "name": "Assaf Shevach",
   "function": "Quality",
   "month": "August 2026",
-  "generated": "2026-08-19T00:00:00.000Z",
+  "reportType": "End-of-Month",
+  "generated": "2026-09-03T02:33:41.120Z",
   "kpis": [
-    { "name": "Root cause closure rate", "target": "100% - no exceptions", "value": "0%", "trend": "→", "rag": "red", "comment": "No root causes documented this month. Consensus for weekly Repair Actions review needed across all functions." },
-    { "name": "Repair actions per job (all functions)", "target": "Trend down - baseline M1", "value": "56", "trend": "↑", "rag": "amber", "comment": "July: 56 actions (YTD avg 46). Trending up. Checksheet updated for re-chassis; TFO usage pending." },
-    { "name": "Engineering-originated repair actions/job", "target": "Reduce 50% in 12mo", "value": "14%", "trend": "→", "rag": "amber", "comment": "Historical baseline: 14% of all repair actions. Standard sales checksheet and weekly engineering/sales forum to be established." },
-    { "name": "Actions open >30 days", "target": "Zero - escalate all", "value": "730", "trend": "↑", "rag": "red", "comment": "730 open actions ageing beyond 30 days. Weekly cross-functional review required immediately." },
-    { "name": "Customer-visible defects", "target": "Trending to zero", "value": "Pending", "trend": "→", "rag": "pending", "comment": "Tracking framework being established. Baseline to be set in September." }
+    {
+      "name": "Root cause closure rate",
+      "target": "100% - no exceptions",
+      "value": "0",
+      "trend": "→",
+      "rag": "red",
+      "comment": "Help Required: Secure consensus for weekly repair action review (supported by Sales; Engineering; Procurement; Production; & Quality)"
+    },
+    {
+      "name": "Repair actions per job (all functions)",
+      "target": "Trend down - baseline M1",
+      "value": "31",
+      "trend": "↓",
+      "rag": "green",
+      "comment": "Aug @ 31 Actions per unit vs 56 in July (and 46 Calendar YTD).  Help required:\n1.  Roll out of target across all functions\n2. Use of checksheet (TFO)\n3. Repair identified issues on upstream units (before shipping prep)\n4. Allocate repair resource"
+    },
+    {
+      "name": "Engineering-originated repair actions/job",
+      "target": "Reduce 50% in 12mo",
+      "value": "9",
+      "trend": "→",
+      "rag": "amber",
+      "comment": "Aug @ 9 Actions per unit vs 8 in July.\nMetric developed. Help required: Allocate resourcing to identify concerns early."
+    },
+    {
+      "name": "Actions open >30 days",
+      "target": "Zero - escalate all",
+      "value": "119",
+      "trend": "↓",
+      "rag": "red",
+      "comment": "Baseline metric developed. Trend reducing. Help required: Secure consensus for weekly repair action review (supported by Sales; Engineering; Procurement; Production; & Quality)."
+    },
+    {
+      "name": "Customer-visible defects",
+      "target": "Trending to zero",
+      "value": "51",
+      "trend": "→",
+      "rag": "amber",
+      "comment": "Use warranty metric (repairs per month).  Aug report pending (July @ 51 warranty jobs). Help required: Finalise warranty procedure to ensure all repairs are processed via customer support team and logged into safety culture with corrective action plans documented."
+    }
   ],
-  "q1": "Updated checksheet for re-chassis jobs. Identified Engineering as key contributor to repair actions at 14% of total.",
-  "q2": "Established framework for cross-functional weekly Repair Actions review — pending consensus from all functions.",
-  "q3": "Weekly cross-functional Repair Actions review must start immediately to address 730 open actions."
+  "q1": "Repair actions per job and aging actions both reduced.  Actions taken:\n1. Checklist updated to incorporate re-chassis (TFO usage pending)\n2. Met with sales & Engineering to close out aging actions",
+  "q2": "Develop a pareto of concerns. Locked in metrics (Repair actions per job; Engineering originataed repairs per job; aging actions; and warranty repairs)",
+  "q3": "Use checksheets in TFO.\nMinimise supply base changes (avoid Marshal & OPW related issues).\nUse standard sales checksheet ahead of all engineering handovers – and have a weekly engineering/ sales forum for each project until all open followup items are resolved."
 }
