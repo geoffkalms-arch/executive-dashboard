@@ -1,0 +1,52 @@
+{
+  "name": "John Wilson",
+  "function": "Production",
+  "month": "September 2026",
+  "reportType": "End-of-Month",
+  "generated": "2026-09-04T00:46:04.348Z",
+  "kpis": [
+    {
+      "name": "On-time delivery to customer (%)",
+      "target": "Baseline Aug 2026",
+      "value": "70%",
+      "trend": "↑",
+      "rag": "red",
+      "comment": "Reworks high mainly through line 1\nRest of the departments, deliveries are good"
+    },
+    {
+      "name": "First-pass build rate (no rework)",
+      "target": "Baseline + improve QoQ",
+      "value": "70%",
+      "trend": "→",
+      "rag": "red",
+      "comment": "Line 1, APSCO reworks to tank internal and external coupled with engineering issues.\nEngineering still ordering hydraulic parts, example APSCO 801235/236"
+    },
+    {
+      "name": "Production stops — incomplete packages",
+      "target": "Trending to zero",
+      "value": "40%",
+      "trend": "→",
+      "rag": "red",
+      "comment": "BOM's are going through to procurement, procurement is still asking a lot of questions as BOM's are not 100% correct. This creates extra work and delays production."
+    },
+    {
+      "name": "Hours per job vs estimate",
+      "target": "Tracked monthly",
+      "value": "80%",
+      "trend": "→",
+      "rag": "red",
+      "comment": "There is rework throughout the business, but a lot of this is through line 1."
+    },
+    {
+      "name": "Daily cell floor review",
+      "target": "Every day — no exceptions",
+      "value": "80%",
+      "trend": "→",
+      "rag": "red",
+      "comment": "Line 1 requires supervisors monitoring with heavy focus"
+    }
+  ],
+  "q1": "on time delivery to customer - TFO's, Commercial fuels, line 2, Heavy fabrication and Service deliveries have been good for August. Paint department keep pushing to stay up with workload, but I can see September will be a challenge, will create a bottle neck.",
+  "q2": "Resource utilization across all departments. \nOrigin 28640, complete LPG transfer solo, no customer support.",
+  "q3": "BOM completion on time and 100% correct"
+}
